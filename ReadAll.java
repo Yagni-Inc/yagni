@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Product{
+public class ReadAll{
     // We should think about building a Product Class. below is some starter variables to begin working off of 
     // String product_ID; 
     // int quantity; 
@@ -27,7 +27,7 @@ public class Product{
   
 
     public static void main(String[] args){
-        String file = "yagni/test.csv"; // variable to reference .csv file
+        String file = "test.csv"; // variable to reference .csv file
         BufferedReader reader = null; // new reader to be able to read the .csv file
         String line = ""; // variable to read each line within the file
 

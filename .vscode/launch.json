@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ReadAll",
+            "request": "launch",
+            "mainClass": "ReadAll",
+            "projectName": "yagni_df3a6c79"
+        },
+        {
+            "type": "java",
+            "name": "Launch Product",
+            "request": "launch",
+            "mainClass": "Product",
+            "projectName": "yagni_df3a6c79"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
