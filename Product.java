@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Product{
-    // We want to begin beuilding a Product Class. below is some starter variables to begin working off of 
+    // We should think about building a Product Class. below is some starter variables to begin working off of 
     // String product_ID; 
     // int quantity; 
     // double wholesale_cost;
@@ -23,7 +23,7 @@ public class Product{
 
     // }
 
-    // TODO- move read all into this readAll() method to 
+    // TODO- move read all into this readAll() method and integrate into the whole project
   
 
     public static void main(String[] args){
