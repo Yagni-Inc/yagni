@@ -9,6 +9,20 @@
             "name": "Launch ReadAll",
             "request": "launch",
             "mainClass": "ReadAll",
+            "projectName": "yagni_8e0b2cf3"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "yagni_8e0b2cf3"
+        },
+        {
+            "type": "java",
+            "name": "Launch ReadAll",
+            "request": "launch",
+            "mainClass": "ReadAll",
             "projectName": "yagni_df3a6c79"
         },
         {
