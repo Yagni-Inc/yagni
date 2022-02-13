@@ -1,21 +1,22 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.io.FileReader;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     /** enter path to file, set filePath equal to it **/
     String filePath;
     /** method to convert file into ArrayList **/
-    public void CSVToArrayList(String file) {
+    public void csvToArrayList(String file) {
 
     }
 
     /** method to convert file back into csv **/
-    public void ArrayListToCSV(ArrayList arr) {
+    public void arrayListToCSV(ArrayList arr) {
 
     }
 
@@ -23,52 +24,52 @@ public class Main {
     public int search(int id) {
 
     }
+     /** DEFAULT CONSTRUCTOR to access and run methods **/
+     public Main(){
+
+     }
 
     /** MAIN LOOP **/
-    public static void main (String[] args) {
+    public static void main (String[] args) throws IOException{
+
+        //Main manageInv = new Main(); 
+        Scanner userInput = new Scanner(System.in);
 
         boolean run = true;
         while (run) {
 
             int selection;
 
-            try (Scanner sc = new Scanner(System.in)) {
-                System.out.println("Choose 1 to Create");
-                System.out.println("Choose 2 to Read");
-                System.out.println("Choose 3 to Update");
-                System.out.println("Choose 4 to Delete");
-                System.out.println("Choose 5 to EXIT");
-                selection = sc.nextInt();
-            }
+            System.out.println("Choose 1 to Create");
+            System.out.println("Choose 2 to Read");
+            System.out.println("Choose 3 to Update");
+            System.out.println("Choose 4 to Delete");
+            System.out.println("Choose 5 to EXIT");
+            selection = userInput.nextInt();
 
             switch (selection) {
                 case 1:
 
                     /** prompt user for product id, index 0**/
-                    Scanner inputProdID = new Scanner(System.in);
                     System.out.println("You have chosen to create a new product.");
                     System.out.println("Enter new product ID:");
-                    int prodID = inputProdID.nextInt();
+                    int prodID = userInput.nextInt();
 
                     /** prompt user for quantity, index 1 **/
-                    Scanner inputQuant = new Scanner(System.in);
                     System.out.println("Enter product quantity:");
-                    int quant = inputQuant.nextInt();
+                    int quant = userInput.nextInt();
 
                     /** prompt user for wholesale_cost, index 2 **/
-                    Scanner inputWholesaleCost = new Scanner(System.in);
                     System.out.println("Enter the wholesale cost:");
-                    float wholesaleCost = inputWholesaleCost.nextFloat();
+                    float wholesaleCost = userInput.nextFloat();
 
                     /** prompt user for sale_price, index 3 **/
-                    Scanner inputSalePrice = new Scanner(System.in);
                     System.out.println("Enter the sale price:");
-                    float salePrice = inputSalePrice.nextFloat();
+                    float salePrice = userInput.nextFloat();
 
                     /** prompt user for supplier_ID, index 4 **/
-                    Scanner inputSupplierID = new Scanner(System.in);
                     System.out.println("Enter the supplier ID:");
-                    int supplierID = inputSupplierID.nextInt();
+                    int supplierID = userInput.nextInt();
 
                     /** METHOD CALL   ADJUST AS NEEDED **/
                     int[] newProduct = create(prodID, quant, wholesaleCost, salePrice, supplierID);
@@ -77,17 +78,18 @@ public class Main {
 
                 case 2:
                     System.out.println("You have chosen to read the file.");
-                    Scanner inputReadChoice = new Scanner(System.in);
-                    System.out.println("Read entire file(1) or read single line(2)?");
-                    int readChoice = inputReadChoice.nextInt();
-
+                    System.out.println("What do you want to view");
+                    System.out.println("1. Display All Inventory");
+                    System.out.println("2. Display one product from Inventory");
+                    int readChoice = userInput.nextInt();
                     if (readChoice == 1) {
-                        /** CALL TO READALL METHOD **/
-                    } else {
-                        Scanner inputReadSingle = new Scanner(System.in);
+                        Main.readAll();
+                    } else if (readChoice == 2){
                         System.out.println("Enter product ID of item:");
-                        int readProdID = inputReadSingle.nextInt();
+                        String readProdID = userInput.nextLine();
                         /** if product ID exists, call readOne method. if not, throw exception. **/
+                    } else{
+                        System.out.println("Oops! You have entered an invalid choice!");
                     }
 
                     break;
@@ -97,26 +99,24 @@ public class Main {
                     System.out.println("You have chosen to update an item.");
 
                     /** input product id of product to update**/
-                    Scanner inputUpdateID = new Scanner(System.in);
                     System.out.println("Enter product ID to update:");
-                    int updateID = inputUpdateID.nextInt();
+                    int updateID = userInput.nextInt();
                     System.out.println("Enter new values. If a value must stay the same, enter nothing.");
 
-                    Scanner inputUpdateQuant = new Scanner(System.in);
                     System.out.println("Enter new quantity:");
-                    int updateQuant = inputUpdateID.nextInt();
+                    int updateQuant = userInput.nextInt();
 
-                    Scanner inputUpdateWholesale = new Scanner(System.in);
+                    
                     System.out.println("Enter new wholesale cost:");
-                    float updateWholesale = inputUpdateID.nextFloat();
+                    float updateWholesale = userInput.nextFloat();
 
-                    Scanner inputUpdatePrice = new Scanner(System.in);
+                    
                     System.out.println("Enter new sale price:");
-                    float updatePrice = inputUpdateID.nextFloat();
+                    float updatePrice = userInput.nextFloat();
 
-                    Scanner inputUpdateSupplierID = new Scanner(System.in);
+                    
                     System.out.println("Enter new supplier ID:");
-                    int updateSupplierID = inputUpdateID.nextInt();
+                    int updateSupplierID = userInput.nextInt();
 
                     /** UPDATE METHOD CALL **/
                     update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID);
@@ -126,9 +126,8 @@ public class Main {
                 case 4:
 
                     System.out.println("You have chosen to delete an item.");
-                    Scanner inputDeleteID = new Scanner(System.in);
                     System.out.println("Enter product ID of item to delete:");
-                    int deleteID = inputDeleteID.nextInt();
+                    int deleteID = userInput.nextInt();
 
                     /** METHOD CALL **/
                     delete(deleteID);
@@ -160,8 +159,37 @@ public class Main {
     /** read all or one product? **/
     /** if all, loop through ArrayList and print all to console **/
 
-    public static int[][] readAll() {
-        /** basically return entire csv file**/
+    public static void readAll() {
+        String file = "test.csv"; // variable to reference .csv file
+        BufferedReader reader = null; // new reader to be able to read the .csv file
+        String line = ""; // variable to read each line within the file
+
+        try{
+            reader = new BufferedReader(new FileReader(file)); //instatiates the reader to read file 
+            
+            // Continuously read the next line until there is no more data to be read 
+            while((line = reader.readLine())!= null){
+                String[] row = line.split(","); //split each line at the commas
+
+                // For each row of data, print the comma separated values 
+                for(String index : row){
+                    System.out.printf("%-15s", index);
+                }
+                System.out.println();
+
+            }
+        }
+        catch(IOException err){
+            err.printStackTrace();
+        }
+        finally{
+            try{
+            reader.close();
+            }
+            catch(IOException err){
+                err.printStackTrace();
+            }
+        }
     }
 
     /** if one, prompt for product id and print product array to console **/
