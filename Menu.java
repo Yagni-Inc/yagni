@@ -65,7 +65,7 @@ public class Menu{
 
   //Method that adds records to the inventory file
   //Implemented by Kyle Zimmerman 2.12.22
-  public void AddRecord(){
+  public void addRecord(){
 
     String fileName = "inventory_team4.csv"; // variable for hardcoded file name
     BufferedWriter buffWrite = null; //Setting up the buffered writer variable and setting initially to null
@@ -101,11 +101,9 @@ public class Menu{
       buffWrite.flush();
       buffWrite.newLine();
       buffWrite.close();
-      
     } catch (IOException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-    
   }
 }
