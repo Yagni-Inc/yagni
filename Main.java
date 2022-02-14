@@ -1,10 +1,15 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 import java.util.List;
+import java.util.ArrayList;
+
 import java.util.*;
 
 public class Main {
@@ -39,13 +44,15 @@ public class Main {
         while (run) {
 
             int selection;
-
+            
             System.out.println("Choose 1 to Create");
             System.out.println("Choose 2 to Read");
             System.out.println("Choose 3 to Update");
             System.out.println("Choose 4 to Delete");
             System.out.println("Choose 5 to EXIT");
             selection = userInput.nextInt();
+            
+
 
             switch (selection) {
                 case 1:
@@ -127,11 +134,12 @@ public class Main {
 
                     System.out.println("You have chosen to delete an item.");
                     System.out.println("Enter product ID of item to delete:");
-                    int deleteID = userInput.nextInt();
+                    String deleteID = userInput.nextLine();
+                    deleteID = userInput.nextLine();
 
                     /** METHOD CALL **/
-                    delete(deleteID);
-
+                    Main.deleteRecord(deleteID);
+                    
                     break;
 
                 case 5:
@@ -207,8 +215,38 @@ public class Main {
 
     /** input '4' **/
     /** DELETE METHOD **/
-    public static void delete(int prodID) {
+    public static void deleteRecord(String deleteID) throws IOException {
 
-    }
+        String product_ID = deleteID;
+        String row;
+        String data[];  
+        
+        File tempFile = new File("inventory_temp_team4.csv");   //Temp file to add rows were are not deleting.
+        File file = new File("inventory_team4.csv");            // original file.
+        FileReader reader = new FileReader(file);
+        BufferedReader read = new BufferedReader(reader);      
+        FileWriter writer = new FileWriter(tempFile);
+        BufferedWriter write = new BufferedWriter(writer);
+        PrintWriter print = new PrintWriter(write);
 
+        //Loop through each line to look for productID
+        while((row = read.readLine())!= null){
+            data = row.split(",");
+        // If productID does not match data then print to temp file.     
+          if(!(data[0].equals(product_ID))){        
+            print.println(row);            
+          }    
+         } 
+         System.out.println("Product deleted succesfully"); 
+         //close utilities
+          print.flush();
+          print.close();
+          writer.close();
+          write.close();
+          read.close();
+          reader.close();
+          file.delete();
+          tempFile.renameTo(file);  //Rename file.
+          
+        }  
 }
