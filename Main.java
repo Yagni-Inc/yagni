@@ -14,7 +14,7 @@ import java.util.*;
 
 public class Main {
     /** enter path to file, set filePath equal to it **/
-    String filePath;
+    String filePath = "test.csv";
     /** method to convert file into ArrayList **/
     public void csvToArrayList(String file) {
 
@@ -93,7 +93,9 @@ public class Main {
                     } else if (readChoice == 2){
                         System.out.println("Enter product ID of item:");
                         String readProdID = userInput.nextLine();
+                        readProdID = userInput.nextLine();
                         /** if product ID exists, call readOne method. if not, throw exception. **/
+                        Main.readOne(readProdID);
                     } else{
                         System.out.println("Oops! You have entered an invalid choice!");
                     }
@@ -200,8 +202,42 @@ public class Main {
     }
 
     /** if one, prompt for product id and print product array to console **/
-    public static int[] readOne(int productID) {
-        /** use search() method if needed**/
+    public static void readOne(String readProdID) {
+         /** use search() method if needed**/
+        String readOneID = readProdID;
+        String file = "test.csv";
+        BufferedReader reader = null; // new reader to be able to read the .csv file
+        String line = ""; // variable to read each line within the file
+        String titleRow[] = {"product_id","quantity","wholesale_cost","sale_price","supplier_id"};
+        try{
+            reader = new BufferedReader(new FileReader(file)); //instatiates the reader to read file 
+            
+            // Continuously read the next line until there is no more data to be read 
+            while((line = reader.readLine())!= null){
+                String[] row = line.split(","); //split each line at the commas
+                if(row[0].equals(readOneID)){
+                    for(String title : titleRow){
+                        System.out.printf("%-15s", title);
+                    }
+                    System.out.println();
+                    for(String index : row){
+                        System.out.printf("%-15s", index);
+                    }
+                    System.out.println();
+                }
+            }
+        }
+        catch(IOException err){
+            err.printStackTrace();
+        }
+        finally{
+            try{
+            reader.close();
+            }
+            catch(IOException err){
+                err.printStackTrace();
+            }
+        }
     }
 
     /** input '3' **/
