@@ -53,6 +53,7 @@ public class Main {
         while (run) {
 
             int selection;
+            System.out.println("-------------------------------------");
             System.out.println("Choose 1 to Create");
             System.out.println("Choose 2 to Read");
             System.out.println("Choose 3 to Update");
