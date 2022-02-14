@@ -33,8 +33,7 @@ public class Main {
     public static void main (String[] args) throws IOException{
 
         //Main manageInv = new Main(); 
-        Scanner userInput = new Scanner(System.in);
-
+        Scanner userInput = new Scanner(System.in); // global userInput scanner for all userInput
         boolean run = true;
         while (run) {
 
