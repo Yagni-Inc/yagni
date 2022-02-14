@@ -6,10 +6,38 @@
     "configurations": [
         {
             "type": "java",
+<<<<<<< HEAD
             "name": "Launch Menu",
             "request": "launch",
             "mainClass": "Menu",
             "projectName": "yagni_c10d3b4a"
+=======
+            "name": "Launch ReadAll",
+            "request": "launch",
+            "mainClass": "ReadAll",
+            "projectName": "yagni_8e0b2cf3"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "yagni_8e0b2cf3"
+        },
+        {
+            "type": "java",
+            "name": "Launch ReadAll",
+            "request": "launch",
+            "mainClass": "ReadAll",
+            "projectName": "yagni_df3a6c79"
+        },
+        {
+            "type": "java",
+            "name": "Launch Product",
+            "request": "launch",
+            "mainClass": "Product",
+            "projectName": "yagni_df3a6c79"
+>>>>>>> 93a4e01e15a282b0e6e07cb9827218c898e09d8d
         },
         {
             "type": "java",
