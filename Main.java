@@ -1,3 +1,4 @@
+import java.io.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,6 +40,8 @@ public class Main {
 
         //Main manageInv = new Main(); 
         Scanner userInput = new Scanner(System.in);
+        String fileName = "inventory_team4.csv"; // variable for hardcoded file name
+
 
         boolean run = true;
         while (run) {
@@ -53,14 +56,15 @@ public class Main {
             selection = userInput.nextInt();
             
 
-
             switch (selection) {
                 case 1:
 
                     /** prompt user for product id, index 0**/
-                    System.out.println("You have chosen to create a new product.");
+                    System.out.println("You have chosen to create a new product.\n");
+                    
                     System.out.println("Enter new product ID:");
-                    int prodID = userInput.nextInt();
+                    String prodID = userInput.nextLine();
+                    //prodID = userInput.nextLine();
 
                     /** prompt user for quantity, index 1 **/
                     System.out.println("Enter product quantity:");
@@ -76,10 +80,11 @@ public class Main {
 
                     /** prompt user for supplier_ID, index 4 **/
                     System.out.println("Enter the supplier ID:");
-                    int supplierID = userInput.nextInt();
+                    String supplierID = userInput.nextLine();
+                    supplierID = userInput.nextLine();
 
                     /** METHOD CALL   ADJUST AS NEEDED **/
-                    int[] newProduct = create(prodID, quant, wholesaleCost, salePrice, supplierID);
+                    Main.addRecord(prodID, quant, wholesaleCost, salePrice, supplierID, fileName);
 
                     break;
 
@@ -155,12 +160,38 @@ public class Main {
      * CREATE METHOD called from case 1 of switch case
      * takes in 5 parameters, turns into array, appends array to end of arraylist (csv file)
      * **/
-    public static int[] create(int productID, int quantity, float wholesaleCost, float salePrice, int supplierID) {
-        /** create new list**/
+    //Method that adds records to the inventory file
+  //Implemented by Kyle Zimmerman 2.12.22
+  public static void addRecord(String productIdIn, int quantityIn, float wholesaleCostIn, float salePriceIn, String supplierIdIn, String file){
 
-        /** append list to ArrayList**/
+    
 
+
+    BufferedWriter buffWrite = null; //Setting up the buffered writer variable and setting initially to null
+    //String product_id, quantity, wholesale_cost, sale_price, supplier_id; //Setting up all the sting variables that I will be sett to user inputs
+    Float wholesaleCost = wholesaleCostIn;
+    Float salePrice = salePriceIn;
+    String productId = productIdIn;
+    String supplierId = supplierIdIn;
+    String fileName = file;
+    int quantity = quantityIn;
+    
+
+    
+    // Writing to the inventory file
+    // Try catches IOExecption
+    try { 
+      buffWrite = new BufferedWriter(new FileWriter(fileName,true)); //Setting our buffered writer to the correct file
+      buffWrite.write(productId+","+quantity+","+wholesaleCost+","+salePrice+","+supplierId); //Writing to the file
+      buffWrite.flush();
+      buffWrite.newLine();
+      buffWrite.close();
+      System.out.println("Added "+productId+","+quantity+","+wholesaleCost+","+salePrice+","+supplierId+" to the inventory!\n");
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
     }
+  }
 
     /** input '2' **/
     /** READ METHOD **/
