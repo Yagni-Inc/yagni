@@ -1,3 +1,5 @@
+package Main_Project.src.Views;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +20,7 @@ public class GUI implements ActionListener {
     private static JButton button;
     private static JLabel success;
 
-    public static void main(String[] args) {
+    GUI(){
 
         JFrame frame = new JFrame("Login");
         JPanel panel = new JPanel();
@@ -47,7 +49,7 @@ public class GUI implements ActionListener {
 
         button = new JButton("Login"); // Login Buttton
         button.setBounds(10, 80, 80, 25);
-        button.addActionListener(new GUI());
+        button.addActionListener(this);
         panel.add(button);
 
         success = new JLabel("");
