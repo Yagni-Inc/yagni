@@ -48,15 +48,12 @@ public class EmployeeGUI implements ActionListener {
 
     }
 
-    
-        
    /**********FOR TESTING PURPOSES************/
    /* public static void main(String[] args) {
 
         EmployeeGUI user = new EmployeeGUI();
-
     }*/
-
+   /**************************************/
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -68,11 +65,9 @@ public class EmployeeGUI implements ActionListener {
 
         if(e.getSource() == orderButton){
             frame.dispose();
-            System.out.println("Another window");
+            OrdersGUI window2 = new OrdersGUI();
 
         }
-        
-
         
     }
 

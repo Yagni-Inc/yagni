@@ -1,5 +1,4 @@
 package Main_Project.src.Views;
-
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
