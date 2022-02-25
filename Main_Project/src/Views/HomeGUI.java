@@ -35,7 +35,7 @@ public class HomeGUI implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == employeeButton){
             frame.dispose();
-            new GUI();
+            new LoginGUI();
         }else if(e.getSource() == customerButton){
             frame.dispose();
             new CustomerGUI();

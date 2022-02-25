@@ -11,7 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
 
-public class GUI implements ActionListener {
+public class LoginGUI implements ActionListener {
     
     private static JLabel userLabel;
     private static JTextField userText;
@@ -20,10 +20,12 @@ public class GUI implements ActionListener {
     private static JButton button;
     private static JLabel success;
 
-    GUI(){
+    JFrame frame = new JFrame("Login");
+    JPanel panel = new JPanel();
 
-        JFrame frame = new JFrame("Login");
-        JPanel panel = new JPanel();
+    LoginGUI(){
+
+        
        
         frame.setSize(350, 350);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,6 +73,9 @@ public class GUI implements ActionListener {
              
              if(user.equals("YAGNI") && password.equals("2022")) {
                 success.setText("Login Successful!");
+                frame.dispose();
+                new EmployeeGUI();
+
                 
              }// end of if statement
         }// end of button action
