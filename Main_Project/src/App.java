@@ -1,41 +1,39 @@
 package Main_Project.src;
 
-import java.io.*;
+//import java.io.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+//import java.nio.file.Files;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.nio.file.Path;
+//import java.nio.file.Path;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.ArrayList;
+//import java.util.List;
+// java.util.ArrayList;
 
 import java.util.*;
 import java.sql.*;
 
 public class App {
-    
 
     /** MAIN LOOP **/
     public static void main(String[] args) throws IOException {
 
-
-        //Main manageInv = new Main(); 
+        // Main manageInv = new Main();
 
         Scanner userInput = new Scanner(System.in); // global userInput scanner for all userInput
-        String fileName = "inventory_team4.csv"; // variable for hardcoded file name
+        // String fileName = "inventory_team4.csv"; // variable for hardcoded file name
         String userName, password;
 
-        //Connect to database and create database connection object
+        // Connect to database and create database connection object
         System.out.println("User Name: ");
         userName = userInput.nextLine();
         System.out.println("Password: ");
         password = userInput.nextLine();
         Connection connection = connect(userName, password);
-        
+
         boolean run = true;
         while (run) {
 
@@ -53,7 +51,8 @@ public class App {
                 case 1:
 
                     /** prompt user for product id, index 0 **/
-                    System.out.println("-----------------------------------------------------------------------------------");
+                    System.out.println(
+                            "-----------------------------------------------------------------------------------");
                     System.out.println("You have chosen to create a new product.\n");
 
                     System.out.println("Enter new product ID:");
@@ -79,33 +78,37 @@ public class App {
 
                     /** METHOD CALL ADJUST AS NEEDED **/
                     App.addRecord(prodID, quant, wholesaleCost, salePrice, supplierID, connection);
-                    System.out.println("-----------------------------------------------------------------------------------");
+                    System.out.println(
+                            "-----------------------------------------------------------------------------------");
                     break;
 
                 case 2:
-                    System.out.println("-----------------------------------------------------------------------------------");
+                    System.out.println(
+                            "-----------------------------------------------------------------------------------");
                     System.out.println("You have chosen to read the file.");
                     System.out.println("What do you want to view");
                     System.out.println("1. Display All Inventory");
                     System.out.println("2. Display one product from Inventory");
                     int readChoice = userInput.nextInt();
                     if (readChoice == 1) {
-                        App.readAll();
+                        App.readAll(connection);
                     } else if (readChoice == 2) {
                         System.out.println("Enter product ID of item:");
                         String readProdID = userInput.nextLine();
                         readProdID = userInput.nextLine();
                         /** if product ID exists, call readOne method. if not, throw exception. **/
-                        App.readOne(readProdID);
-                    } else{
+                        App.readOne(readProdID, connection);
+                    } else {
                         System.out.println("Oops! You have entered an invalid choice!");
                     }
-                    System.out.println("-----------------------------------------------------------------------------------");
+                    System.out.println(
+                            "-----------------------------------------------------------------------------------");
                     break;
 
                 case 3:
                     /** UPDATE METHOD **/
-                    System.out.println("-----------------------------------------------------------------------------------");
+                    System.out.println(
+                            "-----------------------------------------------------------------------------------");
                     System.out.println("You have chosen to update an item.");
 
                     /** input product id of product to update **/
@@ -121,7 +124,6 @@ public class App {
 
                     System.out.println("Enter new wholesale cost:");
                     float updateWholesale = userInput.nextFloat();
-                    
 
                     System.out.println("Enter new sale price:");
                     float updatePrice = userInput.nextFloat();
@@ -131,14 +133,16 @@ public class App {
                     updateSupplierID = userInput.nextLine();
 
                     /** UPDATE METHOD CALL **/
-                    App.update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID, fileName,
-                            removalID);
-                    System.out.println("-----------------------------------------------------------------------------------");
+                    App.update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID, removalID,
+                            connection);
+                    System.out.println(
+                            "-----------------------------------------------------------------------------------");
                     break;
 
                 case 4:
                     /** DELETE METHOD **/
-                    System.out.println("-----------------------------------------------------------------------------------");
+                    System.out.println(
+                            "-----------------------------------------------------------------------------------");
                     System.out.println("You have chosen to delete an item.");
                     System.out.println("Enter product ID of item to delete:");
                     String deleteID = userInput.nextLine();
@@ -146,14 +150,17 @@ public class App {
 
                     /** DELETE METHOD CALL **/
                     App.deleteRecord(deleteID);
-                    System.out.println("-----------------------------------------------------------------------------------");
+                    System.out.println(
+                            "-----------------------------------------------------------------------------------");
                     break;
 
                 case 5:
                     /** SYSTEM EXIT **/
-                    System.out.println("-----------------------------------------------------------------------------------");
+                    System.out.println(
+                            "-----------------------------------------------------------------------------------");
                     System.out.println("Exiting the Inventory Management System. Have a nice day!");
-                    System.out.println("-----------------------------------------------------------------------------------");
+                    System.out.println(
+                            "-----------------------------------------------------------------------------------");
                     userInput.close();
                     run = false;
                     break;
@@ -173,22 +180,24 @@ public class App {
             String supplierIdIn, Connection connection) {
 
         // String product_id, quantity, wholesale_cost, sale_price, supplier_id;
-        //Setting up all the sting variables that I will be sett to user inputs
+        // Setting up all the sting variables that I will be sett to user inputs
         Float wholesaleCost = wholesaleCostIn;
         Float salePrice = salePriceIn;
         String productId = productIdIn;
         String supplierId = supplierIdIn;
         int quantity = quantityIn;
-        
+
         // Inserting into the database
         // Try catches SQLExecption
         try {
             // Creates a statement object
             Statement statement = connection.createStatement();
             // Calling the execute method to execute an INSERT statement
-            statement.execute("INSERT INTO `product`(product_id, quanity, Whole_sale, Sale_cost, vendor_id) VALUES ('"+productId+"',"+quantity+","+wholesaleCost+","+salePrice+",'"+supplierId+"')");
+            statement.execute("INSERT INTO `product`(product_id, quanity, Whole_sale, Sale_cost, vendor_id) VALUES ('"
+                    + productId + "'," + quantity + "," + wholesaleCost + "," + salePrice + ",'" + supplierId + "')");
             System.out.println("\nSuccessfully added the product to inventory");
-            System.out.println("Product ID:\t"+ productId + "\nQuantity:\t" + quantity + "\nWholesale Cost:\t" + wholesaleCost + "\nSale Price:\t" + salePrice + "\nSupplier ID:\t" + supplierId);
+            System.out.println("Product ID:\t" + productId + "\nQuantity:\t" + quantity + "\nWholesale Cost:\t"
+                    + wholesaleCost + "\nSale Price:\t" + salePrice + "\nSupplier ID:\t" + supplierId);
             System.out.println("-----------------------------------------------------------------------------------");
         } catch (SQLException e) {
             System.out.println("Oops! An error has occured.");
@@ -200,73 +209,38 @@ public class App {
     /** READ METHOD **/
     /** read all or one product? **/
     /** if all, loop through array and print all to console **/
-    public static void readAll() {
-        String file = "test.csv"; // variable to reference .csv file
-        BufferedReader reader = null; // new reader to be able to read the .csv file
-        String line = ""; // variable to read each line within the file
+    public static void readAll(Connection connection) {
 
         try {
-            reader = new BufferedReader(new FileReader(file)); // instatiates the reader to read file
-
-            // Continuously read the next line until there is no more data to be read
-            while ((line = reader.readLine()) != null) {
-                String[] row = line.split(","); // split each line at the commas
-
-                // For each row of data, print the comma separated values
-                for (String index : row) {
-                    System.out.printf("%-15s", index);
-                }
-                System.out.println();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM `product`");
+            while (rs.next()) {
+                System.out.println(
+                        rs.getString(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5));
 
             }
-        } catch (IOException err) {
-            err.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException err) {
-                err.printStackTrace();
-            }
+        } catch (SQLException e) {
+            System.out.println("A processing error has occured, please try again.");
         }
+
     }
 
     /** if one, prompt for product id and print product array to console **/
-    public static void readOne(String readProdID) {
-        String readOneID = readProdID;
-        String file = "inventory_team4.csv";
-        BufferedReader reader = null; // new reader to be able to read the .csv file
-        String line = ""; // variable to read each line within the file
-        String titleRow[] = {"Product ID","Quantity","Wholesale Cost","Sale Price","Supplier ID"};
-        try{
-            reader = new BufferedReader(new FileReader(file)); //instatiates the reader to read file 
-            
-            // Continuously read the next line until there is no more data to be read 
-            while((line = reader.readLine())!= null){
-                String[] row = line.split(","); //split each line at the commas
-                if(row[0].equals(readOneID)){
-                    for(String title : titleRow){
-                        System.out.printf("%-15s", title);
-                    }
-                    System.out.println();
-                    System.out.println("-----------------------------------------------------------------------------------");
-                    for(String index : row){
-                        System.out.printf("%-15s", index);
-                    }
-                    System.out.println();
-                }
-            }
+    public static void readOne(String readProdID, Connection connection) {
+        try {
+
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM yagni_inv_db.product WHERE `product_id` like '" + readProdID + "'");
+            String userChoice = rs.getString(readProdID);
+
+            System.out.println(userChoice);
+
+        } catch (SQLException e) {
+            System.out.println("Error processing read request please try again.");
+            System.out.println(e);
         }
-        catch(IOException err){
-            err.printStackTrace();
-        }
-        finally{
-            try{
-            reader.close();
-            }
-            catch(IOException err){
-                err.printStackTrace();
-            }
-        }
+
     }
 
     /** input '3' **/
@@ -277,7 +251,7 @@ public class App {
      **/
 
     public static void update(String updateID, int updateQuant, float updateWholesale, float updatePrice,
-            String updateSupplierID, String fileName, String removalID) throws IOException {
+            String updateSupplierID, String removalID, Connection connection) throws IOException {
 
         String deleteProduct = removalID;
         String prodID = updateID;
@@ -285,14 +259,13 @@ public class App {
         float whole_sale = updateWholesale;
         float sale_price = updatePrice;
         String supplier_ID = updateSupplierID;
-        String updateFile = fileName;
+        Connection con = connection;
 
         deleteRecord(deleteProduct);
-        addRecord(prodID, quanity, whole_sale, sale_price, supplier_ID, updateFile);
+        addRecord(prodID, quanity, whole_sale, sale_price, supplier_ID, con);
 
         System.out.println("Your file has been Successfully updated!");
         System.out.println("-----------------------------------------------------------------------------------");
-
 
     }
 
@@ -333,11 +306,12 @@ public class App {
         tempFile.renameTo(file); // Rename file.
 
     }
-    /**Connection to database method**/
-    /**Returns a Connection object**/
-    public static Connection connect(String userName, String password){
-        
-        //Try block catches a class not found execption
+
+    /** Connection to database method **/
+    /** Returns a Connection object **/
+    public static Connection connect(String userName, String password) {
+
+        // Try block catches a class not found execption
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -345,18 +319,19 @@ public class App {
             System.out.println(e);
         }
 
-        //Try block catches SQLExecption
-        try{
-            //Making a connection to the database and setting it to a connection object
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/yagni_inv_db",userName,password);
+        // Try block catches SQLExecption
+        try {
+            // Making a connection to the database and setting it to a connection object
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/yagni_inv_db", userName,
+                    password);
 
-            //returning the connection object so it can be used through out the app
+            // returning the connection object so it can be used through out the app
             return connection;
 
         } catch (SQLException e) {
             System.out.println(e);
         }
-        //if the connection does not work it returns null.
+        // if the connection does not work it returns null.
         System.out.println("ERROR: Connection to database faild.");
         return null;
 
