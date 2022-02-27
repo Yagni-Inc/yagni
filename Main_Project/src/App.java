@@ -307,11 +307,10 @@ public class App {
     /** input '4' **/
     /** DELETE METHOD **/
     public static void deleteRecord(String deleteID, Connection connection) throws IOException {
-
 		try {
             // Creates a statement object
             Statement delete_statement = connection.createStatement();
-            // Calling the execute method to execute an INSERT statement
+            // Calling the execute method to execute a DELETE statement with given ID
             delete_statement.execute("DELETE FROM `yagni_inv_db`.`product` WHERE (`product_id` = '" + deleteID + "');");
             System.out.println("\nSuccessfully deleted the product from the inventory.");
             System.out.println("-----------------------------------------------------------------------------------");
@@ -319,40 +318,6 @@ public class App {
             System.out.println("Oops! An error has occured.");
             System.out.println(e);
         }
-
-		/*
-        String product_ID = deleteID;
-        String row;
-        String data[];
-
-        File tempFile = new File("inventory_temp_team4.csv"); // Temp file to add rows were are not deleting.
-        File file = new File("inventory_team4.csv"); // original file.
-        FileReader reader = new FileReader(file);
-        BufferedReader read = new BufferedReader(reader);
-        FileWriter writer = new FileWriter(tempFile);
-        BufferedWriter write = new BufferedWriter(writer);
-        PrintWriter print = new PrintWriter(write);
-
-        // Loop through each line to look for productID
-        while ((row = read.readLine()) != null) {
-            data = row.split(",");
-            // If productID does not match data then print to temp file.
-            if (!(data[0].equals(product_ID))) {
-                print.println(row);
-            }
-        }
-        System.out.println("Product deleted succesfully!");
-        System.out.println("-----------------------------------------------------------------------------------");
-        // close utilities
-        print.flush();
-        print.close();
-        writer.close();
-        write.close();
-        read.close();
-        reader.close();
-        file.delete();
-        tempFile.renameTo(file); // Rename file.
-		*/
     }
     /**Connection to database method**/
     /**Returns a Connection object**/
