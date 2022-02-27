@@ -1,18 +1,7 @@
 package Main_Project.src;
 
-import java.io.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
+import java.io.Console;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.nio.file.Path;
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.ArrayList;
-
 import java.util.*;
 import java.sql.*;
 
@@ -25,16 +14,20 @@ public class App {
 
         //Main manageInv = new Main(); 
 
+        Console cnsl= System.console();
         Scanner userInput = new Scanner(System.in); // global userInput scanner for all userInput
         String fileName = "inventory_team4.csv"; // variable for hardcoded file name
-        String userName, password;
+        String userName, strPassword;
+        char [] password;
 
         //Connect to database and create database connection object
         System.out.println("User Name: ");
         userName = userInput.nextLine();
-        System.out.println("Password: ");
-        password = userInput.nextLine();
-        Connection connection = connect(userName, password);
+        password = cnsl.readPassword("Password:\n");
+        strPassword = String.valueOf(password);
+        
+        // Call the connect method and pass the username and password through
+        Connection connection = connect(userName, strPassword);
         
         boolean run = true;
         while (run) {
@@ -90,13 +83,13 @@ public class App {
                     System.out.println("2. Display one product from Inventory");
                     int readChoice = userInput.nextInt();
                     if (readChoice == 1) {
-                        App.readAll();
+                        App.readAll(connection);
                     } else if (readChoice == 2) {
                         System.out.println("Enter product ID of item:");
                         String readProdID = userInput.nextLine();
                         readProdID = userInput.nextLine();
                         /** if product ID exists, call readOne method. if not, throw exception. **/
-                        App.readOne(readProdID);
+                        App.readOne(readProdID, connection);
                     } else{
                         System.out.println("Oops! You have entered an invalid choice!");
                     }
@@ -200,74 +193,44 @@ public class App {
     /** input '2' **/
     /** READ METHOD **/
     /** read all or one product? **/
-    /** if all, loop through array and print all to console **/
-    public static void readAll() {
-        String file = "test.csv"; // variable to reference .csv file
-        BufferedReader reader = null; // new reader to be able to read the .csv file
-        String line = ""; // variable to read each line within the file
+    /** if all, loop through the reslut set and print each row **/
+    public static void readAll(Connection connection) {
+        
 
         try {
-            reader = new BufferedReader(new FileReader(file)); // instatiates the reader to read file
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM yagni_inv_db.product;");
 
-            // Continuously read the next line until there is no more data to be read
-            while ((line = reader.readLine()) != null) {
-                String[] row = line.split(","); // split each line at the commas
-
-                // For each row of data, print the comma separated values
-                for (String index : row) {
-                    System.out.printf("%-15s", index);
-                }
-                System.out.println();
-
+            while(resultSet.next()){
+                //System.out.println(resultSet.getString(1), "%-15s", resultSet.getString(2), "%-15s", resultSet.getString(3), "%-15s", resultSet.getString(4), "%-15s", resultSet.getString(5), "\n");
+                System.out.printf("%-15s%-15s%-15s%-15s%s\n",resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5));
             }
-        } catch (IOException err) {
-            err.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException err) {
-                err.printStackTrace();
-            }
-        }
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("Oops! An error has occured!");
+        } 
     }
 
-    /** if one, prompt for product id and print product array to console **/
-    public static void readOne(String readProdID) {
-        String readOneID = readProdID;
-        String file = "inventory_team4.csv";
-        BufferedReader reader = null; // new reader to be able to read the .csv file
-        String line = ""; // variable to read each line within the file
-        String titleRow[] = {"Product ID","Quantity","Wholesale Cost","Sale Price","Supplier ID"};
-        try{
-            reader = new BufferedReader(new FileReader(file)); //instatiates the reader to read file 
+    /** if one, prompt for product id and print result set to the console**/
+    public static void readOne(String readProdID, Connection connection) {
+
+        // Try catches a SQLEsecption
+        try {
+            // Creating a statment object to pass a SQL statment to the database
+            Statement statement = connection.createStatement();
+
+            // Calling the executeQuery method to execute a statement to the database
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM yagni_inv_db.product WHERE product_id = '" + readProdID + "';");
             
-            // Continuously read the next line until there is no more data to be read 
-            while((line = reader.readLine())!= null){
-                String[] row = line.split(","); //split each line at the commas
-                if(row[0].equals(readOneID)){
-                    for(String title : titleRow){
-                        System.out.printf("%-15s", title);
-                    }
-                    System.out.println();
-                    System.out.println("-----------------------------------------------------------------------------------");
-                    for(String index : row){
-                        System.out.printf("%-15s", index);
-                    }
-                    System.out.println();
-                }
-            }
-        }
-        catch(IOException err){
-            err.printStackTrace();
-        }
-        finally{
-            try{
-            reader.close();
-            }
-            catch(IOException err){
-                err.printStackTrace();
-            }
-        }
+            // Printing out the result set of the SQL statment
+            resultSet.next();
+            System.out.println("-----------------------------------------------------------------------------------\nHere is your product:\n");
+            //System.out.printf("Project ID: " + resultSet.getString(1)+"  Quantity: "+resultSet.getString(2)+"  Wholsale cost: "+resultSet.getString(3)+"  Sale Price: "+resultSet.getString(4)+"  Supplier ID: "+resultSet.getString(5)+"\n");
+            System.out.println("Product ID:\t"+ resultSet.getString(1) + "\nQuantity:\t" + resultSet.getString(2) + "\nWholesale Cost:\t" + resultSet.getString(3) + "\nSale Price:\t" + resultSet.getString(4) + "\nSupplier ID:\t" + resultSet.getString(5));
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("Oops! The product ID you entered does not exist!");
+        } 
     }
 
     /** input '3' **/
