@@ -107,6 +107,7 @@ public class App {
                     /** UPDATE METHOD **/
                     System.out.println("-----------------------------------------------------------------------------------");
                     System.out.println("You have chosen to update an item.");
+					System.out.println("If you wish to keep a value the same, enter nothing.");
 
                     /** input product id of product to update **/
                     System.out.println("Enter product ID to update:");
@@ -145,7 +146,7 @@ public class App {
                     deleteID = userInput.nextLine();
 
                     /** DELETE METHOD CALL **/
-                    App.deleteRecord(deleteID);
+                    App.deleteRecord(deleteID, connection);
                     System.out.println("-----------------------------------------------------------------------------------");
                     break;
 
@@ -287,8 +288,15 @@ public class App {
         String supplier_ID = updateSupplierID;
         String updateFile = fileName;
 
-        deleteRecord(deleteProduct);
-        addRecord(prodID, quanity, whole_sale, sale_price, supplier_ID, updateFile);
+        //deleteRecord(deleteProduct);
+        //addRecord(prodID, quanity, whole_sale, sale_price, supplier_ID, updateFile);
+		
+		//set variables to old values, if any value is changed, changed that value to the new value, then concatenate sql query and execute
+
+		//or, a set of if-else statements checking if input == null (they want the quantity the same), if not null, add string to update method
+		//Statement update_statement = connection.createStatement()
+
+		//update_statement.execute("UPDATE...........")
 
         System.out.println("Your file has been Successfully updated!");
         System.out.println("-----------------------------------------------------------------------------------");
@@ -298,8 +306,21 @@ public class App {
 
     /** input '4' **/
     /** DELETE METHOD **/
-    public static void deleteRecord(String deleteID) throws IOException {
+    public static void deleteRecord(String deleteID, Connection connection) throws IOException {
 
+		try {
+            // Creates a statement object
+            Statement delete_statement = connection.createStatement();
+            // Calling the execute method to execute an INSERT statement
+            delete_statement.execute("DELETE FROM `yagni_inv_db`.`product` WHERE (`product_id` = '" + deleteID + "');");
+            System.out.println("\nSuccessfully deleted the product from the inventory.");
+            System.out.println("-----------------------------------------------------------------------------------");
+        } catch (SQLException e) {
+            System.out.println("Oops! An error has occured.");
+            System.out.println(e);
+        }
+
+		/*
         String product_ID = deleteID;
         String row;
         String data[];
@@ -331,7 +352,7 @@ public class App {
         reader.close();
         file.delete();
         tempFile.renameTo(file); // Rename file.
-
+		*/
     }
     /**Connection to database method**/
     /**Returns a Connection object**/
