@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 public class CustomerGUI {
     JFrame frame = new JFrame();
-    JLabel label = new JLabel("I will eventually lead to the customer GUI!");
+    JLabel label = new JLabel("I will eventually lead to the customer Web page!");
 
     CustomerGUI(){
 

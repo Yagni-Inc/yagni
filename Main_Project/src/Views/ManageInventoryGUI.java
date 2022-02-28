@@ -15,7 +15,7 @@ public class ManageInventoryGUI {
 
         ManageInventoryGUI(){
 
-            userLabel.setText("This will show CRUD operations.");   // Window for future CRUD operations
+            userLabel.setText("This will soon show CRUD operations.");   // Window for future CRUD operations
             userLabel.setBounds(325, 50, 85, 25);
             userLabel.setHorizontalAlignment(JLabel.CENTER);
             userLabel.setVerticalAlignment(JLabel.TOP);
