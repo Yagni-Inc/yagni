@@ -90,28 +90,43 @@ public class App {
                     /** UPDATE METHOD **/
                     System.out.println("-----------------------------------------------------------------------------------");
                     System.out.println("You have chosen to update an item.");
-					System.out.println("If you wish to keep a value the same, enter nothing.");
+					System.out.println("If you wish to keep a value the same, type 'n'.");
 
                     /** input product id of product to update **/
-                    System.out.println("Enter product ID to update:");
+                    System.out.println("Enter product ID to update (REQUIRED) :");
                     String updateID = userInput.nextLine();
-                    updateID = userInput.nextLine();
-
-                    System.out.println("Enter updated product information");
+					updateID = userInput.nextLine();
 
                     System.out.println("Enter new quantity:");
-                    int updateQuant = userInput.nextInt();
+					//input as String
+					String updateQuant = userInput.nextLine();
+					updateQuant = userInput.nextLine();
+					if (updateQuant == "n") { //user does not want to update quantity
+						updateQuant = null;
+					}
 
                     System.out.println("Enter new wholesale cost:");
-                    float updateWholesale = userInput.nextFloat();
+					//input as String
+                    String updateWholesale = userInput.nextLine();
+					updateWholesale = userInput.nextLine();
+					if (updateWholesale == "n") { //user does not want to update wholesale cost
+						updateWholesale = null;
+					}
                     
-
                     System.out.println("Enter new sale price:");
-                    float updatePrice = userInput.nextFloat();
+					//input as String
+                    String updatePrice = userInput.nextLine();
+					updatePrice = userInput.nextLine();
+					if (updatePrice == "n") { //user does not want to update cost
+						updatePrice = null;
+					}
 
                     System.out.println("Enter new supplier ID:");
                     String updateSupplierID = userInput.nextLine();
                     updateSupplierID = userInput.nextLine();
+					if (updateSupplierID == "n") { //user does not want to update supplier ID
+						updateSupplierID = null;
+					}
 
                     /** UPDATE METHOD CALL **/
                     App.update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID, connection);
@@ -253,24 +268,37 @@ public class App {
 
     /** input '3' **/
     /** UPDATE METHOD **/
-    public static void update(String updateID, int updateQuant, float updateWholesale, float updatePrice, String updateSupplierID, Connection connection) throws IOException {
+    public static void update(String updateID, String updateQuant, String updateWholesale, String updatePrice, String updateSupplierID, Connection connection) throws IOException {
 
 		//UPDATE `yagni_inv_db`.`product` SET `quanity` = '1614', `Whole_sale` = '135.92', `Sale_cost` = '207.56', `vendor_id` = 'WBWVYLRD' WHERE (`product_id` = '001LORWG0PC0');
 
 		String sql_statement = "UPDATE `yagni_inv_db`.`product` SET ";
+		int count = 0;
 
-		String updateQuantString = Integer.toString(updateQuant);
-		String updateWholesaleString = Float.toString(updateWholesale);
-		String updatePriceString = Float.toString(updatePrice);
-
-		if (updateQuantString != ""){
-			sql_statement = sql_statement + "`quanity` = '" + updateQuantString + "'";
-		} else if (updateWholesaleString != "") {
-			sql_statement = sql_statement + ", `Whole_sale` = '" + updateWholesaleString + "'";
-		} else if (updatePriceString != "") {
-			sql_statement = sql_statement + ", `Sale_cost` = '" + updatePriceString + "'";
-		} else if (updateSupplierID != "") {
-			sql_statement = sql_statement + ", `vendor_id` = '" + updateSupplierID + "'";
+		if (updateQuant != null){
+			sql_statement = sql_statement + "`quanity` = '" + updateQuant + "'";
+			count ++;
+		}
+		if (updateWholesale != null) {
+			if (count > 0) {
+				sql_statement = sql_statement + ", ";
+			}
+			sql_statement = sql_statement + "`Whole_sale` = '" + updateWholesale + "'";
+			count ++;
+		}
+		if (updatePrice != null) {
+			if (count > 0) {
+				sql_statement = sql_statement + ", ";
+			}
+			sql_statement = sql_statement + "`Sale_cost` = '" + updatePrice + "'";
+			count ++;
+		}
+		if (updateSupplierID != null) {
+			if (count > 0) {
+				sql_statement = sql_statement + ", ";
+			}
+			sql_statement = sql_statement + "`vendor_id` = '" + updateSupplierID + "'";
+			count ++;
 		}
 
 		sql_statement = sql_statement + " WHERE (`product_id` = '" + updateID + "');";
