@@ -1,32 +1,15 @@
 package Main_Project.src;
 
-import java.io.*;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.nio.file.Path;
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.ArrayList;
-
 import java.util.*;
 import java.sql.*;
 
 public class App {
-    
-
     /** MAIN LOOP **/
     public static void main(String[] args) throws IOException {
-
-
-        //Main manageInv = new Main(); 
-
         Scanner userInput = new Scanner(System.in); // global userInput scanner for all userInput
-        String fileName = "inventory_team4.csv"; // variable for hardcoded file name
         String userName, password;
 
         //Connect to database and create database connection object
@@ -107,12 +90,12 @@ public class App {
                     /** UPDATE METHOD **/
                     System.out.println("-----------------------------------------------------------------------------------");
                     System.out.println("You have chosen to update an item.");
+					System.out.println("If you wish to keep a value the same, enter nothing.");
 
                     /** input product id of product to update **/
                     System.out.println("Enter product ID to update:");
                     String updateID = userInput.nextLine();
                     updateID = userInput.nextLine();
-                    String removalID = updateID;
 
                     System.out.println("Enter updated product information");
 
@@ -131,8 +114,7 @@ public class App {
                     updateSupplierID = userInput.nextLine();
 
                     /** UPDATE METHOD CALL **/
-                    App.update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID, fileName,
-                            removalID);
+                    App.update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID, connection);
                     System.out.println("-----------------------------------------------------------------------------------");
                     break;
 
@@ -145,7 +127,7 @@ public class App {
                     deleteID = userInput.nextLine();
 
                     /** DELETE METHOD CALL **/
-                    App.deleteRecord(deleteID);
+                    App.deleteRecord(deleteID, connection);
                     System.out.println("-----------------------------------------------------------------------------------");
                     break;
 
@@ -271,67 +253,55 @@ public class App {
 
     /** input '3' **/
     /** UPDATE METHOD **/
-    /**
-     * note: if nothing is entered for a prompt, the current value will stay the
-     * same.
-     **/
+    public static void update(String updateID, int updateQuant, float updateWholesale, float updatePrice, String updateSupplierID, Connection connection) throws IOException {
 
-    public static void update(String updateID, int updateQuant, float updateWholesale, float updatePrice,
-            String updateSupplierID, String fileName, String removalID) throws IOException {
+		//UPDATE `yagni_inv_db`.`product` SET `quanity` = '1614', `Whole_sale` = '135.92', `Sale_cost` = '207.56', `vendor_id` = 'WBWVYLRD' WHERE (`product_id` = '001LORWG0PC0');
 
-        String deleteProduct = removalID;
-        String prodID = updateID;
-        int quanity = updateQuant;
-        float whole_sale = updateWholesale;
-        float sale_price = updatePrice;
-        String supplier_ID = updateSupplierID;
-        String updateFile = fileName;
+		String sql_statement = "UPDATE `yagni_inv_db`.`product` SET ";
 
-        deleteRecord(deleteProduct);
-        addRecord(prodID, quanity, whole_sale, sale_price, supplier_ID, updateFile);
+		String updateQuantString = Integer.toString(updateQuant);
+		String updateWholesaleString = Float.toString(updateWholesale);
+		String updatePriceString = Float.toString(updatePrice);
 
-        System.out.println("Your file has been Successfully updated!");
-        System.out.println("-----------------------------------------------------------------------------------");
+		if (updateQuantString != ""){
+			sql_statement = sql_statement + "`quanity` = '" + updateQuantString + "'";
+		} else if (updateWholesaleString != "") {
+			sql_statement = sql_statement + ", `Whole_sale` = '" + updateWholesaleString + "'";
+		} else if (updatePriceString != "") {
+			sql_statement = sql_statement + ", `Sale_cost` = '" + updatePriceString + "'";
+		} else if (updateSupplierID != "") {
+			sql_statement = sql_statement + ", `vendor_id` = '" + updateSupplierID + "'";
+		}
 
+		sql_statement = sql_statement + " WHERE (`product_id` = '" + updateID + "');";
 
+		try {
+            // Creates a statement object
+            Statement update_statement = connection.createStatement();
+            // Calling the execute method to execute a DELETE statement with given ID
+            update_statement.execute(sql_statement);
+            System.out.println("\nSuccessfully updated product " + updateID + " in the inventory.");
+            System.out.println("-----------------------------------------------------------------------------------");
+        } catch (SQLException e) {
+            System.out.println("Oops! An error has occured.");
+            System.out.println(e);
+        }
     }
 
     /** input '4' **/
     /** DELETE METHOD **/
-    public static void deleteRecord(String deleteID) throws IOException {
-
-        String product_ID = deleteID;
-        String row;
-        String data[];
-
-        File tempFile = new File("inventory_temp_team4.csv"); // Temp file to add rows were are not deleting.
-        File file = new File("inventory_team4.csv"); // original file.
-        FileReader reader = new FileReader(file);
-        BufferedReader read = new BufferedReader(reader);
-        FileWriter writer = new FileWriter(tempFile);
-        BufferedWriter write = new BufferedWriter(writer);
-        PrintWriter print = new PrintWriter(write);
-
-        // Loop through each line to look for productID
-        while ((row = read.readLine()) != null) {
-            data = row.split(",");
-            // If productID does not match data then print to temp file.
-            if (!(data[0].equals(product_ID))) {
-                print.println(row);
-            }
+    public static void deleteRecord(String deleteID, Connection connection) throws IOException {
+		try {
+            // Creates a statement object
+            Statement delete_statement = connection.createStatement();
+            // Calling the execute method to execute a DELETE statement with given ID
+            delete_statement.execute("DELETE FROM `yagni_inv_db`.`product` WHERE (`product_id` = '" + deleteID + "');");
+            System.out.println("\nSuccessfully deleted the product from the inventory.");
+            System.out.println("-----------------------------------------------------------------------------------");
+        } catch (SQLException e) {
+            System.out.println("Oops! An error has occured.");
+            System.out.println(e);
         }
-        System.out.println("Product deleted succesfully!");
-        System.out.println("-----------------------------------------------------------------------------------");
-        // close utilities
-        print.flush();
-        print.close();
-        writer.close();
-        write.close();
-        read.close();
-        reader.close();
-        file.delete();
-        tempFile.renameTo(file); // Rename file.
-
     }
     /**Connection to database method**/
     /**Returns a Connection object**/
