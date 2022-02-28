@@ -21,7 +21,7 @@ public class ManageInventoryGUI {
             userLabel.setVerticalAlignment(JLabel.TOP);
 
             userFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit out of application.
-            userFrame.setSize(700, 500);
+            userFrame.setSize(900, 900);
             userFrame.add(userLabel);
             userFrame.setVisible(true);
 

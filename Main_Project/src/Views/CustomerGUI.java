@@ -10,12 +10,12 @@ public class CustomerGUI {
 
     CustomerGUI(){
 
-        label.setBounds(100,0,500,200);
+        label.setBounds(100,0,700,200);
         label.setFont(new Font(null, Font.BOLD, 20));
 
         frame.add(label);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(900, 900);
         frame.setLayout(null);
         frame.setVisible(true);
 
