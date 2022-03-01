@@ -102,7 +102,7 @@ public class App {
                     /** UPDATE METHOD **/
                     System.out.println("-----------------------------------------------------------------------------------");
                     System.out.println("You have chosen to update an item.");
-					System.out.println("If you wish to keep a value the same, type 'n'.");
+					System.out.println("If you wish to keep a value the same, hit 'enter'.");
 
                     /** input product id of product to update **/
                     System.out.println("Enter product ID to update (REQUIRED) :");
@@ -112,31 +112,27 @@ public class App {
                     System.out.println("Enter new quantity:");
 					//input as String
 					String updateQuant = userInput.nextLine();
-					updateQuant = userInput.nextLine();
-					if (updateQuant == "n") { //user does not want to update quantity
+					if (updateQuant.isEmpty()) { //user does not want to update quantity
 						updateQuant = null;
 					}
 
                     System.out.println("Enter new wholesale cost:");
 					//input as String
                     String updateWholesale = userInput.nextLine();
-					updateWholesale = userInput.nextLine();
-					if (updateWholesale == "n") { //user does not want to update wholesale cost
-						updateWholesale = null;
+					if (updateWholesale.isEmpty()) { //user does not want to update wholesale cost
+                        updateWholesale = null;
 					}
                     
                     System.out.println("Enter new sale price:");
 					//input as String
                     String updatePrice = userInput.nextLine();
-					updatePrice = userInput.nextLine();
-					if (updatePrice == "n") { //user does not want to update cost
+					if (updatePrice.isEmpty()) { //user does not want to update cost
 						updatePrice = null;
 					}
 
                     System.out.println("Enter new supplier ID:");
                     String updateSupplierID = userInput.nextLine();
-                    updateSupplierID = userInput.nextLine();
-					if (updateSupplierID == "n") { //user does not want to update supplier ID
+					if (updateSupplierID.isEmpty()) { //user does not want to update supplier ID
 						updateSupplierID = null;
 					}
 
