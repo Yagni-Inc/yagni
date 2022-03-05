@@ -116,13 +116,15 @@ public class EmployeeGUI implements ActionListener {
         /* ------- Frame Content ------- */ 
         //set default size. layout and style to the frame 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit out of application.
-        frame.setSize(900,900);
+        frame.setSize(900,700);
         frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+        frame.setResizable(false); //this disable the resize features of the frame to the user
 
         //add the header, body and footer panels to the frame 
         frame.add(headerPanel, BorderLayout.NORTH);
         frame.add(bodyPanel, BorderLayout.CENTER);
         frame.add(footerPanel, BorderLayout.SOUTH);
+        
 
         //display all content to the GUI 
         frame.setVisible(true);
@@ -130,12 +132,12 @@ public class EmployeeGUI implements ActionListener {
     }
 
    /**********FOR TESTING PURPOSES************/
-//    public static void main(String[] args) {
+   public static void main(String[] args) {
 
 
-//         EmployeeGUI user = new EmployeeGUI();
+        EmployeeGUI user = new EmployeeGUI();
 
-//     }
+    }
 
  //Button click method to navigate the user to the Inventory management CRUD GUI or the Customer Orders Management GUI
 
