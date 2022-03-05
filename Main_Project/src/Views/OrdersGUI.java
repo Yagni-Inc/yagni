@@ -17,7 +17,8 @@ public class OrdersGUI {
         ordersLabel.setVerticalAlignment(JLabel.TOP);
 
         ordersFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit out of application.
-        ordersFrame.setSize(700, 500);
+        ordersFrame.setSize(900, 700);
+        ordersFrame.setResizable(false); //this disable the resize features of the frame to the user
         ordersFrame.add(ordersLabel);
         ordersFrame.setVisible(true);
 

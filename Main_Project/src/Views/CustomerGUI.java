@@ -14,7 +14,8 @@ public class CustomerGUI {
 
         frame.add(label);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(900, 900);
+        frame.setSize(900, 700);
+        frame.setResizable(false); //this disable the resize features of the frame to the user
         frame.setLayout(null);
         frame.setVisible(true);
 
