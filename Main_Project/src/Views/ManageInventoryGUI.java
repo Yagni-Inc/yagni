@@ -37,21 +37,21 @@ public class ManageInventoryGUI {
         private static JButton updateButton = new JButton("Update Product");
         private static JButton deleteButton = new JButton("Delete Product"); 
         private static JLabel controlsTitle = new JLabel("Product Lookup");
-        private static JLabel productIDLabel = new JLabel("Product ID: ");
+        private static JLabel productIDLabel = new JLabel("Product ID");
         private static JTextField productIDField = new JTextField(20);
         private static JLabel quantityLabel = new JLabel("Quantity");
         private static JTextField quantityField = new JTextField(20);
-        private static JLabel wholeSaleLabel = new JLabel("Whole Sale Price: ");
+        private static JLabel wholeSaleLabel = new JLabel("Whole Sale Price");
         private static JTextField wholeSaleField = new JTextField(20);
-        private static JLabel salePriceLabel = new JLabel("Sale Price: ");
+        private static JLabel salePriceLabel = new JLabel("Sale Price");
         private static JTextField salePriceField = new JTextField(20);
-        private static JLabel supplierIDLabel = new JLabel("Supplier ID: ");
+        private static JLabel supplierIDLabel = new JLabel("Supplier ID");
         private static JTextField supplierIDField = new JTextField(20);
         private static JTable inventoryTable = new JTable();
 
         ManageInventoryGUI(){
 
-            // Importing and setting custom font Caveat for all text components 
+        // Importing and setting custom font Caveat for all text components 
          try {
             File font_file = new File("Main_Project/assets/fonts/Caveat-VariableFont_wght.ttf");
             Font caveatFont = Font.createFont(Font.TRUETYPE_FONT, font_file).deriveFont(20f);
@@ -89,7 +89,7 @@ public class ManageInventoryGUI {
 
         
 
-         /* ------- Body Content ------- */ 
+        /* ------- Body Content ------- */ 
         bodyPanel.setLayout(null);
         bodyPanel.setBackground(Color.LIGHT_GRAY);
         bodyPanel.add(controlsPanel);
@@ -97,8 +97,6 @@ public class ManageInventoryGUI {
         
 
         //CRUD controls Panel 
-       
-        
         controlsPanel.setBounds(30, 30, 270, 500);
         controlsPanel.setBackground(Color.LIGHT_GRAY);
         controlsPanel.setLayout(new GridLayout(14, 1, 0, 5));
@@ -107,6 +105,7 @@ public class ManageInventoryGUI {
         controlsPanel.add(controlsTitle); 
         
         controlsPanel.add(addButton);
+        // TODO: add event listenter to addButton 
         controlsPanel.add(productIDLabel);
         controlsPanel.add(productIDField);
         controlsPanel.add(quantityLabel);
@@ -117,18 +116,17 @@ public class ManageInventoryGUI {
         controlsPanel.add(salePriceField);
         controlsPanel.add(supplierIDLabel);
         controlsPanel.add(supplierIDField);
-        //controlsPanel.add(new JLabel(""));
         controlsPanel.add(updateButton);
+        // TODO: add event listenter to updateButton 
         controlsPanel.add(deleteButton);
+        // TODO: add event listenter to deleteButton 
 
-        //controlsPanel.add(controlContentPanel);
 
         //Table  Panel 
-    
-        
         tablePanel.setBounds(330, 30, 550, 500);
         tablePanel.setLayout(null);
         bodyPanel.add(tablePanel);
+        // TODO: add JTable to Table Panel and populate data from Product Inventory table in DB  
        
         
          /* ------- Footer Content ------- */
@@ -157,13 +155,15 @@ public class ManageInventoryGUI {
 
         }
 
-           /**********FOR TESTING PURPOSES************/
+    /**********FOR TESTING PURPOSES************/
    public static void main(String[] args) {
 
 
         new ManageInventoryGUI();
 
     }
+
+    // TODO: @Overide method for Action event listeners for button clicks 
 
        
 }
