@@ -87,7 +87,6 @@ public class ManageInventoryGUI {
         //add header label to header panel 
         headerPanel.add(headerLabel);
 
-        
 
         /* ------- Body Content ------- */ 
         bodyPanel.setLayout(null);
