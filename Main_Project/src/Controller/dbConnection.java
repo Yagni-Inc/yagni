@@ -2,12 +2,12 @@ package Main_Project.src.Controller;
 
 import java.sql.*;
 
-public class dbConnection {
+public class DbConnection {
     // variables
     String userName, password;
     Connection connection;
 
-    public dbConnection(String userNameIn, String passwordIn){
+    public DbConnection(String userNameIn, String passwordIn){
 
         //variables
         userName = userNameIn;
