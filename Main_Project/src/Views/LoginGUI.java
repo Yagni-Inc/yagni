@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -125,18 +126,21 @@ public class LoginGUI implements ActionListener {
 
    
         
-    }
+    } // end LoginGUI constructor 
+    
         //Button click method 
         @Override
         public void actionPerformed(ActionEvent e) {
              String user = userText.getText();
              String password = passwordText.getText();
+             Connection connection = connect(user, password); //pass user and password to connect method 
              
-             //if the login button is clicked and the user name and password are correct then open the EmployeeGUI; display login error otherwise. 
-            if(e.getSource() == button && user.equals("YAGNI") && password.equals("2022")) {
+             //if the login button is clicked and the user name and password match mysql login, then open the EmployeeGUI; display login error otherwise. 
+            if(e.getSource() == button && (connection != null)) {
                 success.setText("Login Successful!");
                 frame.dispose();
                 new EmployeeGUI(); 
+                System.out.println("Successfully connected!");
             }else{
                 success.setText("Invalid credentials!  Please Try Again. ");
                 success.setForeground(Color.RED); 
@@ -144,4 +148,33 @@ public class LoginGUI implements ActionListener {
                 
             }// end of if statement
         }// end of button action
-}
+
+        //Establish connection with mySQl 
+        public static Connection connect(String userName, String password){
+        
+            //Try block catches a class not found execption
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+    
+            } catch (ClassNotFoundException e) {
+                System.out.println(e);
+            }
+    
+            //Try block catches SQLExecption
+            try{
+                //Making a connection to the database and setting it to a connection object
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/yagni_inv_db",userName,password);
+    
+                //returning the connection object so it can be used through out the app
+                return connection;
+    
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+            //if the connection does not work it returns null.
+            System.out.println("ERROR: Connection to database failed.");
+            return null;
+    
+        } //end connect method
+
+} // end LoginGUI class
