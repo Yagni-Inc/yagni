@@ -18,6 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Main_Project.src.Controller.*;
+
 public class EmployeeGUI implements ActionListener {
 
     JFrame frame = new JFrame("Employee Main Page");   // Crates Frame & Title
@@ -31,10 +33,14 @@ public class EmployeeGUI implements ActionListener {
     JLabel footerLabel = new JLabel();          //text label for Yagni Inc. Copyright info 
     JButton inventoryButton = new JButton();    //Button for Inventory 
     JButton orderButton = new JButton();        //Button for orders
-    ImageIcon logoImg = new ImageIcon("Main_Project/assets/img/YagniLogoOnly.png"); //loads logo image 
+    ImageIcon logoImg = new ImageIcon("Main_Project/assets/img/YagniLogoOnly.png"); //loads logo image
+    DbConnection connection; 
 
 
-    EmployeeGUI() {
+    EmployeeGUI(DbConnection connectionIn) {
+
+        connection = connectionIn;
+
          // Importing and setting custom font Caveat for all text components 
          try {
             File font_file = new File("Main_Project/assets/fonts/Caveat-VariableFont_wght.ttf");
@@ -132,12 +138,12 @@ public class EmployeeGUI implements ActionListener {
     }
 
    /**********FOR TESTING PURPOSES************/
-   public static void main(String[] args) {
+   //public static void main(String[] args) {
 
 
-        EmployeeGUI user = new EmployeeGUI();
+        //EmployeeGUI user = new EmployeeGUI();
 
-    }
+    //}
 
  //Button click method to navigate the user to the Inventory management CRUD GUI or the Customer Orders Management GUI
 
@@ -148,7 +154,7 @@ public class EmployeeGUI implements ActionListener {
 
         if(e.getSource() == inventoryButton){
             frame.dispose();
-            ManageInventoryGUI window = new ManageInventoryGUI();
+            ManageInventoryGUI window = new ManageInventoryGUI(connection);
 
         }
 
@@ -159,6 +165,8 @@ public class EmployeeGUI implements ActionListener {
         }
         
     }
+
+    
 
 }
 

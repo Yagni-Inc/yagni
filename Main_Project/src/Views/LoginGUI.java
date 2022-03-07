@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import Main_Project.src.Controller.DbConnection;
 
 public class LoginGUI implements ActionListener {
     
@@ -132,11 +135,14 @@ public class LoginGUI implements ActionListener {
              String user = userText.getText();
              String password = passwordText.getText();
              
+             DbConnection connection = new DbConnection(user,password);
+             System.out.println(connection);
+             
              //if the login button is clicked and the user name and password are correct then open the EmployeeGUI; display login error otherwise. 
-            if(e.getSource() == button && user.equals("YAGNI") && password.equals("2022")) {
+            if(e.getSource() == button && connection.getConnection() != null) {
                 success.setText("Login Successful!");
                 frame.dispose();
-                new EmployeeGUI(); 
+                new EmployeeGUI(connection); 
             }else{
                 success.setText("Invalid credentials!  Please Try Again. ");
                 success.setForeground(Color.RED); 
