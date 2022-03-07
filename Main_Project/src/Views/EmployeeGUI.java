@@ -34,10 +34,10 @@ public class EmployeeGUI implements ActionListener {
     JButton inventoryButton = new JButton();    //Button for Inventory 
     JButton orderButton = new JButton();        //Button for orders
     ImageIcon logoImg = new ImageIcon("Main_Project/assets/img/YagniLogoOnly.png"); //loads logo image
-    dbConnection connection; 
+    DbConnection connection; 
 
 
-    EmployeeGUI(dbConnection connectionIn) {
+    EmployeeGUI(DbConnection connectionIn) {
 
         connection = connectionIn;
 

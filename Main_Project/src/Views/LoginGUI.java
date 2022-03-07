@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import Main_Project.src.Controller.dbConnection;
+import Main_Project.src.Controller.DbConnection;
 
 public class LoginGUI implements ActionListener {
     
@@ -135,7 +135,7 @@ public class LoginGUI implements ActionListener {
              String user = userText.getText();
              String password = passwordText.getText();
              
-             dbConnection connection = new dbConnection(user,password);
+             DbConnection connection = new DbConnection(user,password);
              System.out.println(connection);
              
              //if the login button is clicked and the user name and password are correct then open the EmployeeGUI; display login error otherwise. 

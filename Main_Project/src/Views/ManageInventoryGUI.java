@@ -1,28 +1,16 @@
 package Main_Project.src.Views;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.sql.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import Main_Project.src.Controller.*;
+import Main_Project.src.Model.ReadAll;
 
-import Main_Project.src.Controller.dbConnection;
-
-public class ManageInventoryGUI {
+public class ManageInventoryGUI implements ActionListener{
 
         private static JFrame inventoryFrame = new JFrame("Product Inventory Window");  
         private static JLabel inventoryLabel = new JLabel();
@@ -49,10 +37,12 @@ public class ManageInventoryGUI {
         private static JTextField salePriceField = new JTextField(20);
         private static JLabel supplierIDLabel = new JLabel("Supplier ID");
         private static JTextField supplierIDField = new JTextField(20);
-        private static JTable inventoryTable = new JTable();
-        private static dbConnection connection;
+        private static JTable productsTable = new JTable();
+        private static JScrollPane tableScroll = new JScrollPane();
+        private static JButton loadButton = new JButton("Load Inventory Data");
+        private static DbConnection connection;
 
-        ManageInventoryGUI(dbConnection connectionIn){
+        ManageInventoryGUI(DbConnection connectionIn){
             
             // setting the connection
             connection = connectionIn;
@@ -73,6 +63,7 @@ public class ManageInventoryGUI {
                 supplierIDLabel.setFont(caveatFont);
                 updateButton.setFont(caveatFont);
                 deleteButton.setFont(caveatFont);
+                loadButton.setFont(caveatFont);
                 footerLabel.setFont(caveatFont.deriveFont(16f));	    
             } catch (IOException | FontFormatException e) {
                 e.printStackTrace();
@@ -129,9 +120,17 @@ public class ManageInventoryGUI {
 
 
             //Table  Panel 
-            tablePanel.setBounds(330, 30, 550, 500);
+            tablePanel.setBounds(310, 0, 570, 520);
             tablePanel.setLayout(null);
+            tablePanel.setBackground(Color.LIGHT_GRAY);
             bodyPanel.add(tablePanel);
+
+            loadButton.setBounds(200, 0, 200, 40);
+            loadButton.addActionListener(this);
+            tablePanel.add(loadButton);
+            tableScroll.setBounds(0, 45, 570, 480);
+            tablePanel.add(tableScroll);
+            tableScroll.setViewportView(productsTable);
             // TODO: add JTable to Table Panel and populate data from Product Inventory table in DB  
         
             
@@ -169,7 +168,17 @@ public class ManageInventoryGUI {
 
     //     }
 
-    // TODO: @Overide method for Action event listeners for button clicks 
 
+    // event handler for butten click
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //on click of Load button, dsiplay all data from product inventory table 
+        if(e.getSource() == loadButton){
+            loadButton.setText("Reload Inventory");
+            ReadAll read = new ReadAll(productsTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
+            read.readAll(connection); // calls the readAll method and passes in the database connection
+
+        }
+    }
        
 }
