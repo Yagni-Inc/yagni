@@ -218,6 +218,7 @@ public class ManageInventoryGUI implements ActionListener{
         ReadAll displayTable = new ReadAll(productsTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
         displayTable.readAll(linkDB);
 
+
     }
        
 }
