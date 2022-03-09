@@ -19,12 +19,12 @@ public class ReadAll {
 
     // readAll method takes a connection object as an argument
     // readAll creates a table based on the query that will update the JTable for the products table
-    public void readAll(DbConnection connection) {
+    public void readAll(DbConnection dbConnection) {
         
         // catches SQLExecption
         try {
             
-            Statement statement = connection.getConnection().createStatement(); // creates a statment object
+            Statement statement = dbConnection.getConnection().createStatement(); // creates a statment object
 
             // executes a SQL statment that reads all from the products table
             ResultSet resultSet = statement.executeQuery("SELECT * FROM yagni_inv_db.product;"); 

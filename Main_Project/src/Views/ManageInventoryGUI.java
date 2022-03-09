@@ -41,12 +41,12 @@ public class ManageInventoryGUI implements ActionListener{
         private static JTable productsTable = new JTable();
         private static JScrollPane tableScroll = new JScrollPane();
         private static JButton loadButton = new JButton("Load Inventory Data");
-        private static DbConnection connection;
+        private static DbConnection dbConnection;
 
-        ManageInventoryGUI(DbConnection connectionIn){
+        ManageInventoryGUI(DbConnection dbConnectionIn){
             
             // setting the connection
-            connection = connectionIn;
+            dbConnection = dbConnectionIn;
 
             // Importing and setting custom font Caveat for all text components 
             try {
@@ -177,7 +177,7 @@ public class ManageInventoryGUI implements ActionListener{
         if(e.getSource() == loadButton){
             loadButton.setText("Reload Inventory");
             ReadAll read = new ReadAll(productsTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
-            read.readAll(connection); // calls the readAll method and passes in the database connection
+            read.readAll(dbConnection); // calls the readAll method and passes in the database connection
 
         }
         else if(e.getSource() == addButton){
@@ -197,7 +197,7 @@ public class ManageInventoryGUI implements ActionListener{
 
             // creating a Creat obj and calling addRecord passing in user input
             Create addRecord = new Create(productId, quantity, wholeSale, salePrice, supplierId);
-            addRecord.addRecord(connection);
+            addRecord.addRecord(dbConnection);
         }
     }
        

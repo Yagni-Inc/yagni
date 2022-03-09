@@ -135,14 +135,14 @@ public class LoginGUI implements ActionListener {
              String user = userText.getText();
              String password = passwordText.getText();
              
-             DbConnection connection = new DbConnection(user,password);
-             System.out.println(connection);
+             DbConnection dbConnection = new DbConnection(user,password);
+             System.out.println(dbConnection);
              
              //if the login button is clicked and the user name and password are correct then open the EmployeeGUI; display login error otherwise. 
-            if(e.getSource() == button && connection.getConnection() != null) {
+            if(e.getSource() == button && dbConnection.getConnection() != null) {
                 success.setText("Login Successful!");
                 frame.dispose();
-                new EmployeeGUI(connection); 
+                new EmployeeGUI(dbConnection); 
             }else{
                 success.setText("Invalid credentials!  Please Try Again. ");
                 success.setForeground(Color.RED); 
