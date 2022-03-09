@@ -19,15 +19,15 @@ public class ReadAll {
 
     // readAll method takes a connection object as an argument
     // readAll creates a table based on the query that will update the JTable for the products table
-    public void readAll(DbConnection connection) {
+    public void readAll(DbConnection linkDB) {
         
         // catches SQLExecption
         try {
             
-            Statement statement = connection.getConnection().createStatement(); // creates a statment object
+            Statement statement = linkDB.getConnection().createStatement(); // creates a statment object
 
             // executes a SQL statment that reads all from the products table
-            ResultSet resultSet = statement.executeQuery("SELECT product_id AS 'Product ID', quanity AS 'Quantity', Whole_sale AS 'Wholesale Cost', Sale_cost AS 'Sale Price', vendor_id AS 'Supplier ID' FROM yagni_inv_db.product;"); 
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM yagni_inv_db.product;"); 
  
             // creates a DefaultTableModel object
             DefaultTableModel tableModel = (DefaultTableModel) productsTable.getModel();

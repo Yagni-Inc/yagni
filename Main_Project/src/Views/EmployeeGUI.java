@@ -34,12 +34,12 @@ public class EmployeeGUI implements ActionListener {
     JButton inventoryButton = new JButton();    //Button for Inventory 
     JButton orderButton = new JButton();        //Button for orders
     ImageIcon logoImg = new ImageIcon("Main_Project/assets/img/YagniLogoOnly.png"); //loads logo image
-    DbConnection connection; 
+    DbConnection linkDB; 
 
 
-    EmployeeGUI(DbConnection connectionIn) {
+    EmployeeGUI(DbConnection linkDBIn) {
 
-        connection = connectionIn;
+        linkDB = linkDBIn;
 
          // Importing and setting custom font Caveat for all text components 
          try {
@@ -154,7 +154,7 @@ public class EmployeeGUI implements ActionListener {
 
         if(e.getSource() == inventoryButton){
             frame.dispose();
-            ManageInventoryGUI window = new ManageInventoryGUI(connection);
+            ManageInventoryGUI window = new ManageInventoryGUI(linkDB);
 
         }
 

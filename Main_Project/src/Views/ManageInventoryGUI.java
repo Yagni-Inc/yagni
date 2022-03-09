@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Main_Project.src.Controller.*;
+import Main_Project.src.Model.Create;
 import Main_Project.src.Model.ReadAll;
 
 public class ManageInventoryGUI implements ActionListener{
@@ -40,12 +41,12 @@ public class ManageInventoryGUI implements ActionListener{
         private static JTable productsTable = new JTable();
         private static JScrollPane tableScroll = new JScrollPane();
         private static JButton loadButton = new JButton("Load Inventory Data");
-        private static DbConnection connection;
+        private static DbConnection linkDB;
 
-        ManageInventoryGUI(DbConnection connectionIn){
+        ManageInventoryGUI(DbConnection linkDBIn){
             
             // setting the connection
-            connection = connectionIn;
+            linkDB = linkDBIn;
 
             // Importing and setting custom font Caveat for all text components 
             try {
@@ -102,7 +103,7 @@ public class ManageInventoryGUI implements ActionListener{
             controlsPanel.add(controlsTitle); 
             
             controlsPanel.add(addButton);
-            // TODO: add event listenter to addButton 
+            addButton.addActionListener(this);
             controlsPanel.add(productIDLabel);
             controlsPanel.add(productIDField);
             controlsPanel.add(quantityLabel);
@@ -176,8 +177,27 @@ public class ManageInventoryGUI implements ActionListener{
         if(e.getSource() == loadButton){
             loadButton.setText("Reload Inventory");
             ReadAll read = new ReadAll(productsTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
-            read.readAll(connection); // calls the readAll method and passes in the database connection
+            read.readAll(linkDB); // calls the readAll method and passes in the database connection
 
+        }
+        else if(e.getSource() == addButton){
+            // setting our variables to user input
+            String productId = productIDField.getText();
+            String quantity = quantityField.getText();
+            String wholeSale = wholeSaleField.getText();
+            String salePrice = salePriceField.getText();
+            String supplierId = supplierIDField.getText();
+
+            // clearing the text fields
+            productIDField.setText("");
+            quantityField.setText("");
+            wholeSaleField.setText("");
+            salePriceField.setText("");
+            supplierIDField.setText("");
+
+            // creating a Creat obj and calling addRecord passing in user input
+            Create addRecord = new Create(productId, quantity, wholeSale, salePrice, supplierId);
+            addRecord.addRecord(linkDB);
         }
     }
        
