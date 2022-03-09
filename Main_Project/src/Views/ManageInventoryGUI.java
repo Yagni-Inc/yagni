@@ -41,6 +41,7 @@ public class ManageInventoryGUI implements ActionListener{
         private static JTable productsTable = new JTable();
         private static JScrollPane tableScroll = new JScrollPane();
         private static JButton loadButton = new JButton("Load Inventory Data");
+        private static JButton reloadButton = new JButton("Reload Inventory");
         private static DbConnection linkDB;
 
         ManageInventoryGUI(DbConnection linkDBIn){
@@ -65,6 +66,7 @@ public class ManageInventoryGUI implements ActionListener{
                 updateButton.setFont(caveatFont);
                 deleteButton.setFont(caveatFont);
                 loadButton.setFont(caveatFont);
+                reloadButton.setFont(caveatFont);
                 footerLabel.setFont(caveatFont.deriveFont(16f));	    
             } catch (IOException | FontFormatException e) {
                 e.printStackTrace();
@@ -128,6 +130,8 @@ public class ManageInventoryGUI implements ActionListener{
 
             loadButton.setBounds(200, 0, 200, 40);
             loadButton.addActionListener(this);
+            reloadButton.setBounds(200,0,200,40);
+            reloadButton.addActionListener(this);
             tablePanel.add(loadButton);
             tableScroll.setBounds(0, 45, 570, 480);
             tablePanel.add(tableScroll);
@@ -175,7 +179,9 @@ public class ManageInventoryGUI implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         //on click of Load button, dsiplay all data from product inventory table 
         if(e.getSource() == loadButton){
-            loadButton.setText("Reload Inventory");
+            tablePanel.remove(loadButton);
+            tablePanel.repaint();
+            tablePanel.add(reloadButton);
             ReadAll read = new ReadAll(productsTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
             read.readAll(linkDB); // calls the readAll method and passes in the database connection
 
@@ -198,7 +204,21 @@ public class ManageInventoryGUI implements ActionListener{
             // creating a Creat obj and calling addRecord passing in user input
             Create addRecord = new Create(productId, quantity, wholeSale, salePrice, supplierId);
             addRecord.addRecord(linkDB);
+            refreshProducts();
         }
+        else if (e.getSource() == reloadButton){
+            refreshProducts();
+        }
+    }
+
+    //Method to refresh the productsTable JTable 
+    public void refreshProducts(){
+        DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
+        model.setRowCount(0);
+        ReadAll displayTable = new ReadAll(productsTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
+        displayTable.readAll(linkDB);
+
+
     }
        
 }
