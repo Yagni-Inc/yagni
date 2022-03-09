@@ -17,13 +17,13 @@ public class Create {
         wholeSale = wholeSaleIn;
     }
 
-    public void addRecord(DbConnection dbConnection) {
+    public void addRecord(DbConnection linkDB) {
 
         // Inserting into the database
         // Try catches SQLExecption
         try {
             // Creates a statement object
-            Statement statement = dbConnection.getConnection().createStatement();
+            Statement statement = linkDB.getConnection().createStatement();
             // Calling the execute method to execute an INSERT statement
             statement.execute("INSERT INTO `product`(product_id, quanity, Whole_sale, Sale_cost, vendor_id) VALUES ('"+productId+"',"+quantity+","+wholeSale+","+salePrice+",'"+supplierId+"')");
             System.out.println("\nSuccessfully added the product to inventory");

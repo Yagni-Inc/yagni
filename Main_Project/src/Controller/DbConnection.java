@@ -5,7 +5,7 @@ import java.sql.*;
 public class DbConnection {
     // variables
     String userName, password;
-    Connection dbConnection;
+    Connection linkDB;
 
     public DbConnection(String userNameIn, String passwordIn){
 
@@ -14,7 +14,7 @@ public class DbConnection {
         password = passwordIn;
         
         // setting up the connection object
-        dbConnection = connect(userName, password);
+        linkDB = connect(userName, password);
     }
 
     public static Connection connect(String userName, String password){
@@ -30,10 +30,10 @@ public class DbConnection {
         //Try block catches SQLExecption
         try{
             //Making a connection to the database and setting it to a connection object
-            Connection dbConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/yagni_inv_db",userName,password);
+            Connection linkDB = DriverManager.getConnection("jdbc:mysql://localhost:3306/yagni_inv_db",userName,password);
 
             //returning the connection object so it can be used through out the app
-            return dbConnection;
+            return linkDB;
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -47,13 +47,13 @@ public class DbConnection {
     }
     
     public Connection getConnection(){
-        return dbConnection;
+        return linkDB;
     }
     
     public void closeConnection(){
 
         try{
-        dbConnection.close();
+        linkDB.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
