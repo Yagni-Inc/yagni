@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import Main_Project.src.Controller.*;
 import Main_Project.src.Model.Create;
 import Main_Project.src.Model.ReadAll;
+import Main_Project.src.Model.Update;
 
 public class ManageInventoryGUI implements ActionListener,FocusListener{
 
@@ -232,6 +233,18 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
             addRecord.addRecord(linkDB);
             refreshProducts();
         }
+		else if (e.getSource() == updateButton){
+			// setting our variables to user input
+            String updateID = productIDField.getText();
+            String updateQuant = quantityField.getText();
+            String updateWholesale = wholeSaleField.getText();
+            String updatePrice = salePriceField.getText();
+            String updateSupplierID = supplierIDField.getText();
+
+			Update updateRecord = new Update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID);
+			updateRecord.update(linkDB);
+			refreshProducts();
+		}
         else if (e.getSource() == reloadButton){
             refreshProducts();
         }
@@ -243,8 +256,6 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
         else if(e.getSource() == backButton){
             inventoryFrame.dispose();
             new EmployeeGUI(linkDB);
-            
-
         }
     }
 
