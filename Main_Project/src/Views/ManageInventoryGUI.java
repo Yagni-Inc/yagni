@@ -10,11 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 import Main_Project.src.Controller.*;
-import Main_Project.src.Model.Create;
-import Main_Project.src.Model.ReadAll;
-import Main_Project.src.Model.Search;
-import Main_Project.src.Model.Update;
-
+import Main_Project.src.Model.*;
 
 public class ManageInventoryGUI implements ActionListener,FocusListener,MouseListener{
 
@@ -244,9 +240,9 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             String updatePrice = salePriceField.getText();
             String updateSupplierID = supplierIDField.getText();
 
-			Update updateRecord = new Update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID);
-			updateRecord.update(linkDB);
-			refreshProducts();
+			      Update updateRecord = new Update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID);
+            updateRecord.update(linkDB);
+            refreshProducts();
 		}
         else if (e.getSource() == reloadButton){
             refreshProducts();
@@ -261,7 +257,6 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             inventoryFrame.dispose();
             new EmployeeGUI(linkDB);
         }
-
         else if(e.getSource() == searchButton){
             refreshProductsSearch();
            
@@ -270,6 +265,15 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             Search searchObj = new Search(productId, productsTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
             searchObj.readOne(linkDB); // calls the readAll method and passes in the database connection
             }
+        else if(e.getSource() == deleteButton){
+            
+            String deleteID = productIDField.getText();
+            Delete deleteObj = new Delete(deleteID);
+            deleteObj.delete(linkDB);
+
+            refreshProducts();
+            
+        }
     }
 
     @Override //focusGained & focusLost Override's both belong to searchField & searchButton
