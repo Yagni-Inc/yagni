@@ -259,7 +259,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
             new EmployeeGUI(linkDB);
         }
         else if(e.getSource() == deleteButton){
-            int action = JOptionPane.showConfirmDialog(null, "Do you really want to delete this product!", //Pop up that will let user confirm to delete product or not. 
+            int action = JOptionPane.showConfirmDialog(null, "Do you really want to delete this product?", //Pop up that will let user confirm to delete product or not. 
             "Delete", JOptionPane.YES_NO_CANCEL_OPTION);
             if(action == 0){
                  String deleteID = productIDField.getText();
