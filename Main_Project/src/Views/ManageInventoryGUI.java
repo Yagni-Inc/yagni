@@ -324,7 +324,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             productIDField.setText("");
             quantityField.setText("");
             wholeSaleField.setText("");
-            salePriceField.setText("");
+            salePriceField.setText("");//hi
             supplierIDField.setText("");
 
     }
