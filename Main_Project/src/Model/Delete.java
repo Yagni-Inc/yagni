@@ -11,10 +11,8 @@ public class Delete {
         deleteID = deleteIDin;
 
     }
-
     public void delete(DbConnection linkDB) {
 
-        //Statement delete_statement = connection.createStatement();
         try {
             // Creates a statement object
             Statement delete_statement = linkDB.getConnection().createStatement();
@@ -26,8 +24,6 @@ public class Delete {
             System.out.println("Oops! An error has occured.");
             System.out.println(e);
         }
-
-
     
  }
 } 
