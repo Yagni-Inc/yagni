@@ -10,13 +10,8 @@ import javax.swing.table.DefaultTableModel;
 
 
 import Main_Project.src.Controller.*;
-<<<<<<< HEAD
-
 import Main_Project.src.Model.*;
 
-=======
-import Main_Project.src.Model.*;
->>>>>>> 171f0c58a2625af6b003b4649a10d6438292e495
 
 public class ManageInventoryGUI implements ActionListener,FocusListener,MouseListener{
 
@@ -245,23 +240,9 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             String updateWholesale = wholeSaleField.getText();
             String updatePrice = salePriceField.getText();
             String updateSupplierID = supplierIDField.getText();
-
-			      Update updateRecord = new Update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID);
+			Update updateRecord = new Update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID);
             updateRecord.update(linkDB);
             refreshProducts();
-		}
-        else if (e.getSource() == reloadButton){
-            refreshProducts();
-        }
-        
-        else if(e.getSource() == logoutButton){
-            inventoryFrame.dispose();
-            new HomeGUI(); 
-
-        }
-        else if(e.getSource() == backButton){
-            inventoryFrame.dispose();
-            new EmployeeGUI(linkDB);
         }
         else if(e.getSource() == searchButton){
             clearProductsTable();
@@ -270,13 +251,19 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
 
             Search searchObj = new Search(productId, productsTable); // creates a searchObj object from model/Search.java and passes in the products table
             searchObj.readOne(linkDB); // calls the readOne method and passes in the database connection
-            }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 171f0c58a2625af6b003b4649a10d6438292e495
+        }
         else if(e.getSource() == deleteButton){
+
+            
+            String deleteID = productIDField.getText();
+            Delete deleteObj = new Delete(deleteID);
+            deleteObj.delete(linkDB);
+
+            refreshProducts(); 
+        } 
+        else if (e.getSource() == reloadButton){
+            refreshProducts();
+
             int action = JOptionPane.showConfirmDialog(null, "Do you really want to delete this product?", //Pop up that will let user confirm to delete product or not. 
             "Delete", JOptionPane.YES_NO_CANCEL_OPTION);
             if(action == 0){
@@ -286,14 +273,17 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
                  refreshProducts();
             }
             
+
         }
-<<<<<<< HEAD
+        else if(e.getSource() == logoutButton){
+            inventoryFrame.dispose();
+            new HomeGUI(); 
 
-        
-
-
-=======
->>>>>>> 171f0c58a2625af6b003b4649a10d6438292e495
+        }
+        else if(e.getSource() == backButton){
+            inventoryFrame.dispose();
+            new EmployeeGUI(linkDB);
+        }
     }
 
     @Override //focusGained & focusLost Override's both belong to searchField & searchButton
@@ -325,20 +315,13 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
 
 
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 171f0c58a2625af6b003b4649a10d6438292e495
     //Method to refresh the productsTable JTable 
     public void clearProductsTable(){
         DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
         model.setRowCount(0);
         
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 171f0c58a2625af6b003b4649a10d6438292e495
     public void clearTextFields(){
            
             productIDField.setText("");
@@ -346,7 +329,6 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             wholeSaleField.setText("");
             salePriceField.setText("");//hi
             supplierIDField.setText("");
-
     }
     
     @Override //method that populates our textfields when you click a row on the JTable
@@ -385,13 +367,4 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
         // need this here app breaks if you remove these events
         
     }
-<<<<<<< HEAD
-    
-
-
-    
-       
-=======
-           
->>>>>>> 171f0c58a2625af6b003b4649a10d6438292e495
 }
