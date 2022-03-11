@@ -7,9 +7,10 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+
 import Main_Project.src.Controller.*;
 import Main_Project.src.Model.Create;
-import Main_Project.src.Model.ReadAll;
+import Main_Project.src.Model.*;
 import Main_Project.src.Model.Update;
 
 public class ManageInventoryGUI implements ActionListener,FocusListener{
@@ -256,6 +257,15 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
         else if(e.getSource() == backButton){
             inventoryFrame.dispose();
             new EmployeeGUI(linkDB);
+        }
+        else if(e.getSource() == deleteButton){
+            
+            String deleteID = productIDField.getText();
+            Delete deleteObj = new Delete(deleteID);
+            deleteObj.delete(linkDB);
+
+            refreshProducts();
+            
         }
     }
 
