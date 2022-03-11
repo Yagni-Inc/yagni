@@ -8,12 +8,13 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
+
 import Main_Project.src.Controller.*;
 import Main_Project.src.Model.Create;
 import Main_Project.src.Model.*;
 import Main_Project.src.Model.Update;
 
-public class ManageInventoryGUI implements ActionListener,FocusListener{
+public class ManageInventoryGUI implements ActionListener,FocusListener,MouseListener{
 
         private static JFrame inventoryFrame = new JFrame("Product Inventory Window");  
         private static JTable productsTable = new JTable();
@@ -160,6 +161,10 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
             tableScroll.setBounds(0, 45, 570, 480);
             tablePanel.add(tableScroll);
             tableScroll.setViewportView(productsTable);
+            productsTable.addMouseListener(this);
+            
+            
+            
             
             /* ------- Search Textfield & Button ------- */
             searchField.setBounds(0, 0, 200, 40);
@@ -222,12 +227,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
             String salePrice = salePriceField.getText();
             String supplierId = supplierIDField.getText();
 
-            // clearing the text fields
-            productIDField.setText("");
-            quantityField.setText("");
-            wholeSaleField.setText("");
-            salePriceField.setText("");
-            supplierIDField.setText("");
+            clearTextFields();
 
             // creating a Creat obj and calling addRecord passing in user input
             Create addRecord = new Create(productId, quantity, wholeSale, salePrice, supplierId);
@@ -249,6 +249,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
         else if (e.getSource() == reloadButton){
             refreshProducts();
         }
+        
         else if(e.getSource() == logoutButton){
             inventoryFrame.dispose();
             new HomeGUI(); 
@@ -258,6 +259,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
             inventoryFrame.dispose();
             new EmployeeGUI(linkDB);
         }
+
         else if(e.getSource() == deleteButton){
             
             String deleteID = productIDField.getText();
@@ -267,6 +269,9 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
             refreshProducts();
             
         }
+
+        
+
     }
 
     @Override //focusGained & focusLost Override's both belong to searchField & searchButton
@@ -298,6 +303,53 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
 
 
     }
+    public void clearTextFields(){
+           
+            productIDField.setText("");
+            quantityField.setText("");
+            wholeSaleField.setText("");
+            salePriceField.setText("");
+            supplierIDField.setText("");
+
+    }
+    
+    @Override //method that populates our textfields when you click a row on the JTable
+    public void mouseClicked(MouseEvent e) {
+        
+        DefaultTableModel tmodel=(DefaultTableModel)productsTable.getModel();
+        int selectrowindex=productsTable.getSelectedRow();
+        productIDField.setText(tmodel.getValueAt(selectrowindex, 0).toString());
+        quantityField.setText(tmodel.getValueAt(selectrowindex, 1).toString());
+        wholeSaleField.setText(tmodel.getValueAt(selectrowindex, 2).toString());
+        salePriceField.setText(tmodel.getValueAt(selectrowindex, 3).toString());
+        supplierIDField.setText(tmodel.getValueAt(selectrowindex, 4).toString());
+        
+    }
+
+    @Override
+    public void mousePressed(java.awt.event.MouseEvent e) {
+        // need this here app breaks if you remove these events
+        
+    }
+
+    @Override
+    public void mouseReleased(java.awt.event.MouseEvent e) {
+        // need this here app breaks if you remove these events
+        
+    }
+
+    @Override
+    public void mouseEntered(java.awt.event.MouseEvent e) {
+        // need this here app breaks if you remove these events
+        
+    }
+
+    @Override
+    public void mouseExited(java.awt.event.MouseEvent e) {
+        // need this here app breaks if you remove these events
+        
+    }
+    
 
     
        
