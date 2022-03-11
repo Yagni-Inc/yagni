@@ -1,3 +1,4 @@
 *.csv
 *.class
 *.json
+**/.DS_Store
