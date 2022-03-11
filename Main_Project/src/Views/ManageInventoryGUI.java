@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import Main_Project.src.Controller.*;
 import Main_Project.src.Model.Create;
 import Main_Project.src.Model.ReadAll;
+import Main_Project.src.Model.Search;
 
 public class ManageInventoryGUI implements ActionListener,FocusListener{
 
@@ -42,7 +43,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
         private static JButton updateButton = new JButton("Update Product");
         private static JButton deleteButton = new JButton("Delete Product"); 
         private static JButton loadButton = new JButton("Load Inventory Data");
-        private static JButton reloadButton = new JButton("Reload Inventory");
+        private static JButton reloadButton = new JButton("Refresh");
         private static JButton searchButton = new JButton(); //button with searchIcon.png
         private static JButton backButton = new JButton("Back");
         private static JButton logoutButton = new JButton("Logout");
@@ -246,6 +247,15 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
             
 
         }
+        else if(e.getSource() == searchButton){
+            refreshProductsSearch();
+           
+            String productId = searchField.getText();
+
+            Search searchObj = new Search(productId, productsTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
+            searchObj.readOne(linkDB); // calls the readAll method and passes in the database connection
+            }
+
     }
 
     @Override //focusGained & focusLost Override's both belong to searchField & searchButton
@@ -276,6 +286,12 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
         displayTable.readAll(linkDB);
 
 
+    }
+    //Method to refresh the productsTable JTable 
+    public void refreshProductsSearch(){
+        DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
+        model.setRowCount(0);
+        
     }
 
     
