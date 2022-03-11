@@ -248,12 +248,12 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
 
         }
         else if(e.getSource() == searchButton){
-            refreshProductsSearch();
+            clearProductsTable();
            
             String productId = searchField.getText();
 
-            Search searchObj = new Search(productId, productsTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
-            searchObj.readOne(linkDB); // calls the readAll method and passes in the database connection
+            Search searchObj = new Search(productId, productsTable); // creates a searchObj object from model/Search.java and passes in the products table
+            searchObj.readOne(linkDB); // calls the readOne method and passes in the database connection
             }
 
     }
@@ -288,7 +288,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener{
 
     }
     //Method to refresh the productsTable JTable 
-    public void refreshProductsSearch(){
+    public void clearProductsTable(){
         DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
         model.setRowCount(0);
         
