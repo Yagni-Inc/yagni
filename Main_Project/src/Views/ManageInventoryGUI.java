@@ -252,28 +252,20 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             Search searchObj = new Search(productId, productsTable); // creates a searchObj object from model/Search.java and passes in the products table
             searchObj.readOne(linkDB); // calls the readOne method and passes in the database connection
         }
-        else if(e.getSource() == deleteButton){
-
-            
+        else if(e.getSource() == deleteButton){            
             String deleteID = productIDField.getText();
-            Delete deleteObj = new Delete(deleteID);
-            deleteObj.delete(linkDB);
-
-            refreshProducts(); 
-        } 
-        else if (e.getSource() == reloadButton){
-            refreshProducts();
-
+            Delete deleteObj = new Delete(deleteID);  //object of delete to get the id we want to delete.
             int action = JOptionPane.showConfirmDialog(null, "Do you really want to delete this product?", //Pop up that will let user confirm to delete product or not. 
             "Delete", JOptionPane.YES_NO_CANCEL_OPTION);
             if(action == 0){
-                 String deleteID = productIDField.getText();
-                 Delete deleteObj = new Delete(deleteID);      //object of delete to get the id we want to delete
-                 deleteObj.delete(linkDB);        // calls the delete method and passes in the database connection
-                 refreshProducts();
-            }
-            
+                 deleteObj.delete(linkDB);  //calls the delete object and passes in the database connection.
+                 refreshProducts();  
 
+            } 
+            
+        } 
+        else if (e.getSource() == reloadButton){
+            refreshProducts();
         }
         else if(e.getSource() == logoutButton){
             inventoryFrame.dispose();
