@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import Main_Project.src.Controller.*;
 import Main_Project.src.Model.*;
 
-
 public class ManageInventoryGUI implements ActionListener,FocusListener,MouseListener{
 
         private static JFrame inventoryFrame = new JFrame("Product Inventory Window");  
@@ -22,7 +21,8 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
         
         
         private static JPanel headerPanel = new JPanel();               //Creates header content are
-        private static JPanel navPanel = new JPanel();             
+        private static JPanel backPanel = new JPanel(); 
+        private static JPanel logoutPanel = new JPanel();            
         private static JPanel bodyPanel = new JPanel();                //Creates body content area 
         private static JPanel footerPanel = new JPanel();              //Creates footer content area 
         private static JPanel tablePanel = new JPanel();               //Creates panel for table area
@@ -99,20 +99,28 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             headerLabel.setVerticalTextPosition(JLabel.CENTER);
             headerLabel.setHorizontalTextPosition(JLabel.RIGHT);
 
+            
+            backPanel.setBounds(5, 0, 100, 25);
+            backPanel.setBackground(Color.LIGHT_GRAY);
+            backPanel.setLayout(new GridLayout(1, 1, 0, 0));
+            //navPanel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 25));
+            inventoryFrame.add(backPanel);
             //adding back button inside header panel
-            backButton.setBounds(0, 0, 70, 40);
-            backButton.setHorizontalAlignment(JLabel.LEFT);
-            backButton.setVerticalAlignment(JLabel.TOP);
+           // backButton.setBounds(0, 0, 70, 40);
+           // backButton.setHorizontalAlignment(JLabel.LEFT);
+           // backButton.setVerticalAlignment(JLabel.TOP);
             backButton.addActionListener(this);
-           // headerPanel.add(backButton);
-           
-            //adding logout button inside header panel
-            logoutButton.setBounds(830, 0, 70, 40);
-            logoutButton.setHorizontalAlignment(JLabel.LEFT);
-            logoutButton.setVerticalAlignment(JLabel.TOP);
-            logoutButton.addActionListener(this);
-            //headerPanel.add(logoutButton);
+            backPanel.add(backButton);
+            backButton.setHorizontalAlignment(JLabel.CENTER);
 
+            logoutPanel.setBounds(780, 0, 100, 25);
+            logoutPanel.setBackground(Color.LIGHT_GRAY);
+            logoutPanel.setLayout(new GridLayout(1, 1, 0, 0));
+            inventoryFrame.add(logoutPanel);
+            logoutButton.addActionListener(this);
+            logoutPanel.add(logoutButton);
+            logoutButton.setHorizontalAlignment(JLabel.CENTER);
+            
             //add header label to header panel 
             headerPanel.add(headerLabel);
 
@@ -196,6 +204,8 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             inventoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Exit out of the application
             inventoryFrame.setResizable(false); //this disable the resize features of the frame to the user
             
+            
+            
 
             //add the header, body and footer panels to the frame 
             inventoryFrame.add(headerPanel, BorderLayout.NORTH);
@@ -240,9 +250,37 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             String updateWholesale = wholeSaleField.getText();
             String updatePrice = salePriceField.getText();
             String updateSupplierID = supplierIDField.getText();
-			Update updateRecord = new Update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID);
+
+			      Update updateRecord = new Update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID);
             updateRecord.update(linkDB);
             refreshProducts();
+		}
+        else if (e.getSource() == reloadButton){
+            refreshProducts();
+        }
+        
+        else if(e.getSource() == logoutButton){
+            tablePanel.remove(reloadButton);
+            tablePanel.repaint();
+            tablePanel.add(loadButton);
+
+            clearProductsTable();
+            inventoryFrame.setVisible(false);
+            inventoryFrame.dispose();
+            new HomeGUI(); 
+
+        }
+        else if(e.getSource() == backButton){
+            tablePanel.remove(reloadButton);
+            tablePanel.repaint();
+            tablePanel.add(loadButton);
+            
+            clearProductsTable();
+            inventoryFrame.setVisible(false);
+            inventoryFrame.dispose();
+            new EmployeeGUI(linkDB);
+            
+            
         }
         else if(e.getSource() == searchButton){
             clearProductsTable();
@@ -251,30 +289,15 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
 
             Search searchObj = new Search(productId, productsTable); // creates a searchObj object from model/Search.java and passes in the products table
             searchObj.readOne(linkDB); // calls the readOne method and passes in the database connection
-        }
-        else if(e.getSource() == deleteButton){            
-            String deleteID = productIDField.getText();
-            Delete deleteObj = new Delete(deleteID);  //object of delete to get the id we want to delete.
-            int action = JOptionPane.showConfirmDialog(null, "Do you really want to delete this product?", //Pop up that will let user confirm to delete product or not. 
-            "Delete", JOptionPane.YES_NO_CANCEL_OPTION);
-            if(action == 0){
-                 deleteObj.delete(linkDB);  //calls the delete object and passes in the database connection.
-                 refreshProducts();  
-
-            } 
+            }
+        else if(e.getSource() == deleteButton){
             
-        } 
-        else if (e.getSource() == reloadButton){
-            refreshProducts();
-        }
-        else if(e.getSource() == logoutButton){
-            inventoryFrame.dispose();
-            new HomeGUI(); 
+            String deleteID = productIDField.getText();
+            Delete deleteObj = new Delete(deleteID);
+            deleteObj.delete(linkDB);
 
-        }
-        else if(e.getSource() == backButton){
-            inventoryFrame.dispose();
-            new EmployeeGUI(linkDB);
+            refreshProducts();
+            
         }
     }
 
@@ -313,14 +336,14 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
         model.setRowCount(0);
         
     }
-
     public void clearTextFields(){
            
             productIDField.setText("");
             quantityField.setText("");
             wholeSaleField.setText("");
-            salePriceField.setText("");//hi
+            salePriceField.setText("");
             supplierIDField.setText("");
+
     }
     
     @Override //method that populates our textfields when you click a row on the JTable
@@ -359,4 +382,5 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
         // need this here app breaks if you remove these events
         
     }
+           
 }
