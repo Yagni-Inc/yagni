@@ -116,7 +116,6 @@ public class EmployeeGUI implements ActionListener {
         buttonPanel.add(inventoryButton);
         buttonPanel.add(orderButton); 
 
-
         /* ------- Footer Content ------- */
         //set defualts and text of footer panel
         footerPanel.setPreferredSize(new Dimension(100, 30));
@@ -139,7 +138,6 @@ public class EmployeeGUI implements ActionListener {
         frame.add(bodyPanel, BorderLayout.CENTER);
         frame.add(footerPanel, BorderLayout.SOUTH);
         
-
         //display all content to the GUI 
         frame.setVisible(true);
 

@@ -99,20 +99,16 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             headerLabel.setVerticalTextPosition(JLabel.CENTER);
             headerLabel.setHorizontalTextPosition(JLabel.RIGHT);
 
-            
+            /* ------- Back Panel/Back Button ------- */
             backPanel.setBounds(5, 0, 100, 25);
             backPanel.setBackground(Color.LIGHT_GRAY);
             backPanel.setLayout(new GridLayout(1, 1, 0, 0));
-            //navPanel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 25));
             inventoryFrame.add(backPanel);
-            //adding back button inside header panel
-           // backButton.setBounds(0, 0, 70, 40);
-           // backButton.setHorizontalAlignment(JLabel.LEFT);
-           // backButton.setVerticalAlignment(JLabel.TOP);
             backButton.addActionListener(this);
             backPanel.add(backButton);
             backButton.setHorizontalAlignment(JLabel.CENTER);
 
+             /* ------- Logout Panel/Logout Button ------- */
             logoutPanel.setBounds(780, 0, 100, 25);
             logoutPanel.setBackground(Color.LIGHT_GRAY);
             logoutPanel.setLayout(new GridLayout(1, 1, 0, 0));
@@ -170,9 +166,6 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             tableScroll.setViewportView(productsTable);
             productsTable.addMouseListener(this);
             
-            
-            
-            
             /* ------- Search Textfield & Button ------- */
             searchField.setBounds(0, 0, 200, 40);
             searchField.setText("Search Product ID");
@@ -204,10 +197,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             inventoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Exit out of the application
             inventoryFrame.setResizable(false); //this disable the resize features of the frame to the user
             
-            
-            
-
-            //add the header, body and footer panels to the frame 
+             //add the header, body and footer panels to the frame 
             inventoryFrame.add(headerPanel, BorderLayout.NORTH);
             inventoryFrame.add(bodyPanel);
             inventoryFrame.add(footerPanel, BorderLayout.SOUTH);
@@ -251,7 +241,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             String updatePrice = salePriceField.getText();
             String updateSupplierID = supplierIDField.getText();
 
-			      Update updateRecord = new Update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID);
+		    Update updateRecord = new Update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID);
             updateRecord.update(linkDB);
             refreshProducts();
 		}
@@ -280,7 +270,6 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             inventoryFrame.dispose();
             new EmployeeGUI(linkDB);
             
-            
         }
         else if(e.getSource() == searchButton){
             clearProductsTable();
@@ -289,7 +278,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
 
             Search searchObj = new Search(productId, productsTable); // creates a searchObj object from model/Search.java and passes in the products table
             searchObj.readOne(linkDB); // calls the readOne method and passes in the database connection
-            }
+        }
         else if(e.getSource() == deleteButton){
             
             String deleteID = productIDField.getText();
@@ -307,8 +296,6 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             searchField.setText("");
             searchField.setForeground(Color.BLACK);
             searchField.setHorizontalAlignment(JTextField.LEFT);
-            
-
         }// end of if
     }// end of focusGained
     
@@ -327,14 +314,11 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
         model.setRowCount(0);
         ReadAll displayTable = new ReadAll(productsTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
         displayTable.readAll(linkDB);
-
-
     }
     //Method to refresh the productsTable JTable 
     public void clearProductsTable(){
         DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
         model.setRowCount(0);
-        
     }
     public void clearTextFields(){
            
@@ -343,7 +327,6 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             wholeSaleField.setText("");
             salePriceField.setText("");
             supplierIDField.setText("");
-
     }
     
     @Override //method that populates our textfields when you click a row on the JTable
