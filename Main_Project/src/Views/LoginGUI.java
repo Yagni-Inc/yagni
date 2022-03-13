@@ -31,6 +31,7 @@ public class LoginGUI implements ActionListener {
     private static JPasswordField passwordText;
     private static JButton button = new JButton("Login");
     private static JLabel success = new JLabel();
+    private static JButton backButton = new JButton("Back");
 
     JFrame frame = new JFrame("Employee Login");    //Creates frame and title 
     JPanel headerPanel = new JPanel();              //Creates header content area
@@ -54,6 +55,7 @@ public class LoginGUI implements ActionListener {
             userLabel.setFont(caveatFont);
             passwordLabel.setFont(caveatFont);
             button.setFont(caveatFont);
+            backButton.setFont(caveatFont);
             footerLabel.setFont(caveatFont.deriveFont(16f));	    
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
@@ -73,6 +75,13 @@ public class LoginGUI implements ActionListener {
 
         //add header label to header panel 
         headerPanel.add(headerLabel);
+
+        /*-------Back Button-------*/
+       backButton.setBounds(10, 15, 100, 40);
+       frame.add(backButton);
+       backButton.addActionListener(this);
+       backButton.setHorizontalTextPosition(JLabel.CENTER);
+       backButton.setVerticalTextPosition(JLabel.CENTER);
         
        
         /* ------- Body Content ------- */
@@ -137,17 +146,27 @@ public class LoginGUI implements ActionListener {
              
              DbConnection linkDB = new DbConnection(user,password);
              System.out.println(linkDB);
+             success.setText("");
              
              //if the login button is clicked and the user name and password are correct then open the EmployeeGUI; display login error otherwise. 
             if(e.getSource() == button && linkDB.getConnection() != null) {
-                success.setText("Login Successful!");
+                
+                System.out.println("Login Successful!");
+                System.out.println("---------------------------------------");
                 frame.dispose();
                 new EmployeeGUI(linkDB); 
+            
             }else{
                 success.setText("Invalid credentials!  Please Try Again. ");
                 success.setForeground(Color.RED); 
                 
-                
             }// end of if statement
+            if(e.getSource() == backButton){
+                frame.setVisible(false);
+                frame.dispose();
+                success.setText("");
+                new HomeGUI(); ;
+            }
+            
         }// end of button action
 }

@@ -35,6 +35,7 @@ public class EmployeeGUI implements ActionListener {
     JButton orderButton = new JButton();        //Button for orders
     ImageIcon logoImg = new ImageIcon("Main_Project/assets/img/YagniLogoOnly.png"); //loads logo image
     DbConnection linkDB; 
+    JButton logoutButton = new JButton("Logout");
 
 
     EmployeeGUI(DbConnection linkDBIn) {
@@ -51,6 +52,7 @@ public class EmployeeGUI implements ActionListener {
             label.setFont(caveatFont.deriveFont(Font.BOLD, 30f));
             subLabel.setFont(caveatFont);
             inventoryButton.setFont(caveatFont);
+            logoutButton.setFont(caveatFont);
             orderButton.setFont(caveatFont);
             footerLabel.setFont(caveatFont.deriveFont(16f));	    
         } catch (IOException | FontFormatException e) {
@@ -71,6 +73,13 @@ public class EmployeeGUI implements ActionListener {
 
         //add header label to header panel 
         headerPanel.add(headerLabel);
+
+        /*------- Logout Button -------*/
+        logoutButton.setBounds(780, 15, 100, 40);
+        frame.add(logoutButton);
+        logoutButton.addActionListener(this);
+        logoutButton.setHorizontalTextPosition(JLabel.CENTER);
+        logoutButton.setVerticalTextPosition(JLabel.CENTER);
        
         /* ------- Body Content ------- */
         //set default size and layout of body panel 
@@ -108,7 +117,6 @@ public class EmployeeGUI implements ActionListener {
         buttonPanel.add(inventoryButton);
         buttonPanel.add(orderButton); 
 
-
         /* ------- Footer Content ------- */
         //set defualts and text of footer panel
         footerPanel.setPreferredSize(new Dimension(100, 30));
@@ -131,7 +139,6 @@ public class EmployeeGUI implements ActionListener {
         frame.add(bodyPanel, BorderLayout.CENTER);
         frame.add(footerPanel, BorderLayout.SOUTH);
         
-
         //display all content to the GUI 
         frame.setVisible(true);
 
@@ -162,6 +169,10 @@ public class EmployeeGUI implements ActionListener {
             frame.dispose();
             OrdersGUI window2 = new OrdersGUI();
 
+        }
+        if(e.getSource() == logoutButton){
+            frame.dispose();
+            new HomeGUI(); 
         }
         
     }
