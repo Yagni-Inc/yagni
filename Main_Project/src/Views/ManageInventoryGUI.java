@@ -100,22 +100,24 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             headerLabel.setHorizontalTextPosition(JLabel.RIGHT);
 
             /* ------- Back Panel/Back Button ------- */
-            backPanel.setBounds(5, 0, 100, 25);
+            backPanel.setBounds(5, 15, 100, 25);
             backPanel.setBackground(Color.LIGHT_GRAY);
             backPanel.setLayout(new GridLayout(1, 1, 0, 0));
             inventoryFrame.add(backPanel);
             backButton.addActionListener(this);
             backPanel.add(backButton);
-            backButton.setHorizontalAlignment(JLabel.CENTER);
+            backButton.setHorizontalTextPosition(JLabel.CENTER);
+            backButton.setVerticalTextPosition(JLabel.CENTER);
 
              /* ------- Logout Panel/Logout Button ------- */
-            logoutPanel.setBounds(780, 0, 100, 25);
+            logoutPanel.setBounds(780, 15, 100, 25);
             logoutPanel.setBackground(Color.LIGHT_GRAY);
             logoutPanel.setLayout(new GridLayout(1, 1, 0, 0));
             inventoryFrame.add(logoutPanel);
             logoutButton.addActionListener(this);
             logoutPanel.add(logoutButton);
-            logoutButton.setHorizontalAlignment(JLabel.CENTER);
+            logoutButton.setHorizontalTextPosition(JLabel.CENTER);
+            logoutButton.setVerticalTextPosition(JLabel.CENTER);
             
             //add header label to header panel 
             headerPanel.add(headerLabel);
