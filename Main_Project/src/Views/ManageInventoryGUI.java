@@ -7,7 +7,7 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-
+import com.mysql.cj.protocol.Warning;
 
 import Main_Project.src.Controller.*;
 import Main_Project.src.Model.*;
@@ -39,6 +39,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
 
         private static ImageIcon logoImg = new ImageIcon("Main_Project/assets/img/YagniLogoOnly-50percent.png"); //load logo image  
         private static ImageIcon searchImg = new ImageIcon("Main_Project/assets/img/searchIcon.png"); //image for search
+        private static ImageIcon warningImg = new ImageIcon("Main_Project/assets/img/warning.png");
         
         private static JButton addButton = new JButton("Add New Product");
         private static JButton updateButton = new JButton("Update Product");
@@ -275,20 +276,21 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
         }
         else if(e.getSource() == searchButton){
             clearProductsTable();
-           
             String productId = searchField.getText();
-
             Search searchObj = new Search(productId, productsTable); // creates a searchObj object from model/Search.java and passes in the products table
             searchObj.readOne(linkDB); // calls the readOne method and passes in the database connection
         }
         else if(e.getSource() == deleteButton){
             
             String deleteID = productIDField.getText();
-            Delete deleteObj = new Delete(deleteID);
+            Delete deleteObj = new Delete(deleteID); //object of delete to get the id we want to delete.
             deleteObj.delete(linkDB);
-
-            refreshProducts();
-            
+            int action = JOptionPane.showConfirmDialog(null, "Do you really want to delete this product?\nThis action cannot be undone.","Delete", JOptionPane.YES_NO_OPTION, 3, warningImg);
+            if(action == 0){
+                    deleteObj.delete(linkDB);  //calls the delete method and passes in the database connection.
+                    refreshProducts();  
+                    clearTextFields();
+            }
         }
     }
 
