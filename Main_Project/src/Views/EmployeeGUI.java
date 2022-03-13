@@ -75,7 +75,7 @@ public class EmployeeGUI implements ActionListener {
         headerPanel.add(headerLabel);
 
         /*------- Logout Button -------*/
-        logoutButton.setBounds(780, 15, 100, 25);
+        logoutButton.setBounds(780, 15, 100, 35);
         frame.add(logoutButton);
         logoutButton.addActionListener(this);
         logoutButton.setHorizontalTextPosition(JLabel.CENTER);

@@ -100,7 +100,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             headerLabel.setHorizontalTextPosition(JLabel.RIGHT);
 
             /* ------- Back Panel/Back Button ------- */
-            backPanel.setBounds(5, 15, 100, 25);
+            backPanel.setBounds(5, 15, 100, 30);
             backPanel.setBackground(Color.LIGHT_GRAY);
             backPanel.setLayout(new GridLayout(1, 1, 0, 0));
             inventoryFrame.add(backPanel);
@@ -110,7 +110,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             backButton.setVerticalTextPosition(JLabel.CENTER);
 
              /* ------- Logout Panel/Logout Button ------- */
-            logoutPanel.setBounds(780, 15, 100, 25);
+            logoutPanel.setBounds(780, 15, 100, 30);
             logoutPanel.setBackground(Color.LIGHT_GRAY);
             logoutPanel.setLayout(new GridLayout(1, 1, 0, 0));
             inventoryFrame.add(logoutPanel);

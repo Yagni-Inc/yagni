@@ -77,7 +77,7 @@ public class LoginGUI implements ActionListener {
         headerPanel.add(headerLabel);
 
         /*-------Back Button-------*/
-       backButton.setBounds(5, 15, 100, 25);
+       backButton.setBounds(5, 15, 100, 35);
        frame.add(backButton);
        backButton.addActionListener(this);
        backButton.setHorizontalTextPosition(JLabel.CENTER);
