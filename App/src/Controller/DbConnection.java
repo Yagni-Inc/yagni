@@ -39,7 +39,7 @@ public class DbConnection {
             System.out.println(e);
             
             //if the connection does not work it returns null.
-            System.out.println("ERROR: Connection to database faild.");
+            System.out.println("ERROR: Connection to database failed.");
             return null;
         }
         
