@@ -1,4 +1,4 @@
-package Main_Project.src.Controller;
+package App.src.Controller;
 
 import java.sql.*;
 

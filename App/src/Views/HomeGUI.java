@@ -1,4 +1,4 @@
-package Main_Project.src.Views;
+package App.src.Views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -29,13 +29,13 @@ public class HomeGUI implements ActionListener{
     JPanel footerPanel = new JPanel();          //Creates panel for footer content 
     JLabel headerLabel = new JLabel();          //text/image label for header
     JLabel footerLabel = new JLabel();          //text label for Yagni Inc. Copyright info
-    ImageIcon logoImg = new ImageIcon("Main_Project/assets/img/YAGNI_logo.png");    //loads logo image 
+    ImageIcon logoImg = new ImageIcon("App/assets/img/YAGNI_logo.png");    //loads logo image 
 
     HomeGUI(){
 
         // Importing and setting custom font Caveat for all text components 
         try {
-            File font_file = new File("Main_Project/assets/fonts/Caveat-VariableFont_wght.ttf");
+            File font_file = new File("App/assets/fonts/Caveat-VariableFont_wght.ttf");
             Font caveatFont = Font.createFont(Font.TRUETYPE_FONT, font_file).deriveFont(25f);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font_file));

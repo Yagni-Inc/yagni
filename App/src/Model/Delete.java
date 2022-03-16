@@ -1,7 +1,8 @@
-package Main_Project.src.Model;
+package App.src.Model;
 
 import java.sql.*;
-import Main_Project.src.Controller.DbConnection;
+
+import App.src.Controller.DbConnection;
 
 public class Delete {
 

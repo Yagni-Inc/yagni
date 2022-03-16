@@ -1,4 +1,4 @@
-package Main_Project.src;
+package App.src;
 
 import java.io.Console;
 import java.io.BufferedReader;

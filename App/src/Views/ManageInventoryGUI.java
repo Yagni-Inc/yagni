@@ -1,4 +1,4 @@
-package Main_Project.src.Views;
+package App.src.Views;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,10 +7,8 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import com.mysql.cj.protocol.Warning;
-
-import Main_Project.src.Controller.*;
-import Main_Project.src.Model.*;
+import App.src.Controller.*;
+import App.src.Model.*;
 
 public class ManageInventoryGUI implements ActionListener,FocusListener,MouseListener{
 
@@ -37,9 +35,9 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
         private static JLabel salePriceLabel = new JLabel("Sale Price");
         private static JLabel supplierIDLabel = new JLabel("Supplier ID");
 
-        private static ImageIcon logoImg = new ImageIcon("Main_Project/assets/img/YagniLogoOnly-50percent.png"); //load logo image  
-        private static ImageIcon searchImg = new ImageIcon("Main_Project/assets/img/searchIcon.png"); //image for search
-        private static ImageIcon warningImg = new ImageIcon("Main_Project/assets/img/warning.png");
+        private static ImageIcon logoImg = new ImageIcon("App/assets/img/YagniLogoOnly-50percent.png"); //load logo image  
+        private static ImageIcon searchImg = new ImageIcon("App/assets/img/searchIcon.png"); //image for search
+        private static ImageIcon warningImg = new ImageIcon("App/assets/img/warning.png");
         
         private static JButton addButton = new JButton("Add New Product");
         private static JButton updateButton = new JButton("Update Product");
@@ -64,7 +62,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
 
             // Importing and setting custom font Caveat for all text components 
             try {
-                File font_file = new File("Main_Project/assets/fonts/Caveat-VariableFont_wght.ttf");
+                File font_file = new File("App/assets/fonts/Caveat-VariableFont_wght.ttf");
                 Font caveatFont = Font.createFont(Font.TRUETYPE_FONT, font_file).deriveFont(20f);
                 GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font_file));

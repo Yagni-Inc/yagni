@@ -1,4 +1,4 @@
-package Main_Project.src.Views;
+package App.src.Views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Main_Project.src.Controller.*;
+import App.src.Controller.*;
 
 public class EmployeeGUI implements ActionListener {
 
@@ -33,7 +33,7 @@ public class EmployeeGUI implements ActionListener {
     JLabel footerLabel = new JLabel();          //text label for Yagni Inc. Copyright info 
     JButton inventoryButton = new JButton();    //Button for Inventory 
     JButton orderButton = new JButton();        //Button for orders
-    ImageIcon logoImg = new ImageIcon("Main_Project/assets/img/YagniLogoOnly.png"); //loads logo image
+    ImageIcon logoImg = new ImageIcon("App/assets/img/YagniLogoOnly.png"); //loads logo image
     DbConnection linkDB; 
     JButton logoutButton = new JButton("Logout");
 
@@ -44,7 +44,7 @@ public class EmployeeGUI implements ActionListener {
 
          // Importing and setting custom font Caveat for all text components 
          try {
-            File font_file = new File("Main_Project/assets/fonts/Caveat-VariableFont_wght.ttf");
+            File font_file = new File("App/assets/fonts/Caveat-VariableFont_wght.ttf");
             Font caveatFont = Font.createFont(Font.TRUETYPE_FONT, font_file).deriveFont(25f);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font_file));

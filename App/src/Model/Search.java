@@ -1,4 +1,4 @@
-package Main_Project.src.Model;
+package App.src.Model;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,7 +7,7 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import Main_Project.src.Controller.DbConnection;
+import App.src.Controller.DbConnection;
 
 public class Search {
     private static String productID;
