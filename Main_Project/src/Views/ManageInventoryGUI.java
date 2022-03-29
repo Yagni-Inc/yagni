@@ -256,6 +256,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             tablePanel.remove(reloadButton);
             tablePanel.repaint();
             tablePanel.add(loadButton);
+            linkDB.closeConnection();
 
             clearProductsTable();
             inventoryFrame.setVisible(false);
