@@ -3,6 +3,7 @@ package App.src.Views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Desktop; 
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,7 +25,7 @@ public class HomeGUI implements ActionListener{
 
     JFrame frame = new JFrame("Yagni Inc. Ordering and Inventory Management");  // Crates Frame & Title
     JButton employeeButton = new JButton("Employee Login"); //Button to launch Employee Login
-    JButton customerButton = new JButton("Customer Login"); //Button to launch Customer Web Page
+    JButton customerButton = new JButton("Customer Ordering");     //Button to launch Customer Web Page
     JPanel headerPanel = new JPanel();          //Creates panel for header content 
     JPanel bodyPanel = new JPanel();            //Creates panel for body content 
     JPanel buttonPanel = new JPanel();          //Creates inner panel for buttons in the body 
@@ -122,14 +125,12 @@ public class HomeGUI implements ActionListener{
             frame.dispose();
             new LoginGUI();
         }else if(e.getSource() == customerButton){
-            frame.dispose();
-            new CustomerGUI();
+            try {
+                Desktop.getDesktop().browse(new URI("https://yagni-inc.github.io/yagni/"));
+            } catch (IOException | URISyntaxException e1) {
+                e1.printStackTrace();
+            }
         }
         
     }
-
-    //TODO: move caveatFont definition to separate method setCaveatFont()
-
-
-    
 }
