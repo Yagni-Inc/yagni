@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/yagni/static/css/main.a6e02041.css",
+    "main.js": "/yagni/static/js/main.aebc11ca.js",
+    "static/js/787.0bfccc2a.chunk.js": "/yagni/static/js/787.0bfccc2a.chunk.js",
+    "static/media/logo.png": "/yagni/static/media/logo.a830f43191363abf758f.png",
+    "index.html": "/yagni/index.html",
+    "main.a6e02041.css.map": "/yagni/static/css/main.a6e02041.css.map",
+    "main.aebc11ca.js.map": "/yagni/static/js/main.aebc11ca.js.map",
+    "787.0bfccc2a.chunk.js.map": "/yagni/static/js/787.0bfccc2a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a6e02041.css",
+    "static/js/main.aebc11ca.js"
+  ]
+}
