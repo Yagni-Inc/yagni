@@ -1,14 +1,14 @@
-package Main_Project.src.Model;
+package App.src.Model;
 
 import java.sql.*;
 import java.util.*;
 import java.io.*;
-import Main_Project.src.Controller.DbConnection;
+import App.src.Controller.DbConnection;
 
 public class ProcessOne {
     
     private static String date,email,location,productId,quantity,hashedEmail,user,password;
-    private static String propsFile = "Main_Project\\config.properties";
+    private static String propsFile = "App\\config.properties";
     private static DbConnection linkDb;
     private static Properties props;
 
@@ -57,9 +57,7 @@ public class ProcessOne {
         }
         
         user = props.getProperty("user");
-        System.out.println(user);
         password = props.getProperty("password");
-        System.out.println(password);
 
         date = "";
         email = "";
@@ -104,11 +102,20 @@ public class ProcessOne {
     public void InsertCustInfo(){
         try{
             Statement statement = linkDb.getConnection().createStatement();
-    
-            statement.execute("INSERT INTO `yagni_inv_db`.`customer_information` (`hashed_email`, `customer_email`) VALUES ('" + hashedEmail + "', '" + email + "');");
-            }catch (SQLException e){
-                System.out.println(e);
+            ResultSet querySet =  statement.executeQuery("SELECT '1' FROM `yagni_inv_db`.`customer_information` WHERE EXISTS (SELECT * FROM `yagni_inv_db`.`customer_information` WHERE `customer_email` ='" + email + "')");
+
+            if(querySet.next()){
+                querySet = statement.executeQuery("SELECT * FROM `yagni_inv_db`.`customer_information` WHERE `customer_email` = '" + email + "'");
+                querySet.next();
+                hashedEmail = querySet.getString(1);
             }
+            else{
+                hashedEmail = UserEncryption.userEncryption(email);
+                statement.execute("INSERT INTO `yagni_inv_db`.`customer_information` (`hashed_email`, `customer_email`) VALUES ('" + hashedEmail + "', '" + email + "');");
+            }
+        }catch (SQLException e){
+                System.out.println(e);
+        }
     }
 
     //Inserts into the Order history table

@@ -1,4 +1,4 @@
-package Main_Project.src.Model;
+package App.src.Model;
 
 import java.io.*;
 
@@ -35,13 +35,14 @@ public class ParseOrders {
                     item.setQuantity(productQuantity);
                     // calling the methods to update the database
                     item.updateInventory();
-                    //item.InsertCustInfo();
-                    //item.InsertOrderHist();
+                    item.InsertCustInfo();
+                    item.InsertOrderHist();
                 }
-
                 count += 1;
-
+                System.out.println(count);
             }
+            System.out.println("Data Succsessfully entered into Data Base!");
+            System.exit(0);
         }
         catch(IOException err){
             err.printStackTrace();
