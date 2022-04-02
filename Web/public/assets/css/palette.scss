@@ -1,0 +1,25 @@
+// Required
+@import "../../../node_modules/bootstrap/scss/functions";
+
+// Default variable overrides
+$mine-shaft: #222222 !default;
+$daintree: #001e2eff !default;
+$blue-munsell: #5497a7ff !default;
+$steel-teal: #50858bff !default;
+$cultured: #f6f6f6ff !default;
+$goblin: #358446ff !default;
+$pumpkin-skin: #b3730eff !default;
+$pomegranate: #f44336ff !default;
+
+$primary: $daintree !default;
+$success: $goblin !default;
+$info: $mine-shaft !default;
+$warning: $pumpkin-skin !default;
+$danger: $pomegranate !default;
+$light: $cultured !default;
+$dark: $mine-shaft !default;
+
+// Required
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins";
+@import "../../../node_modules/bootstrap/scss/root";

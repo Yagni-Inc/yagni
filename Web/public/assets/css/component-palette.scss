@@ -45,3 +45,22 @@ $gradient-bottom-right: linear-gradient(135deg, #000000ff, #001e2eff, #5497a7ff,
 $gradient-top-left: linear-gradient(225deg, #000000ff, #001e2eff, #5497a7ff, #50858bff, #f6f6f6ff);
 $gradient-bottom-left: linear-gradient(315deg, #000000ff, #001e2eff, #5497a7ff, #50858bff, #f6f6f6ff);
 $gradient-radial: radial-gradient(#000000ff, #001e2eff, #5497a7ff, #50858bff, #f6f6f6ff);
+
+
+$mine-shaft: #222222ff;
+$daintree: #001e2eff;
+$blue-munsell: #5497a7ff;
+$steel-teal: #50858bff;
+$cultured: #f6f6f6ff;
+$goblin: #358446ff; 
+$pumpkin-skin: #b3730eff; 
+$pomegranate: #f44336ff;
+
+$primary:       $daintree !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $cultured !default;
+$dark:          $mine-shaft !default;
