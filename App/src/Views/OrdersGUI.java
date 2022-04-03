@@ -45,6 +45,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
         private static JButton logoutButton = new JButton("Logout");
         private static JButton editButton = new JButton("Edit Order");
         private static JButton cancelButton = new JButton("Cancel Order");
+        private static JButton clearButton = new JButton("Clear");
 
         private static JTextField orderNumberField = new JTextField(20);
         private static JTextField orderDateField = new JTextField(20);
@@ -72,6 +73,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
                 reloadButton.setFont(caveatFont);
                 backButton.setFont(caveatFont);
                 logoutButton.setFont(caveatFont);
+                clearButton.setFont(caveatFont);
 
                 orderLabel.setFont(caveatFont);
                 orderALabel.setFont(caveatFont);
@@ -127,7 +129,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
             /* ------- CRUD Controls Panel------- */
             controlsPanel.setBounds(30, 30, 270, 500);
             controlsPanel.setBackground(Color.LIGHT_GRAY);
-            controlsPanel.setLayout(new GridLayout(16, 1, 0, 5));
+            controlsPanel.setLayout(new GridLayout(17, 1, 0, 5));
             controlsPanel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 25));
             controlsTitle.setHorizontalAlignment(JLabel.CENTER);
             controlsPanel.add(controlsTitle); 
@@ -153,6 +155,8 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
             searchButton.addActionListener(this);
 
             controlsPanel.add(orderALabel);
+            controlsPanel.add(clearButton);
+            clearButton.addActionListener(this);
             controlsPanel.add(editButton);
             editButton.addActionListener(this);
             controlsPanel.add(cancelButton);
@@ -213,6 +217,9 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
         else if (e.getSource() == reloadButton){
             refreshOrders();
         }
+        else if (e.getSource() == clearButton){
+            clearTextFields();
+        }
         else if(e.getSource() == logoutButton){
             tablePanel.remove(reloadButton);
             tablePanel.repaint();
@@ -237,8 +244,8 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
         else if(e.getSource() == searchButton){
             clearOrdersTable();
             String orderNum = searchField.getText();
-            Search searchObj = new Search(orderNum, ordersTable); // creates a searchObj object from model/Search.java and passes in the products table
-            //searchObj.readOne(linkDB); // calls the readOne method and passes in the database connection
+            ReadOneOrder searchObj = new ReadOneOrder(orderNum, ordersTable); // creates a searchObj object from model/ReadOneOrder.java and passes in the products table
+            searchObj.readOneOrder(linkDB); // calls the readOneOrder method and passes in the database connection
         }
         
     }  
