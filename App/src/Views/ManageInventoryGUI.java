@@ -254,10 +254,11 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             tablePanel.remove(reloadButton);
             tablePanel.repaint();
             tablePanel.add(loadButton);
+            linkDB.closeConnection();
 
             clearProductsTable();
-            inventoryFrame.setVisible(false);
             inventoryFrame.dispose();
+            
             new HomeGUI(); 
 
         }
@@ -267,8 +268,8 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             tablePanel.add(loadButton);
             
             clearProductsTable();
-            inventoryFrame.setVisible(false);
             inventoryFrame.dispose();
+            
             new EmployeeGUI(linkDB);
             
         }
@@ -310,7 +311,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
         }// end of if
     }// end of focusLost
 
-    //Method to refresh the productsTable JTable 
+    //Method to refresh the JTable 
     public void refreshProducts(){
         DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
         model.setRowCount(0);
