@@ -167,11 +167,13 @@ public class EmployeeGUI implements ActionListener {
 
         if(e.getSource() == orderButton){
             frame.dispose();
-            OrdersGUI window2 = new OrdersGUI();
+            OrdersGUI window2 = new OrdersGUI(linkDB);
 
         }
         if(e.getSource() == logoutButton){
+            linkDB.closeConnection();
             frame.dispose();
+            
             new HomeGUI(); 
         }
         
