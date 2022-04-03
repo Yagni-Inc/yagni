@@ -33,6 +33,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
         private static JLabel productLabel = new JLabel("Product ID");
         private static JLabel quantityLabel = new JLabel("Product Quantity");
         private static JLabel searchLabel = new JLabel("Search Actions");
+        private static JLabel orderALabel = new JLabel("Order Actions");
 
         private static ImageIcon logoImg = new ImageIcon("App/assets/img/YagniLogoOnly-50percent.png"); //load logo image  
         private static ImageIcon searchImg = new ImageIcon("App/assets/img/searchIcon.png"); //image for search
@@ -73,6 +74,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
                 logoutButton.setFont(caveatFont);
 
                 orderLabel.setFont(caveatFont);
+                orderALabel.setFont(caveatFont);
                 dateLabel.setFont(caveatFont);
                 productLabel.setFont(caveatFont);
                 quantityLabel.setFont(caveatFont);
@@ -149,7 +151,8 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
             searchButton.setIcon(searchImg);
             controlsPanel.add(searchButton);
             searchButton.addActionListener(this);
-        
+
+            controlsPanel.add(orderALabel);
             controlsPanel.add(editButton);
             editButton.addActionListener(this);
             controlsPanel.add(cancelButton);
@@ -204,8 +207,8 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
             tablePanel.remove(loadButton);
             tablePanel.repaint();
             tablePanel.add(reloadButton);
-           // ReadAll read = new ReadAll(ordersTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
-           // read.readAll(linkDB); // calls the readAll method and passes in the database connection
+            ReadAllOrders read = new ReadAllOrders(ordersTable); // creates a ReadAllOrders object from model/ReadAllOrders.java and passes in the products table
+            read.readAllOrders(linkDB); // calls the readAllOrders method and passes in the database connection
         }
         else if (e.getSource() == reloadButton){
             refreshOrders();
@@ -215,7 +218,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
             tablePanel.repaint();
             tablePanel.add(loadButton);
             linkDB.closeConnection();
-
+            clearTextFields();
             clearOrdersTable();
             ordersFrame.dispose();
             
@@ -225,7 +228,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
             tablePanel.remove(reloadButton);
             tablePanel.repaint();
             tablePanel.add(loadButton);
-            
+            clearTextFields();
             clearOrdersTable();
             ordersFrame.dispose();
             
@@ -243,8 +246,8 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
     public void refreshOrders(){
         DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
         model.setRowCount(0);
-       // ReadAll displayTable = new ReadAll(ordersTable); // creates a ReadAll object from model/ReadAll.java and passes in the products table
-       // displayTable.readAll(linkDB); *New ReadAll will go here**
+        ReadAllOrders displayTable = new ReadAllOrders(ordersTable); // creates a ReadAllOrders object from model/ReadAllOrders.java and passes in the products table
+        displayTable.readAllOrders(linkDB); 
     }
     //Method to refresh the ordersTable JTable 
     public void clearOrdersTable(){
