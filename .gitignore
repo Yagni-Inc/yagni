@@ -164,3 +164,7 @@ yarn-error.log*
 
 # Ignore Gradle build output directory
 build
+
+# Avoid ignore of Gradle wrapper jar and Gradle wrapper properties
+!gradle-wrapper.jar
+!gradle-wrapper.properties
