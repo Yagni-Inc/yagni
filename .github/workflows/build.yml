@@ -24,7 +24,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Make gradle executable
-        uses: chmod +x ./gradlew
+        run: chmod +x ./gradlew
 
       - name: Gradle compile
         run: ./gradlew compileJava
