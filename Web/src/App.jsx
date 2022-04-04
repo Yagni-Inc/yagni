@@ -13,7 +13,7 @@ class App extends Component {
         <BrowserRouter>
           <NavBar />
           <Routes>
-            <Route path="/" element={<Landing />} />
+            <Route path="/yagni" element={<Landing />} />
           </Routes>
         </BrowserRouter>
       </div>

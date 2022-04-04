@@ -22,7 +22,7 @@ class Landing extends Component {
                 <Link
                   className="btn btn-callout btn-lg text-uppercase"
                   type="button"
-                  to="/shop"
+                  to="/yagni/shop"
                 >
                   Shop now
                 </Link>

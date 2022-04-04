@@ -13,27 +13,27 @@ class NavBar extends Component {
           id="nav"
         >
           <li className="nav-item">
-            <Link className="nav-link text-light" to="/shop">
+            <Link className="nav-link text-light" to="/yagni/shop">
               Shop
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-light" to="#contact">
+            <Link className="nav-link text-light" to="/yagni#contact">
               Contact
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="navbar-brand" to="/">
+            <Link className="navbar-brand" to="/yagni">
               <img src={logo} alt="Yagni Inc." height="100" />
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-light" to="/orders">
+            <Link className="nav-link text-light" to="/yagni/orders">
               My Orders
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link text-light" to="/cart">
+            <Link className="nav-link text-light" to="/yagni/cart">
               Cart
             </Link>
           </li>
