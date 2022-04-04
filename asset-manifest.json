@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/yagni/static/css/main.c1db0896.css",
-    "main.js": "/yagni/static/js/main.7735b5c1.js",
-    "static/js/787.0bfccc2a.chunk.js": "/yagni/static/js/787.0bfccc2a.chunk.js",
-    "static/media/landing-bkg.png": "/yagni/static/media/landing-bkg.c6a6bf09024445eb421f.png",
-    "static/media/yagni-inc-light.png": "/yagni/static/media/yagni-inc-light.72b0e61b2bc135a8dbed.png",
-    "index.html": "/yagni/index.html",
-    "main.c1db0896.css.map": "/yagni/static/css/main.c1db0896.css.map",
-    "main.7735b5c1.js.map": "/yagni/static/js/main.7735b5c1.js.map",
-    "787.0bfccc2a.chunk.js.map": "/yagni/static/js/787.0bfccc2a.chunk.js.map"
+    "main.css": "/static/css/main.ca0a1c1b.css",
+    "main.js": "/static/js/main.004b474a.js",
+    "static/js/787.0bfccc2a.chunk.js": "/static/js/787.0bfccc2a.chunk.js",
+    "static/media/landing-bkg.png": "/static/media/landing-bkg.c6a6bf09024445eb421f.png",
+    "static/media/yagni-inc-light.png": "/static/media/yagni-inc-light.72b0e61b2bc135a8dbed.png",
+    "index.html": "/index.html",
+    "main.ca0a1c1b.css.map": "/static/css/main.ca0a1c1b.css.map",
+    "main.004b474a.js.map": "/static/js/main.004b474a.js.map",
+    "787.0bfccc2a.chunk.js.map": "/static/js/787.0bfccc2a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c1db0896.css",
-    "static/js/main.7735b5c1.js"
+    "static/css/main.ca0a1c1b.css",
+    "static/js/main.004b474a.js"
   ]
 }
