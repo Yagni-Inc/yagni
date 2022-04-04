@@ -23,3 +23,4 @@ Yagni Inc. is split into two separate applications. The first is a GUI applicati
 - Jordan Snow
 - Alyssa Williams
 - Kyle Zimmerman
+
