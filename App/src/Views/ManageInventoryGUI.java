@@ -34,6 +34,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
         private static JLabel wholeSaleLabel = new JLabel("Whole Sale Price");
         private static JLabel salePriceLabel = new JLabel("Sale Price");
         private static JLabel supplierIDLabel = new JLabel("Supplier ID");
+        private static JLabel productActionsLabel = new JLabel("Product Actions");
 
         private static ImageIcon logoImg = new ImageIcon("App/assets/img/YagniLogoOnly-50percent.png"); //load logo image  
         private static ImageIcon searchImg = new ImageIcon("App/assets/img/searchIcon.png"); //image for search
@@ -47,6 +48,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
         private static JButton searchButton = new JButton(); //button with searchIcon.png
         private static JButton backButton = new JButton("Back");
         private static JButton logoutButton = new JButton("Logout");
+        private static JButton clearButton = new JButton("Clear");
        
         private static JTextField productIDField = new JTextField(20);
         private static JTextField quantityField = new JTextField(20);
@@ -70,6 +72,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
                 controlsTitle.setFont(caveatFont.deriveFont(Font.BOLD, 25f));
                 addButton.setFont(caveatFont);
                 productIDLabel.setFont(caveatFont);
+                productActionsLabel.setFont(caveatFont);
                 quantityLabel.setFont(caveatFont);
                 wholeSaleLabel.setFont(caveatFont);
                 salePriceLabel.setFont(caveatFont);
@@ -81,6 +84,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
                 searchField.setFont(caveatFont);
                 backButton.setFont(caveatFont);
                 logoutButton.setFont(caveatFont);
+                clearButton.setFont(caveatFont);
                 footerLabel.setFont(caveatFont.deriveFont(16f));	    
             } catch (IOException | FontFormatException e) {
                 e.printStackTrace();
@@ -129,7 +133,7 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
              /* ------- CRUD Controls Panel------- */
             controlsPanel.setBounds(30, 30, 270, 500);
             controlsPanel.setBackground(Color.LIGHT_GRAY);
-            controlsPanel.setLayout(new GridLayout(14, 1, 0, 5));
+            controlsPanel.setLayout(new GridLayout(16, 1, 0, 5));
             controlsPanel.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 25));
             controlsTitle.setHorizontalAlignment(JLabel.CENTER);
             controlsPanel.add(controlsTitle); 
@@ -146,6 +150,9 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             controlsPanel.add(salePriceField);
             controlsPanel.add(supplierIDLabel);
             controlsPanel.add(supplierIDField);
+            controlsPanel.add(productActionsLabel);
+            controlsPanel.add(clearButton);
+            clearButton.addActionListener(this);
             controlsPanel.add(updateButton);
             updateButton.addActionListener(this);
             controlsPanel.add(deleteButton);
@@ -234,7 +241,10 @@ public class ManageInventoryGUI implements ActionListener,FocusListener,MouseLis
             addRecord.addRecord(linkDB);
             refreshProducts();
         }
-		else if (e.getSource() == updateButton){
+        else if (e.getSource() == clearButton){
+            clearTextFields();
+        }
+        else if (e.getSource() == updateButton){
 			// setting our variables to user input
             String updateID = productIDField.getText();
             String updateQuant = quantityField.getText();
