@@ -1,0 +1,13 @@
+body{
+    background-image: url("../../assets/img/landing-bkg.png") !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+ 
+}
+
+.btn-callout{
+    background-color: #E8FF18 !important;
+    border-color: #E8FF18 !important;
+    color: #001e2e;  
+    box-shadow: 3px 5px #888888
+  }
