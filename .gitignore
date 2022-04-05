@@ -168,3 +168,18 @@ build
 # Avoid ignore of Gradle wrapper jar and Gradle wrapper properties
 !gradle-wrapper.jar
 !gradle-wrapper.properties
+
+**/build/
+!src/**/build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Cache of project
+.gradletasknamecache
+
+# Eclipse Gradle plugin generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
