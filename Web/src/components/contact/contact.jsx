@@ -83,7 +83,7 @@ const Contact = () => {
 	);
 };
 
-export default function App() {
+export default function ContactForm() {
 	return (
 		<Styles>
 			<Contact />
