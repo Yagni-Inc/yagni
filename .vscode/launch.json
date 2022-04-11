@@ -6,12 +6,20 @@
     "configurations": [
         {
             "type": "java",
-<<<<<<< HEAD
-            "name": "Launch Menu",
+            "name": "Launch Main",
             "request": "launch",
-            "mainClass": "Menu",
-            "projectName": "yagni_c10d3b4a"
-=======
+            "mainClass": "App.src.Views.Main",
+            "projectName": "yagni_218a6bae"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "yagni"
+        },
+        {
+            "type": "java",
             "name": "Launch ReadAll",
             "request": "launch",
             "mainClass": "ReadAll",
@@ -37,7 +45,6 @@
             "request": "launch",
             "mainClass": "Product",
             "projectName": "yagni_df3a6c79"
->>>>>>> 93a4e01e15a282b0e6e07cb9827218c898e09d8d
         },
         {
             "type": "java",

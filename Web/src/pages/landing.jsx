@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import logo from "../assets/img/logos/YagniLogoOnly.png";
+import bkgImg from "../assets/img/ecommerce.png";
 import "./css/landing.css";
 import { Link } from "react-router-dom";
 
@@ -26,6 +27,9 @@ class Landing extends Component {
                 >
                   Shop now
                 </Link>
+              </div>
+              <div className="col-sm-12 col-md-5 align-items-start">
+                <img className="landingImg" src={bkgImg} alt="" />
               </div>
             </div>
           </div>
