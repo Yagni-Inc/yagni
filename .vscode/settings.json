@@ -1,7 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "Main_Project/src/Model/mysql-connector-java-8.0.20.jar",
-        "d:\\MSU\\SW Methods and tools\\Main Project Branches\\Update_Login\\yagni\\Main_Project\\src\\Model\\mysql-connector-java-8.0.20.jar"
-    ]
-}
