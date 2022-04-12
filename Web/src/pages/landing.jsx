@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import NavBar from "../components/navBar/navBar";
-import logo from "../logo.png";
+import logo from "../assets/img/logos/YagniLogoOnly.png";
+import "./css/landing.css";
+import { Link } from "react-router-dom";
 
 // TODO: Make a landing page!
 
@@ -8,18 +9,27 @@ class Landing extends Component {
   state = {};
   render() {
     return (
-      <div>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 class="display-5 fw-bold m-3">Hello Yagni Inc!</h1>
-            <p class="col-md-8 fs-4">Let's build a sick web page.</p>
-            <button class="btn btn-dark btn-lg" type="button" onClick="">
-              Click me!
-            </button>
-            <a href="index2.html"> click Me to go to link 2!</a>
-          </header>
-        </div>
+      <div className="App">
+        <header className="App-header">
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-12 col-md-7 align-items-center">
+                <img src={logo} className="App-logo" alt="logo" />
+                <h1 className="display-2 fw-bold m-3">
+                  Products by Yagni Inc.
+                </h1>
+                <p className="display-5">We got what you need</p>
+                <Link
+                  className="btn btn-callout btn-lg text-uppercase"
+                  type="button"
+                  to="/yagni/shop"
+                >
+                  Shop now
+                </Link>
+              </div>
+            </div>
+          </div>
+        </header>
       </div>
     );
   }

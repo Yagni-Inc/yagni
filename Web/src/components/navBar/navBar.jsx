@@ -7,27 +7,38 @@ class NavBar extends Component {
   state = {};
   render() {
     return (
-      <nav class="navbar bg-light" id="ournav">
-        <div class="container">
-          <div className="nav">
-            <a className="navbar-brand" href="/">
-              <img src={logo} alt="Yagni Inc." height="100" />
-            </a>
-            <a className="navLink" href="/shop">
+      <div>
+        <ul
+          className="nav justify-content-evenly align-items-end text-light"
+          id="nav"
+        >
+          <li className="nav-item">
+            <Link className="nav-link text-light" to="/yagni/shop">
               Shop
-            </a>
-            <a className="navLink" href="#contact">
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link text-light" to="/yagni#contact">
               Contact
-            </a>
-            <a className="navLink" href="/orders">
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="navbar-brand" to="/yagni">
+              <img src={logo} alt="Yagni Inc." height="100" />
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link text-light" to="/yagni/orders">
               My Orders
-            </a>
-            <a className="navLink" href="/cart">
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link text-light" to="/yagni/cart">
               Cart
-            </a>
-          </div>
-        </div>
-      </nav>
+            </Link>
+          </li>
+        </ul>
+      </div>
     );
   }
 }
