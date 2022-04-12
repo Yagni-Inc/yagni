@@ -52,7 +52,7 @@ public class ReadOneOrder {
             
         } catch (SQLException e) {
             System.out.println(e);
-            System.out.println("Oops! The product ID you entered does not exist!");
+            System.out.println("Oops! The order number you entered does not exist!");
         } 
     }
     
