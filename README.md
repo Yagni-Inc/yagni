@@ -10,8 +10,8 @@ Yagni Inc. is split into two separate applications. The first is a GUI applicati
 
 #### Clone or fork this repository to contribute or explore how the inventory and ordering system is built!
 
-- `App` is where our Java GUI application is housed
-- `Web` contains all development for the web based application
+- `app` is where our Java GUI application is housed
+- `web` contains all development for the web based application
 
 ### Yagni Inc. Developers
 

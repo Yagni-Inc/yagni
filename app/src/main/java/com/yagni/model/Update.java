@@ -1,8 +1,7 @@
-package App.src.Model;
+package com.yagni.model;
 
 import java.sql.*;
-
-import App.src.Controller.DbConnection;
+import com.yagni.controller.*;
 
 public class Update {
 	
@@ -72,5 +71,4 @@ public class Update {
             System.out.println(e);
         }
     }
-
 }

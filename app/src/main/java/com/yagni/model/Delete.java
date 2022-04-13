@@ -1,8 +1,7 @@
-package App.src.Model;
+package com.yagni.model;
 
 import java.sql.*;
-
-import App.src.Controller.DbConnection;
+import com.yagni.controller.*;
 
 public class Delete {
 
@@ -10,8 +9,8 @@ public class Delete {
 
     public Delete (String deleteIDin){
         deleteID = deleteIDin;
-
     }
+	
     public void delete(DbConnection linkDB) {
 
         try {
@@ -25,7 +24,5 @@ public class Delete {
             System.out.println("Oops! An error has occured.");
             System.out.println(e);
         }
-    
- }
-} 
-
+	}
+}

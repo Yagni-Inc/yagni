@@ -1,13 +1,11 @@
-package App.src.Model;
+package com.yagni.model;
 
 import java.sql.*;
-
-import App.src.Controller.DbConnection;
+import com.yagni.controller.*;
 
 public class Create {
     
     private static String productId, supplierId, quantity, salePrice, wholeSale;
-
 
     public Create(String productIdIn, String quantityIn, String wholeSaleIn, String salePriceIn, String supplierIdIn){
         productId = productIdIn;
@@ -32,5 +30,4 @@ public class Create {
             System.out.println(e);
         }
     }
-
 }

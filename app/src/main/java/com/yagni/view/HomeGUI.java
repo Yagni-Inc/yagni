@@ -1,4 +1,4 @@
-package App.src.Views;
+package com.yagni.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
