@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProductCard from '../components/productCard/productCard';
+import ProductCard from '../components/productCard/ProductCard';
 import productData from '../assets/products.json';
 
 class Shop extends Component {
