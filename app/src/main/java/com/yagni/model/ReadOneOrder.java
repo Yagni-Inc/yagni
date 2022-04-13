@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import com.yagni.controller.*;
 
 public class ReadOneOrder {
-	
+
     private static String orderNum;
     private static JTable ordersTable;
     
@@ -50,7 +50,7 @@ public class ReadOneOrder {
             
         } catch (SQLException e) {
             System.out.println(e);
-            System.out.println("Oops! The product ID you entered does not exist!");
+            System.out.println("Oops! The order number you entered does not exist!");
         } 
     }
 }
