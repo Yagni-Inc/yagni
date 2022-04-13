@@ -1,26 +1,17 @@
-package App.src;
+package com.yagni.model;
 
-import java.io.Console;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.*;
 import java.sql.*;
 
-public class App {
+public class Main {
     /** MAIN LOOP **/
     public static void main(String[] args) throws IOException {
 
-
-
-        //Main manageInv = new Main(); 
-
         Console cnsl= System.console();
         Scanner userInput = new Scanner(System.in); // global userInput scanner for all userInput
-        String fileName = "inventory_team4.csv"; // variable for hardcoded file name
         String userName, strPassword;
         char [] password;
-
 
         //Connect to database and create database connection object
         System.out.println("User Name: ");
@@ -73,7 +64,7 @@ public class App {
                     supplierID = userInput.nextLine();
 
                     /** METHOD CALL ADJUST AS NEEDED **/
-                    App.addRecord(prodID, quant, wholesaleCost, salePrice, supplierID, connection);
+                    Main.addRecord(prodID, quant, wholesaleCost, salePrice, supplierID, connection);
                     System.out.println("-----------------------------------------------------------------------------------");
                     break;
 
@@ -85,13 +76,13 @@ public class App {
                     System.out.println("2. Display one product from Inventory");
                     int readChoice = userInput.nextInt();
                     if (readChoice == 1) {
-                        App.readAll(connection);
+                        Main.readAll(connection);
                     } else if (readChoice == 2) {
                         System.out.println("Enter product ID of item:");
                         String readProdID = userInput.nextLine();
                         readProdID = userInput.nextLine();
                         /** if product ID exists, call readOne method. if not, throw exception. **/
-                        App.readOne(readProdID, connection);
+                        Main.readOne(readProdID, connection);
                     } else{
                         System.out.println("Oops! You have entered an invalid choice!");
                     }
@@ -137,7 +128,7 @@ public class App {
 					}
 
                     /** UPDATE METHOD CALL **/
-                    App.update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID, connection);
+                    Main.update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID, connection);
                     System.out.println("-----------------------------------------------------------------------------------");
                     break;
 
@@ -150,7 +141,7 @@ public class App {
                     deleteID = userInput.nextLine();
 
                     /** DELETE METHOD CALL **/
-                    App.deleteRecord(deleteID, connection);
+                    Main.deleteRecord(deleteID, connection);
                     System.out.println("-----------------------------------------------------------------------------------");
                     break;
 
@@ -206,7 +197,6 @@ public class App {
     /** read all or one product? **/
     /** if all, loop through the reslut set and print each row **/
     public static void readAll(Connection connection) {
-        
 
         try {
             Statement statement = connection.createStatement();
@@ -248,6 +238,7 @@ public class App {
     /** UPDATE METHOD **/
     public static void update(String updateID, String updateQuant, String updateWholesale, String updatePrice, String updateSupplierID, Connection connection) throws IOException {
 
+		//Example sql statement:
 		//UPDATE `yagni_inv_db`.`product` SET `quanity` = '1614', `Whole_sale` = '135.92', `Sale_cost` = '207.56', `vendor_id` = 'WBWVYLRD' WHERE (`product_id` = '001LORWG0PC0');
 
 		String sql_statement = "UPDATE `yagni_inv_db`.`product` SET ";
@@ -309,6 +300,7 @@ public class App {
             System.out.println(e);
         }
     }
+
     /**Connection to database method**/
     /**Returns a Connection object**/
     public static Connection connect(String userName, String password){
@@ -335,6 +327,5 @@ public class App {
         //if the connection does not work it returns null.
         System.out.println("ERROR: Connection to database faild.");
         return null;
-
     }
 }

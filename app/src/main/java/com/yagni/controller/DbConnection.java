@@ -1,4 +1,4 @@
-package App.src.Controller;
+package com.yagni.controller;
 
 import java.sql.*;
 
@@ -42,8 +42,6 @@ public class DbConnection {
             System.out.println("ERROR: Connection to database failed.");
             return null;
         }
-        
-
     }
     
     public Connection getConnection(){

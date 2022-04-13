@@ -1,24 +1,11 @@
-package App.src.Views;
+package com.yagni.view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import javax.swing.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import App.src.Controller.*;
+import com.yagni.controller.*;
 
 public class EmployeeGUI implements ActionListener {
 
@@ -37,7 +24,6 @@ public class EmployeeGUI implements ActionListener {
     DbConnection linkDB; 
     JButton logoutButton = new JButton("Logout");
 
-
     EmployeeGUI(DbConnection linkDBIn) {
 
         linkDB = linkDBIn;
@@ -54,7 +40,7 @@ public class EmployeeGUI implements ActionListener {
             inventoryButton.setFont(caveatFont);
             logoutButton.setFont(caveatFont);
             orderButton.setFont(caveatFont);
-            footerLabel.setFont(caveatFont.deriveFont(16f));	    
+            footerLabel.setFont(caveatFont.deriveFont(16f));
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
@@ -98,13 +84,11 @@ public class EmployeeGUI implements ActionListener {
         label.setForeground(Color.WHITE);
         subLabel.setForeground(Color.WHITE);
 
-        
         //set defaults of inventory button 
         inventoryButton.setPreferredSize(new Dimension(200, 60));
         inventoryButton.setText("Manage Inventory");
         inventoryButton.addActionListener(this);
         
-
         //set defaults of customer orders button 
         orderButton.setPreferredSize(new Dimension(200, 60));
         orderButton.setText("Manage Orders");
@@ -115,7 +99,7 @@ public class EmployeeGUI implements ActionListener {
         buttonPanel.add(label); 
         buttonPanel.add(subLabel);
         buttonPanel.add(inventoryButton);
-        buttonPanel.add(orderButton); 
+        buttonPanel.add(orderButton);
 
         /* ------- Footer Content ------- */
         //set defualts and text of footer panel
@@ -154,15 +138,12 @@ public class EmployeeGUI implements ActionListener {
 
  //Button click method to navigate the user to the Inventory management CRUD GUI or the Customer Orders Management GUI
 
-   
-  
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource() == inventoryButton){
             frame.dispose();
-            ManageInventoryGUI window = new ManageInventoryGUI(linkDB);
-
+            ManageInvGUI window = new ManageInvGUI(linkDB);
         }
 
         if(e.getSource() == orderButton){
@@ -173,13 +154,8 @@ public class EmployeeGUI implements ActionListener {
         if(e.getSource() == logoutButton){
             linkDB.closeConnection();
             frame.dispose();
-            
+
             new HomeGUI(); 
         }
-        
     }
-
-    
-
 }
-

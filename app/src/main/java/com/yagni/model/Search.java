@@ -1,13 +1,9 @@
-package App.src.Model;
+package com.yagni.model;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-import App.src.Controller.DbConnection;
+import com.yagni.controller.*;
 
 public class Search {
     private static String productID;
@@ -17,6 +13,7 @@ public class Search {
         productID = productIDIn;
         productsTable = productsTableIn;
     }
+
     public void readOne(DbConnection linkDb){
         try {
             // Creating a statment object to pass a SQL statment to the database
@@ -54,5 +51,4 @@ public class Search {
             System.out.println("Oops! The product ID you entered does not exist!");
         } 
     }
-    
 }

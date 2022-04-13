@@ -1,13 +1,9 @@
-package App.src.Model;
+package com.yagni.model;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-import App.src.Controller.DbConnection;
+import com.yagni.controller.*;
 
 public class ReadAll {
 
@@ -31,7 +27,6 @@ public class ReadAll {
  
             // creates a DefaultTableModel object
             DefaultTableModel tableModel = (DefaultTableModel) productsTable.getModel();
-
 
             // initialize strings for the data in each field
             String productId, quantity, wholesaleCost, salePrice, supplierId;
@@ -67,5 +62,4 @@ public class ReadAll {
             System.out.println("Oops! An error has occured!");
         } 
     }
-    
 }

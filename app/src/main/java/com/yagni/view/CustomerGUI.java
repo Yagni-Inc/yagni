@@ -1,4 +1,5 @@
-package App.src.Views;
+package com.yagni.view;
+
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,6 +20,5 @@ public class CustomerGUI {
         frame.setLayout(null);
         frame.setVisible(true);
 
-        
     }
 }

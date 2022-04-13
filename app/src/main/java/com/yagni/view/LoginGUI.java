@@ -1,27 +1,11 @@
-package App.src.Views;
+package com.yagni.view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.sql.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import javax.swing.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-import App.src.Controller.DbConnection;
+import com.yagni.controller.*;
 
 public class LoginGUI implements ActionListener {
     
@@ -77,11 +61,11 @@ public class LoginGUI implements ActionListener {
         headerPanel.add(headerLabel);
 
         /*-------Back Button-------*/
-       backButton.setBounds(10, 15, 100, 40);
-       frame.add(backButton);
-       backButton.addActionListener(this);
-       backButton.setHorizontalTextPosition(JLabel.CENTER);
-       backButton.setVerticalTextPosition(JLabel.CENTER);
+		backButton.setBounds(10, 15, 100, 40);
+		frame.add(backButton);
+		backButton.addActionListener(this);
+		backButton.setHorizontalTextPosition(JLabel.CENTER);
+		backButton.setVerticalTextPosition(JLabel.CENTER);
         
        
         /* ------- Body Content ------- */
@@ -138,35 +122,34 @@ public class LoginGUI implements ActionListener {
    
         
     }
-        //Button click method 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-             String user = userText.getText();
-             String password = passwordText.getText();
-             
-             DbConnection linkDB = new DbConnection(user,password);
-             System.out.println(linkDB);
-             success.setText("");
-             
-             //if the login button is clicked and the user name and password are correct then open the EmployeeGUI; display login error otherwise. 
-            if(e.getSource() == button && linkDB.getConnection() != null) {
-                
-                System.out.println("Login Successful!");
-                System.out.println("---------------------------------------");
-                frame.dispose();
-                new EmployeeGUI(linkDB); 
-            
-            }else{
-                success.setText("Invalid credentials!  Please Try Again. ");
-                success.setForeground(Color.RED); 
-                
-            }// end of if statement
-            if(e.getSource() == backButton){
-                frame.setVisible(false);
-                frame.dispose();
-                success.setText("");
-                new HomeGUI(); ;
-            }
-            
-        }// end of button action
+	//Button click method 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+			String user = userText.getText();
+			String password = passwordText.getText();
+			
+			DbConnection linkDB = new DbConnection(user,password);
+			System.out.println(linkDB);
+			success.setText("");
+			
+			//if the login button is clicked and the user name and password are correct then open the EmployeeGUI; display login error otherwise. 
+		if (e.getSource() == button && linkDB.getConnection() != null) {
+			
+			System.out.println("Login Successful!");
+			System.out.println("---------------------------------------");
+			frame.dispose();
+			new EmployeeGUI(linkDB); 
+		
+		} else {
+			success.setText("Invalid credentials!  Please Try Again. ");
+			success.setForeground(Color.RED); 	
+		}
+
+		if (e.getSource() == backButton) {
+			frame.setVisible(false);
+			frame.dispose();
+			success.setText("");
+			new HomeGUI(); ;
+		}
+	}
 }

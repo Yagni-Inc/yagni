@@ -1,13 +1,9 @@
-package App.src.Model;
+package com.yagni.model;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-import App.src.Controller.DbConnection;
+import com.yagni.controller.*;
 
 public class ReadAllOrders {
     
@@ -16,8 +12,8 @@ public class ReadAllOrders {
     public ReadAllOrders(JTable ordersTableIn){
         ordersTable = ordersTableIn;
     }
+
     public void readAllOrders(DbConnection linkDB) {
-        
         
         try {
             
@@ -50,12 +46,10 @@ public class ReadAllOrders {
                 String [] row = {orderNum, orderDate, hashEmail, location, productID, productQuantity};
                 tableModel.addRow(row);
             }
+			
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("Oops! An error has occured!");
         } 
     }
-    
 }
-    
-

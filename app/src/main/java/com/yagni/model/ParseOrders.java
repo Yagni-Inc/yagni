@@ -1,4 +1,4 @@
-package App.src.Model;
+package com.yagni.model;
 
 import java.io.*;
 

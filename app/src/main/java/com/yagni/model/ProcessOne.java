@@ -1,9 +1,9 @@
-package App.src.Model;
+package com.yagni.model;
 
 import java.sql.*;
 import java.util.*;
 import java.io.*;
-import App.src.Controller.DbConnection;
+import com.yagni.controller.*;
 
 public class ProcessOne {
     
@@ -12,14 +12,13 @@ public class ProcessOne {
     private static DbConnection linkDb;
     private static Properties props;
 
-
     public ProcessOne(String dateIn, String emailIn, String locationIn, String productIdIn, String quantityIn){
 
         props = new Properties();
         try {
             props.load(new FileInputStream(propsFile));
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
+            //TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -68,6 +67,7 @@ public class ProcessOne {
 
         linkDb = new DbConnection(user, password);
     }
+	
     public void updateInventory(){
         // select the product and pull the quantity from the products table and assign it to a variable for that quantity
         // Creating a statment object to pass a SQL statment to the database
@@ -119,34 +119,33 @@ public class ProcessOne {
     }
 
     //Inserts into the Order history table
-    public void InsertOrderHist(){
-        try{
+    public void InsertOrderHist() {
+        try {
             Statement statement = linkDb.getConnection().createStatement();
     
             statement.execute("INSERT INTO `yagni_inv_db`.`purchase_history` (`order_date`, `hashed_email`, `customer_location`, `product_id`, `product_quanity`) VALUES ('" + date + "', '" + hashedEmail + "', '" + location + "', '" + productId + "', '" + quantity + "');");
-            }catch (SQLException e){
-                System.out.println(e);
-            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
-    public void setDate(String dateIn){
+    public void setDate(String dateIn) {
         date = dateIn.replace("-", "");
     }
 
-    public void setEmail(String emailIn){
+    public void setEmail(String emailIn) {
         email = emailIn;
     }
 
-    public void setLocation(String locationIn){
+    public void setLocation(String locationIn) {
         location = locationIn;
     }
 
-    public void setProductId(String prodIdIn){
+    public void setProductId(String prodIdIn) {
         productId = prodIdIn;
     }
 
-    public void setQuantity(String quantityIn){
+    public void setQuantity(String quantityIn) {
         quantity = quantityIn;
     }
-    
 }
