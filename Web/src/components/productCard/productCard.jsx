@@ -10,12 +10,21 @@ class ProductCard extends Component {
 
 	render() {
 		return (
-			<div className='card card-test'>
-				<img className='card-img-top' src={prodImg} alt='' />
-				<div className='card-body'>
-					<h4 className='card-title'>Product ID: </h4>
-					<h5 className='card-subtitle mb-3'> Sale Price: </h5>
-					<Counter />
+			<div className='col-lg-4 col-md-3 col-sm-12 mb-5'>
+				<div className='card align-items-center'>
+					<img className='card-img-top pt-3 w-50 h-50' src={prodImg} alt='' />
+					<div className='card-body align-items-start'>
+						<h4 className='card-title'>
+							Product ID: <span> {this.props.productId}</span>
+						</h4>
+						<h5 className='card-subtitle mb-3'>
+							Sale Price: <span> ${this.props.salePrice.toFixed(2)}</span>
+						</h5>
+						<h5 className='card-subtitle mb-3'>
+							Supplier: <span> {this.props.supplierId}</span>
+						</h5>
+						<Counter />
+					</div>
 				</div>
 			</div>
 		);

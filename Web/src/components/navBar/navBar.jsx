@@ -9,7 +9,7 @@ class NavBar extends Component {
 		return (
 			<div>
 				<ul
-					className='nav justify-content-evenly align-items-end text-light'
+					className='nav justify-content-evenly align-items-end text-light pb-2'
 					id='nav'
 				>
 					<li className='nav-item'>
