@@ -1,30 +1,41 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Counter extends Component {
-  state = {
-    count: 1,
-  };
+	state = {
+		value: 0,
+	};
 
-  render() {
-    return (
-      <div>
-        <button className="btn btn-dark btn-lg">Add to Cart </button>
-        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-      </div>
-    );
-  }
+	// Event binding option
+	// constructor() {
+	//   super();
+	//   this.handleIncrement = this.handleIncrement.bind(this);
+	// }
 
-  formatCount() {
-    const { count } = this.state;
-    return count === 0 ? "Zero" : count;
-  }
+	handleIncrement = () => {
+		this.setState({ value: this.state.value + 1 });
+	};
 
-  getBadgeClasses() {
-    let classes = "badge m-2 text-dark bg-";
-    classes += this.state.count === 0 ? "warning" : "info";
-    console.log(classes);
-    return classes;
-  }
+	render() {
+		return (
+			<div>
+				<button onClick={this.handleIncrement} className='btn btn-dark btn-lg'>
+					Add to Cart
+				</button>
+				<span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+			</div>
+		);
+	}
+
+	formatCount() {
+		const { value } = this.state;
+		return value === 0 ? 'Zero' : value;
+	}
+
+	getBadgeClasses() {
+		let classes = 'badge m-2 text-dark bg-';
+		classes += this.state.value === 0 ? 'warning' : 'info';
+		return classes;
+	}
 }
 
 export default Counter;

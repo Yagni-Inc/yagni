@@ -61,7 +61,7 @@ const Contact = () => {
 	const { contact, handleSubmit } = useForm();
 
 	return (
-		<form onSubmit={handleSubmit(data => saveData(data))}>
+		<form onSubmit={handleSubmit((data) => saveData(data))}>
 			<h1>Contact Us</h1>
 			<label>First name:</label>
 			<input name='First Name' ref={contact} />
