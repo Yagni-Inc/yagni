@@ -197,6 +197,22 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 		ordersFrame.add(bodyPanel);
 		ordersFrame.add(footerPanel, BorderLayout.SOUTH);
 
+		 //Menu to show reports and its items
+		 JMenuBar menubar = new JMenuBar();
+		 ordersFrame.setJMenuBar(menubar);
+
+		 JMenu MarketReports = new JMenu("Marketing Reports");
+		 menubar.add(MarketReports);
+		 JMenuItem daily = new JMenuItem("Daily report");  
+		 JMenuItem weekly = new JMenuItem("Weekly report"); 
+		 JMenuItem monthly = new JMenuItem("Monthly report");
+		 MarketReports.add(daily);
+		 MarketReports.add(weekly);   
+		 MarketReports.add(monthly);
+
+		 JMenu FinanceReports = new JMenu("Finance Reports");
+		 menubar.add(FinanceReports);
+		 
 		//displays all content to the GUI 
 		ordersFrame.setVisible(true);
 	}
