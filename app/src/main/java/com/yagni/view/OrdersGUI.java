@@ -278,7 +278,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 			//method to get data from database will go here
 		}
 		else if(e.getSource() == weeklyFinance){
-			JOptionPane.showMessageDialog(null,"<html>New customer orders this week:<br>Dollar total of new orders this week:<br>Customer orders difference from last week vs. this week:<br>Dollar total difference of last week vs this week:</html>", "Weekly Finance Report", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,"<html>New customer orders this week:<br>Dollar total of new orders this week:<br>Customer orders difference from last week vs. this week:<br>Dollar total difference of last week vs. this week:</html>", "Weekly Finance Report", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if(e.getSource() == quarterlyFinance){
 			JOptionPane.showMessageDialog(null,"Jesse was here :'(", "Quarterly Finance Report", JOptionPane.INFORMATION_MESSAGE);
