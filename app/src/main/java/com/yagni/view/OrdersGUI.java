@@ -14,8 +14,18 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 	private static JFrame ordersFrame = new JFrame("Manage Orders Window");  
 	private static JTable ordersTable = new JTable();
 	private static JScrollPane tableScroll = new JScrollPane();
+	private static JMenuBar menuReportsBar = new JMenuBar();
 	private static DbConnection linkDB;
+	
+	private static JMenu marketReports = new JMenu("Marketing Reports");
+	private static JMenu financeReports = new JMenu("Finance Reports");
 
+	private static JMenuItem dailyMarket = new JMenuItem("Daily Market Report");  
+	private static JMenuItem weeklyMarket = new JMenuItem("Weekly Market Report"); 
+	private static JMenuItem monthlyMarket = new JMenuItem("Monthly Market Report");
+	private static JMenuItem weeklyFinance = new JMenuItem("Weekly Finance Report");
+	private static JMenuItem quarterlyFinance = new JMenuItem("Quarterly Finace Report");
+	
 	private static JPanel headerPanel = new JPanel();               //Creates header content are
 	private static JPanel backPanel = new JPanel(); 
 	private static JPanel logoutPanel = new JPanel();            
@@ -42,8 +52,6 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 	private static JButton searchButton = new JButton(); //button with searchIcon.png
 	private static JButton backButton = new JButton("Back");
 	private static JButton logoutButton = new JButton("Logout");
-	private static JButton editButton = new JButton("Edit Order");
-	private static JButton cancelButton = new JButton("Cancel Order");
 	private static JButton clearButton = new JButton("Clear");
 
 	private static JTextField orderNumberField = new JTextField(20);
@@ -65,8 +73,6 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 			footerLabel.setFont(caveatFont.deriveFont(16f));
 			controlsTitle.setFont(caveatFont.deriveFont(Font.BOLD, 25f));
 		
-			cancelButton.setFont(caveatFont);
-			editButton.setFont(caveatFont);
 			loadButton.setFont(caveatFont); 
 			reloadButton.setFont(caveatFont);
 			backButton.setFont(caveatFont);
@@ -155,11 +161,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 		controlsPanel.add(orderALabel);
 		controlsPanel.add(clearButton);
 		clearButton.addActionListener(this);
-		controlsPanel.add(editButton);
-		editButton.addActionListener(this);
-		controlsPanel.add(cancelButton);
-		cancelButton.addActionListener(this);
-	
+		
 		/* ------- Tabel Panel & Load/Reload Button ------- */
 		tablePanel.setBounds(310, 0, 570, 520);
 		tablePanel.setLayout(null);
@@ -197,22 +199,25 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 		ordersFrame.add(bodyPanel);
 		ordersFrame.add(footerPanel, BorderLayout.SOUTH);
 
-		 //Menu to show reports and its items
-		 JMenuBar menubar = new JMenuBar();
-		 ordersFrame.setJMenuBar(menubar);
+		/* ------- MenuBar Content ------- */ 
+		ordersFrame.setJMenuBar(menuReportsBar);		//adding JMenuBar to ordersFrame
+		menuReportsBar.add(marketReports);		//adding Market Reports drop-down menu 
+		menuReportsBar.add(financeReports);		//adding Finance Reports drop-down menu
+		
+		/* ------- Market Reports Content ------- */
+		marketReports.add(dailyMarket);
+		dailyMarket.addActionListener(this);
+		marketReports.add(weeklyMarket);
+		weeklyMarket.addActionListener(this); 
+		marketReports.add(monthlyMarket);
+		monthlyMarket.addActionListener(this);
+		
+		/* ------- Finace Reports Content ------- */
+		financeReports.add(weeklyFinance);
+		weeklyFinance.addActionListener(this);
+		financeReports.add(quarterlyFinance);
+		quarterlyFinance.addActionListener(this);
 
-		 JMenu MarketReports = new JMenu("Marketing Reports");
-		 menubar.add(MarketReports);
-		 JMenuItem daily = new JMenuItem("Daily report");  
-		 JMenuItem weekly = new JMenuItem("Weekly report"); 
-		 JMenuItem monthly = new JMenuItem("Monthly report");
-		 MarketReports.add(daily);
-		 MarketReports.add(weekly);   
-		 MarketReports.add(monthly);
-
-		 JMenu FinanceReports = new JMenu("Finance Reports");
-		 menubar.add(FinanceReports);
-		 
 		//displays all content to the GUI 
 		ordersFrame.setVisible(true);
 	}
@@ -260,6 +265,25 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
             ReadOneOrder searchObj = new ReadOneOrder(orderNum, ordersTable); // creates a searchObj object from model/ReadOneOrder.java and passes in the products table
             searchObj.readOneOrder(linkDB); // calls the readOneOrder method and passes in the database connection
         }
+		else if(e.getSource() == dailyMarket){
+			JOptionPane.showMessageDialog(null,"<html>Most popular orders:<br>1.<br>2.<br>3.<br>Top customers by dollar amount:<br>1.<br>2.<br>3.</html>", "Daily Market Report", JOptionPane.INFORMATION_MESSAGE);
+			//method to get data from database will go here
+		}
+		else if(e.getSource() == weeklyMarket){
+			JOptionPane.showMessageDialog(null,"<html>Most popular orders:<br>1.<br>2.<br>3.<br>Top customers by dollar amount:<br>1.<br>2.<br>3.</html>", "Weekly Market Report", JOptionPane.INFORMATION_MESSAGE);
+			//method to get data from database will go here
+		}
+		else if(e.getSource() == monthlyMarket){
+			JOptionPane.showMessageDialog(null,"<html>Most popular orders:<br>1.<br>2.<br>3.<br>Top customers by dollar amount:<br>1.<br>2.<br>3.</html>", "Monthly Market Report", JOptionPane.INFORMATION_MESSAGE);
+			//method to get data from database will go here
+		}
+		else if(e.getSource() == weeklyFinance){
+			JOptionPane.showMessageDialog(null,"<html>New customer orders this week:<br>Dollar total of new orders this week:<br>Customer orders difference from last week vs. this week:<br>Dollar total difference of last week vs. this week:</html>", "Weekly Finance Report", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if(e.getSource() == quarterlyFinance){
+			JOptionPane.showMessageDialog(null,"Jesse was here :'(", "Quarterly Finance Report", JOptionPane.INFORMATION_MESSAGE);
+
+		}
         
     }  
     //Method to refresh the JTable 
