@@ -6,13 +6,13 @@ import saveData from './SaveData';
 import emailValidator from './EmailValidator';
 
 const Styles = styled.div`
-	background: lavender;
+	// background: lavender;
 	padding: 20px;
 
 	h1 {
 		border-bottom: 1px solid white;
 		color: #3d3d3d;
-		font-family: sans-serif;
+
 		font-size: 20px;
 		font-weight: 600;
 		line-height: 24px;
@@ -27,7 +27,7 @@ const Styles = styled.div`
 		flex-direction: column;
 		justify-content: space-around;
 		margin: 0 auto;
-		max-width: 500px;
+		max-width: 800px;
 		padding: 30px 50px;
 	}
 
@@ -61,24 +61,27 @@ const Contact = () => {
 	const { contact, handleSubmit } = useForm();
 
 	return (
-		<form onSubmit={handleSubmit((data) => saveData(data))}>
+		<form
+			onSubmit={handleSubmit((data) => saveData(data))}
+			className='text-start'
+		>
 			<h1>Contact Us</h1>
 			<label>First name:</label>
-			<input name='First Name' ref={contact} />
+			<input name='First Name ' ref={contact} />
 
-			<label>Last name:</label>
+			<label className='mt-3'>Last name:</label>
 			<input name='Last Name' ref={contact} />
 
-			<label>Email:</label>
+			<label className='mt-3'>Email:</label>
 			<input name='Email' ref={contact} />
 
-			<label>Phone number:</label>
+			<label className='mt-3'>Phone number:</label>
 			<input name='phone' ref={contact} />
 
-			<label>Reason for contact:</label>
+			<label className='mt-3'>Reason for contact:</label>
 			<input name='contactReason' ref={contact} />
 
-			<input type='submit' className='submitButton' />
+			<input type='submit' className='submitButton mt-5' />
 		</form>
 	);
 };
