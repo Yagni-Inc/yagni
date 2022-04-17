@@ -201,8 +201,8 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 
 		/* ------- MenuBar Content ------- */ 
 		ordersFrame.setJMenuBar(menuReportsBar);		//adding JMenuBar to ordersFrame
-		menuReportsBar.add(marketReports);		//adding Market Reports drop-down menu 
-		menuReportsBar.add(financeReports);		//adding Finance Reports drop-down menu
+		menuReportsBar.add(marketReports);		      //adding Market Reports drop-down menu 
+		menuReportsBar.add(financeReports);		    //adding Finance Reports drop-down menu
 		
 		/* ------- Market Reports Content ------- */
 		marketReports.add(dailyMarket);
@@ -266,19 +266,22 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
             searchObj.readOneOrder(linkDB); // calls the readOneOrder method and passes in the database connection
         }
 		else if(e.getSource() == dailyMarket){
-			JOptionPane.showMessageDialog(null,"<html>Most popular orders:<br>1.<br>2.<br>3.<br>Top customers by dollar amount:<br>1.<br>2.<br>3.</html>", "Daily Market Report", JOptionPane.INFORMATION_MESSAGE);
 			//method to get data from database will go here
-			//JOptionPane code above should be copied into MarketRepo.java file, then deleted
+			MarketRepo day = new MarketRepo();
+			day.dayReport(linkDB);
+			
 		}
 		else if(e.getSource() == weeklyMarket){
-			JOptionPane.showMessageDialog(null,"<html>Most popular orders:<br>1.<br>2.<br>3.<br>Top customers by dollar amount:<br>1.<br>2.<br>3.</html>", "Weekly Market Report", JOptionPane.INFORMATION_MESSAGE);
 			//method to get data from database will go here
-			//JOptionPane code above should be copied into MarketRepo.java file, then deleted
+			MarketRepo week = new MarketRepo();
+			week.weekReport(linkDB);
+			
 		}
 		else if(e.getSource() == monthlyMarket){
-			JOptionPane.showMessageDialog(null,"<html>Most popular orders:<br>1.<br>2.<br>3.<br>Top customers by dollar amount:<br>1.<br>2.<br>3.</html>", "Monthly Market Report", JOptionPane.INFORMATION_MESSAGE);
 			//method to get data from database will go here
-			//JOptionPane code above should be copied into MarketRepo.java file, then deleted
+			MarketRepo month = new MarketRepo();
+			month.monthReport(linkDB);
+			
 		}
 		else if(e.getSource() == weeklyFinance){
 			FinanceRepo fin = new FinanceRepo();
@@ -287,7 +290,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 		else if(e.getSource() == quarterlyFinance){
 			JOptionPane.showMessageDialog(null,"Jesse was here :'(", "Quarterly Finance Report", JOptionPane.INFORMATION_MESSAGE);
 		}
-        
+
     }  
     //Method to refresh the JTable 
     public void refreshOrders(){
