@@ -133,7 +133,7 @@ public class MarketRepo {
             //creating a pop-up that displays a message w/ variables created 
             JOptionPane.showMessageDialog(null,"<html>Most popular orders:<br>1. " + firstProduct + "<br>2. " + secondProduct + "<br>3. " + thirdProduct + 
             "<br> <br>Top customers by dollar amount:<br>1.  " + firstCustomer + " ---> $" + firstAmt + "<br>2. " + secondCustomer + " ---> $" +  secAmt + "<br>3. " + thirdCustomer + " ---> $" + thirdAmt + 
-            "</html>", "Weekly Market Report", JOptionPane.INFORMATION_MESSAGE);
+            "</html>", "Monthly Market Report", JOptionPane.INFORMATION_MESSAGE);
 
          }  
             catch(SQLException e) {
