@@ -268,7 +268,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 		else if(e.getSource() == dailyMarket){
 			//method to get data from database will go here
 			MarketRepo day = new MarketRepo();
-			day.dayRepo(linkDB);
+			day.dayReport(linkDB);
 			
 		}
 		else if(e.getSource() == weeklyMarket){

@@ -21,7 +21,7 @@ public class MarketRepo {
     private static String thirdAmt;
 
   
-     public void dayRepo(DbConnection linkDb){
+     public void dayReport(DbConnection linkDb){
         try{
 
             Statement state = linkDb.getConnection().createStatement();
