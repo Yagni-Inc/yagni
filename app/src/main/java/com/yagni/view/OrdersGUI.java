@@ -28,6 +28,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 	private static JMenuItem quarterlyFinance = new JMenuItem("Quarterly Finace Report");
 	private static JMenuItem about = new JMenuItem("Assistance");
 
+
 	private static JPanel headerPanel = new JPanel();               //Creates header content are
 	private static JPanel backPanel = new JPanel(); 
 	private static JPanel logoutPanel = new JPanel();            
@@ -51,7 +52,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 
 	private static JButton loadButton = new JButton("Load Order Data");
 	private static JButton reloadButton = new JButton("Refresh");
-	private static JButton searchButton = new JButton(); //button with searchIcon.png
+	private static JButton searchButton = new JButton();		//button with searchIcon.png
 	private static JButton backButton = new JButton("Back");
 	private static JButton logoutButton = new JButton("Logout");
 	
@@ -203,9 +204,14 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 
 		 /* ------- MenuBar Content ------- */ 
 		ordersFrame.setJMenuBar(menuReportsBar);		//adding JMenuBar to ordersFrame
+
 		menuReportsBar.add(marketReports);		//adding Market Reports drop-down menu 
 		menuReportsBar.add(financeReports);		//adding Finance Reports drop-down menu
 		menuReportsBar.add(help);               // adding help section
+
+		menuReportsBar.add(marketReports);		      //adding Market Reports drop-down menu 
+		menuReportsBar.add(financeReports);		    //adding Finance Reports drop-down menu
+		
 
 		/* ------- Market Reports Content ------- */
 		marketReports.add(dailyMarket);
@@ -231,7 +237,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        //on click of Load button, dsiplay all data from product inventory table 
+        //on click of Load button, display all data from product inventory table 
         if(e.getSource() == loadButton){
             tablePanel.remove(loadButton);
             tablePanel.repaint();
@@ -274,29 +280,43 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
         }
 
 		else if(e.getSource() == dailyMarket){
-			JOptionPane.showMessageDialog(null,"<html>Most popular orders:<br>1.<br>2.<br>3.<br>Top customers by dollar amount:<br>1.<br>2.<br>3.</html>", "Daily Market Report", JOptionPane.INFORMATION_MESSAGE);
 			//method to get data from database will go here
+			MarketRepo day = new MarketRepo();
+			day.dayReport(linkDB);
+			
 		}
 		else if(e.getSource() == weeklyMarket){
-			JOptionPane.showMessageDialog(null,"<html>Most popular orders:<br>1.<br>2.<br>3.<br>Top customers by dollar amount:<br>1.<br>2.<br>3.</html>", "Weekly Market Report", JOptionPane.INFORMATION_MESSAGE);
 			//method to get data from database will go here
+			MarketRepo week = new MarketRepo();
+			week.weekReport(linkDB);
+			
 		}
 		else if(e.getSource() == monthlyMarket){
-			JOptionPane.showMessageDialog(null,"<html>Most popular orders:<br>1.<br>2.<br>3.<br>Top customers by dollar amount:<br>1.<br>2.<br>3.</html>", "Monthly Market Report", JOptionPane.INFORMATION_MESSAGE);
 			//method to get data from database will go here
+			MarketRepo month = new MarketRepo();
+			month.monthReport(linkDB);
+			
 		}
 		else if(e.getSource() == weeklyFinance){
+
 			JOptionPane.showMessageDialog(null,"<html>New customer orders this week:<br>Dollar total of new orders this week:<br>Customer orders difference from last week vs. this week:<br>Dollar total difference of last week vs this week:</html>", "Weekly Finance Report", JOptionPane.INFORMATION_MESSAGE);
+
+			FinanceRepo fin = new FinanceRepo();
+			fin.financeRepo(linkDB);		//calls financeRepo method and passes in the database connection
+
 		}
 		else if(e.getSource() == quarterlyFinance){
 			JOptionPane.showMessageDialog(null,"Jesse was here :'(", "Quarterly Finance Report", JOptionPane.INFORMATION_MESSAGE);
-
 		}
+
 		else if(e.getSource()== about){
 			JOptionPane.showMessageDialog(null, "For Customer Support Call Jesse at 720-277-6916 !","Help", JOptionPane.INFORMATION_MESSAGE);
 
 		}
 	       
+
+
+
     }  
     //Method to refresh the JTable 
     public void refreshOrders(){
