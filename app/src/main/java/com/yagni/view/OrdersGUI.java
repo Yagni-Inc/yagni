@@ -16,15 +16,18 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 	private static JScrollPane tableScroll = new JScrollPane();
 	private static JMenuBar menuReportsBar = new JMenuBar();
 	private static DbConnection linkDB;
-	
+
 	private static JMenu marketReports = new JMenu("Marketing Reports");
 	private static JMenu financeReports = new JMenu("Finance Reports");
+	private static JMenu help = new JMenu("Help");
 
 	private static JMenuItem dailyMarket = new JMenuItem("Daily Market Report");  
 	private static JMenuItem weeklyMarket = new JMenuItem("Weekly Market Report"); 
 	private static JMenuItem monthlyMarket = new JMenuItem("Monthly Market Report");
 	private static JMenuItem weeklyFinance = new JMenuItem("Weekly Finance Report");
 	private static JMenuItem quarterlyFinance = new JMenuItem("Quarterly Finace Report");
+	private static JMenuItem about = new JMenuItem("Assistance");
+
 
 	private static JPanel headerPanel = new JPanel();               //Creates header content are
 	private static JPanel backPanel = new JPanel(); 
@@ -52,6 +55,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 	private static JButton searchButton = new JButton();		//button with searchIcon.png
 	private static JButton backButton = new JButton("Back");
 	private static JButton logoutButton = new JButton("Logout");
+	
 	private static JButton clearButton = new JButton("Clear");
 
 	private static JTextField orderNumberField = new JTextField(20);
@@ -72,13 +76,11 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 			headerLabel.setFont(caveatFont.deriveFont(Font.BOLD, 35f));
 			footerLabel.setFont(caveatFont.deriveFont(16f));
 			controlsTitle.setFont(caveatFont.deriveFont(Font.BOLD, 25f));
-		
 			loadButton.setFont(caveatFont); 
 			reloadButton.setFont(caveatFont);
 			backButton.setFont(caveatFont);
 			logoutButton.setFont(caveatFont);
 			clearButton.setFont(caveatFont);
-
 			orderLabel.setFont(caveatFont);
 			orderALabel.setFont(caveatFont);
 			dateLabel.setFont(caveatFont);
@@ -162,6 +164,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 		controlsPanel.add(clearButton);
 		clearButton.addActionListener(this);
 		
+	
 		/* ------- Tabel Panel & Load/Reload Button ------- */
 		tablePanel.setBounds(310, 0, 570, 520);
 		tablePanel.setLayout(null);
@@ -199,11 +202,17 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 		ordersFrame.add(bodyPanel);
 		ordersFrame.add(footerPanel, BorderLayout.SOUTH);
 
-		/* ------- MenuBar Content ------- */ 
+		 /* ------- MenuBar Content ------- */ 
 		ordersFrame.setJMenuBar(menuReportsBar);		//adding JMenuBar to ordersFrame
+
+		menuReportsBar.add(marketReports);		//adding Market Reports drop-down menu 
+		menuReportsBar.add(financeReports);		//adding Finance Reports drop-down menu
+		menuReportsBar.add(help);               // adding help section
+
 		menuReportsBar.add(marketReports);		      //adding Market Reports drop-down menu 
 		menuReportsBar.add(financeReports);		    //adding Finance Reports drop-down menu
 		
+
 		/* ------- Market Reports Content ------- */
 		marketReports.add(dailyMarket);
 		dailyMarket.addActionListener(this);
@@ -218,6 +227,10 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 		financeReports.add(quarterlyFinance);
 		quarterlyFinance.addActionListener(this);
 
+		/* ------- Help Content ------- */
+		help.add(about);
+		about.addActionListener(this);
+		 
 		//displays all content to the GUI 
 		ordersFrame.setVisible(true);
 	}
@@ -265,6 +278,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
             ReadOneOrder searchObj = new ReadOneOrder(orderNum, ordersTable); // creates a searchObj object from model/ReadOneOrder.java and passes in the products table
             searchObj.readOneOrder(linkDB); // calls the readOneOrder method and passes in the database connection
         }
+
 		else if(e.getSource() == dailyMarket){
 			//method to get data from database will go here
 			MarketRepo day = new MarketRepo();
@@ -284,12 +298,24 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 			
 		}
 		else if(e.getSource() == weeklyFinance){
+
+			JOptionPane.showMessageDialog(null,"<html>New customer orders this week:<br>Dollar total of new orders this week:<br>Customer orders difference from last week vs. this week:<br>Dollar total difference of last week vs this week:</html>", "Weekly Finance Report", JOptionPane.INFORMATION_MESSAGE);
+
 			FinanceRepo fin = new FinanceRepo();
 			fin.financeRepo(linkDB);		//calls financeRepo method and passes in the database connection
+
 		}
 		else if(e.getSource() == quarterlyFinance){
 			JOptionPane.showMessageDialog(null,"Jesse was here :'(", "Quarterly Finance Report", JOptionPane.INFORMATION_MESSAGE);
 		}
+
+		else if(e.getSource()== about){
+			JOptionPane.showMessageDialog(null, "For Customer Support Call Jesse at 720-277-6916 !","Help", JOptionPane.INFORMATION_MESSAGE);
+
+		}
+	       
+
+
 
     }  
     //Method to refresh the JTable 
