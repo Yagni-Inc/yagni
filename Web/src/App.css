@@ -23,6 +23,11 @@
   color: #000000;
 }
 
+.bg-callout{
+  background-color: #E8FF18 !important;
+    border-color: #E8FF18 !important;
+}
+
 
 /* @keyframes App-logo-spin {
   from {

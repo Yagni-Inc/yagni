@@ -3,6 +3,7 @@ import logo from '../assets/img/logos/YagniLogoOnly.png';
 import bkgImg from '../assets/img/ecommerce.png';
 import './css/Landing.css';
 import { Link } from 'react-router-dom';
+import ContactForm from '../components/contact/Contact';
 
 // TODO: Make a landing page!
 
@@ -11,7 +12,7 @@ class Landing extends Component {
 	render() {
 		return (
 			<div className='App'>
-				<header className='App-header'>
+				<header className='App-header mb-5'>
 					<div className='container'>
 						<div className='row'>
 							<div className='col-sm-12 col-md-7 align-items-center'>
@@ -23,7 +24,7 @@ class Landing extends Component {
 								<Link
 									className='btn btn-callout btn-lg text-uppercase'
 									type='button'
-									to='/yagni/shop'
+									to='/shop'
 								>
 									Shop now
 								</Link>
@@ -34,6 +35,10 @@ class Landing extends Component {
 						</div>
 					</div>
 				</header>
+
+				<div id='contact' className='mt-5'>
+					<ContactForm />
+				</div>
 			</div>
 		);
 	}
