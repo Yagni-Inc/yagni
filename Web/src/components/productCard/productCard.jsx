@@ -10,8 +10,8 @@ class ProductCard extends Component {
 
 	render() {
 		return (
-			<div className='col-lg-4 col-md-3 col-sm-12 mb-5'>
-				<div className='card align-items-center'>
+			<div className='col-sm-12 col-md-4 mb-5'>
+				<div className='card align-items-center mb-5'>
 					<img className='card-img-top pt-3 w-50 h-50' src={prodImg} alt='' />
 					<div className='card-body align-items-start'>
 						<h4 className='card-title'>
