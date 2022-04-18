@@ -32,7 +32,6 @@ public class ReadAllOrders {
             // Creates a string array that is the size of our number of columns
             String [] columnName = {"Order Number", "Order Date", "Hashed Email", "Location", "Product ID", "Product Quantity"};
 
-          
             tableModel.setColumnIdentifiers(columnName);
 
             // updates the JTable object ordersTable with the result data

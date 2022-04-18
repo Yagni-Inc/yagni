@@ -30,7 +30,7 @@ public class DbConnection {
         //Try block catches SQLExecption
         try{
             //Making a connection to the database and setting it to a connection object
-            Connection linkDB = DriverManager.getConnection("jdbc:mysql://localhost:3306/yagni_inv_db",userName,password);
+            Connection linkDB = DriverManager.getConnection("jdbc:mysql://yag-01.cldkvvrrriir.us-west-1.rds.amazonaws.com:3306/yagni_inv_db",userName,password);
 
             //returning the connection object so it can be used through out the app
             return linkDB;

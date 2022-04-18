@@ -1,0 +1,39 @@
+{
+    "products":[
+        {
+            "productId": "Eraser",
+            "quantity": 3000,
+            "wholeSale": 0.05,
+            "salePrice": 0.75,
+            "supplierId": "Erasers R US"
+          },
+          {
+            "productId": "White Out",
+            "quantity": 3500,
+            "wholeSale": 1.05,
+            "salePrice": 3.75,
+            "supplierId": "Mistakes Make Us Rich"
+          },
+          {
+            "productId": "Bleach",
+            "quantity": 7000,
+            "wholeSale": 1.95,
+            "salePrice": 5.50,
+            "supplierId": "When in doubt, bleach it out!"
+          },
+          {
+            "productId": "Scissors",
+            "quantity": 6400,
+            "wholeSale": 1.75,
+            "salePrice": 4.65,
+            "supplierId": "Rocks, Paper and Scissors Ltd."
+          },
+          {
+            "productId": "Paint",
+            "quantity": 1500,
+            "wholeSale": 4.75,
+            "salePrice": 15.05,
+            "supplierId": "Cover the mistakes on your walls"
+          }
+    ]
+}

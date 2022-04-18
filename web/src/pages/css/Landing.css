@@ -1,8 +1,13 @@
 body{
-    background-image: url("../../assets/img/landing-bkg.png") !important;
+    background-image: url("../../assets/img/landing-bkg2.png") !important;
     background-size: cover;
     background-repeat: no-repeat;
+    color: #001e2e !important;
  
+}
+
+h1{
+    color: #001e2e !important;
 }
 
 .btn-callout{
