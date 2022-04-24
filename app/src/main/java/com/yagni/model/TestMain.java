@@ -3,8 +3,12 @@ package com.yagni.model;
 import java.io.*;
 import java.util.*;
 import java.sql.*;
-
-public class Main {
+/**
+ * Deprecated main file used to run the terminal interface.
+ * Currently used for testing.
+ * Last changed by Seth Harling 4/24/2022
+ */
+public class TestMain {
     /** MAIN LOOP **/
     public static void main(String[] args) throws IOException {
 
@@ -64,7 +68,7 @@ public class Main {
                     supplierID = userInput.nextLine();
 
                     /** METHOD CALL ADJUST AS NEEDED **/
-                    Main.addRecord(prodID, quant, wholesaleCost, salePrice, supplierID, connection);
+                    TestMain.addRecord(prodID, quant, wholesaleCost, salePrice, supplierID, connection);
                     System.out.println("-----------------------------------------------------------------------------------");
                     break;
 
@@ -76,13 +80,13 @@ public class Main {
                     System.out.println("2. Display one product from Inventory");
                     int readChoice = userInput.nextInt();
                     if (readChoice == 1) {
-                        Main.readAll(connection);
+                        TestMain.readAll(connection);
                     } else if (readChoice == 2) {
                         System.out.println("Enter product ID of item:");
                         String readProdID = userInput.nextLine();
                         readProdID = userInput.nextLine();
                         /** if product ID exists, call readOne method. if not, throw exception. **/
-                        Main.readOne(readProdID, connection);
+                        TestMain.readOne(readProdID, connection);
                     } else{
                         System.out.println("Oops! You have entered an invalid choice!");
                     }
@@ -128,7 +132,7 @@ public class Main {
 					}
 
                     /** UPDATE METHOD CALL **/
-                    Main.update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID, connection);
+                    TestMain.update(updateID, updateQuant, updateWholesale, updatePrice, updateSupplierID, connection);
                     System.out.println("-----------------------------------------------------------------------------------");
                     break;
 
@@ -141,7 +145,7 @@ public class Main {
                     deleteID = userInput.nextLine();
 
                     /** DELETE METHOD CALL **/
-                    Main.deleteRecord(deleteID, connection);
+                    TestMain.deleteRecord(deleteID, connection);
                     System.out.println("-----------------------------------------------------------------------------------");
                     break;
 
