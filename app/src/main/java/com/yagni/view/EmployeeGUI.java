@@ -1,10 +1,8 @@
 package com.yagni.view;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
-
 import com.yagni.controller.*;
 
 public class EmployeeGUI implements ActionListener {
@@ -141,15 +139,15 @@ public class EmployeeGUI implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == inventoryButton){
+        if (e.getSource() == inventoryButton){
             frame.dispose();
             new ManageInvGUI(linkDB);
         }
-        if(e.getSource() == orderButton){
+        if (e.getSource() == orderButton){
             frame.dispose();
             new OrdersGUI(linkDB);
         }
-        if(e.getSource() == logoutButton){
+        if (e.getSource() == logoutButton){
             linkDB.closeConnection();
             frame.dispose();
 
