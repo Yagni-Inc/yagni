@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import com.yagni.controller.*;
 import com.yagni.model.*;
 
@@ -17,22 +16,48 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
     private static DbConnection linkDB; // Variable to persist connection to db
 
     // Variable declarations for all JPanels needed within GUI
-    private static JPanel headerPanel, backPanel, logoutPanel, bodyPanel, footerPanel, tablePanel, controlsPanel;
+    private static JPanel headerPanel;
+    private static JPanel backPanel;
+    private static JPanel logoutPanel;
+    private static JPanel bodyPanel;
+    private static JPanel footerPanel;
+    private static JPanel tablePanel;
+    private static JPanel controlsPanel;
 
     // Variable declarations for all JLabels needed within GUI
-    private static JLabel headerLabel, footerLabel, controlsTitle, productIDLabel, quantityLabel, wholeSaleLabel,
-            salePriceLabel, supplierIDLabel, productActionsLabel;
+    private static JLabel headerLabel;
+    private static JLabel footerLabel;
+    private static JLabel controlsTitle;
+    private static JLabel productIDLabel;
+    private static JLabel quantityLabel;
+    private static JLabel wholeSaleLabel;
+    private static JLabel salePriceLabel;
+    private static JLabel supplierIDLabel;
+    private static JLabel productActionsLabel;
 
     // Variable declarations for all Images needed within GUI
-    private static ImageIcon logoImg, searchImg, warningImg;
+    private static ImageIcon logoImg;
+    private static ImageIcon searchImg;
+    private static ImageIcon warningImg;
 
     // Variable declarations for all JButtons needed within GUI
-    private static JButton addButton, updateButton, deleteButton, loadButton, reloadButton, searchButton, backButton,
-            logoutButton, clearButton;
+    private static JButton addButton;
+    private static JButton updateButton;
+    private static JButton deleteButton;
+    private static JButton loadButton;
+    private static JButton reloadButton;
+    private static JButton searchButton;
+    private static JButton backButton;
+    private static JButton logoutButton;
+    private static JButton clearButton;
 
     // Variable declarations for all JTextFields needed within GUI
-    private static JTextField productIDField, quantityField, wholeSaleField, salePriceField, supplierIDField,
-            searchField;
+    private static JTextField productIDField;
+    private static JTextField quantityField;
+    private static JTextField wholeSaleField;
+    private static JTextField salePriceField;
+    private static JTextField supplierIDField;
+    private static JTextField searchField;
 
     ManageInvGUI(DbConnection linkDBIn) {
 
@@ -302,8 +327,7 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
             refreshProducts();
 
         } else if (e.getSource() == logoutButton) {
-            // On click of the logout button close the db connection and dispose the
-            // JFrame
+            // On click of logout button close the db connection and dispose the JFrame
             linkDB.closeConnection();
             inventoryFrame.dispose();
 
@@ -345,9 +369,9 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
                 Delete deleteObj = new Delete(deleteID);
                 deleteObj.delete(linkDB);
 
-                // Refresh products Table 
+                // Refresh products Table
                 refreshProducts();
-                
+
             }
         }
     }
@@ -373,7 +397,7 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
         }
     }
 
-    // Method to set the default placeholder text for the search field 
+    // Method to set the default placeholder text for the search field
     private void setPlaceholderText() {
         searchField.setText("Search Product ID");
         searchField.setForeground(Color.GRAY);
@@ -382,7 +406,7 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
 
     // Method to refresh the JTable
     public void refreshProducts() {
-        // Clear all text fields 
+        // Clear all text fields
         clearTextFields();
         // Create tableModel object and set the row count to 0
         DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
@@ -410,7 +434,7 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
         wholeSaleField.setText("");
         salePriceField.setText("");
         supplierIDField.setText("");
-        //Reset placeholder text of the search field 
+        // Reset placeholder text of the search field
         setPlaceholderText();
     }
 
@@ -451,5 +475,4 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
     @Override
     public void mouseExited(java.awt.event.MouseEvent e) {
     }
-
 }
