@@ -7,12 +7,12 @@ import com.yagni.controller.*;
 
 public class MarketRepo {
 
-    // Best customers by doller amount
+    // Best customers by dollar amount
     private static String firstCustomer;
     private static String secondCustomer;
     private static String thirdCustomer;
 
-    // Most ordered product and their doller amount
+    // Most ordered product and their dollar amount
     private static String firstProduct;
     private static String secondProduct;
     private static String thirdProduct;
