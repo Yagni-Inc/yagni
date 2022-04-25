@@ -102,7 +102,7 @@ public class HomeGUI implements ActionListener {
         frame.add(headerPanel, BorderLayout.NORTH);
         frame.add(bodyPanel, BorderLayout.CENTER);
         frame.add(footerPanel, BorderLayout.SOUTH);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        // Dispose out of this GUI application only if needed, program will continue to run.
         frame.setSize(900, 700);
         frame.setResizable(false); // this disable the resize features of the frame to the user
 

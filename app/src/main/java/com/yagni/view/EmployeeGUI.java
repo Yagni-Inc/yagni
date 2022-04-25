@@ -113,7 +113,7 @@ public class EmployeeGUI implements ActionListener {
 
         /* ------- Frame Content ------- */ 
         //set default size. layout and style to the frame 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit out of application.
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        // Dispose out of this GUI application only if needed, program will continue to run.
         frame.setSize(900,700);
         frame.getContentPane().setBackground(Color.LIGHT_GRAY);
         frame.setResizable(false); //this disable the resize features of the frame to the user
@@ -143,13 +143,11 @@ public class EmployeeGUI implements ActionListener {
 
         if(e.getSource() == inventoryButton){
             frame.dispose();
-            ManageInvGUI window = new ManageInvGUI(linkDB);
+            new ManageInvGUI(linkDB);
         }
-
         if(e.getSource() == orderButton){
             frame.dispose();
-            OrdersGUI window2 = new OrdersGUI(linkDB);
-
+            new OrdersGUI(linkDB);
         }
         if(e.getSource() == logoutButton){
             linkDB.closeConnection();
