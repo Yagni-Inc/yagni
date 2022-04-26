@@ -8,35 +8,66 @@ import javax.swing.*;
 import com.yagni.controller.*;
 
 public class EmployeeGUI implements ActionListener {
+    //
+    private static DbConnection linkDB; // Variable to persist connection to db
+    private static JFrame frame; // Jframe to display all elements of EmployeeGUI
 
-    JFrame frame = new JFrame("Employee Main Page");   // Crates Frame & Title
-    JPanel headerPanel = new JPanel();          //Creates panel for header content 
-    JPanel bodyPanel = new JPanel();            //Creates panel for body content 
-    JPanel buttonPanel = new JPanel();          //Creates inner panel for buttons in the body 
-    JPanel footerPanel = new JPanel();          //Creates panel for footer content 
-    JLabel headerLabel = new JLabel();          //text/image label for header
-    JLabel label = new JLabel();                //main text label for main body 
-    JLabel subLabel = new JLabel();             //sub label for body text 
-    JLabel footerLabel = new JLabel();          //text label for Yagni Inc. Copyright info 
-    JButton inventoryButton = new JButton();    //Button for Inventory 
-    JButton orderButton = new JButton();        //Button for orders
-    ImageIcon logoImg = new ImageIcon("App/assets/img/YagniLogoOnly.png"); //loads logo image
-    DbConnection linkDB; 
-    JButton logoutButton = new JButton("Logout");
+    // Variable declarations for all JPanels needed within Employee GUI
+    private static JPanel headerPanel;
+    private static JPanel bodyPanel;
+    private static JPanel buttonPanel;
+    private static JPanel footerPanel;
+
+    // Variable declarations for all JLabels needed within Employee GUI
+    private static JLabel headerLabel;
+    private static JLabel bodyLabel;
+    private static JLabel bodySubLabel;
+    private static JLabel footerLabel;
+
+    // Variable declarations for all JButtons needed within GUI
+    private static JButton inventoryButton;
+    private static JButton orderButton;
+    private static JButton logoutButton;
+
+    private static ImageIcon logoImg; // Variable to display Yagni logo
 
     EmployeeGUI(DbConnection linkDBIn) {
 
+        // Set the connection with db
         linkDB = linkDBIn;
 
-         // Importing and setting custom font Caveat for all text components 
-         try {
+        // Initializing JFrame
+        frame = new JFrame("Employee Main Page");
+
+        // Initializing JPanels
+        headerPanel = new JPanel();
+        bodyPanel = new JPanel();
+        buttonPanel = new JPanel();
+        footerPanel = new JPanel();
+
+        // Initializing JLabels
+        headerLabel = new JLabel();
+        bodyLabel = new JLabel("Welcome Employee! ");
+        bodySubLabel = new JLabel("Choose an option to continue");
+        footerLabel = new JLabel();
+
+        // Initializing JButtons
+        inventoryButton = new JButton("Manage Inventory");
+        orderButton = new JButton("Manage Orders");
+        logoutButton = new JButton("Logout");
+
+        // Initializing ImageIcon with Yagni logo file path
+        logoImg = new ImageIcon("App/assets/img/YagniLogoOnly.png");
+
+        // Importing and setting custom font Caveat for all text components
+        try {
             File font_file = new File("App/assets/fonts/Caveat-VariableFont_wght.ttf");
             Font caveatFont = Font.createFont(Font.TRUETYPE_FONT, font_file).deriveFont(25f);
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font_file));
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font_file));
             headerLabel.setFont(caveatFont.deriveFont(Font.BOLD, 35f));
-            label.setFont(caveatFont.deriveFont(Font.BOLD, 30f));
-            subLabel.setFont(caveatFont);
+            bodyLabel.setFont(caveatFont.deriveFont(Font.BOLD, 30f));
+            bodySubLabel.setFont(caveatFont);
             inventoryButton.setFont(caveatFont);
             logoutButton.setFont(caveatFont);
             orderButton.setFont(caveatFont);
@@ -45,117 +76,118 @@ public class EmployeeGUI implements ActionListener {
             e.printStackTrace();
         }
 
-        /* ------- Header Content ------- */ 
-        //set default size and layout of body panel 
+        /* ------- Header Content ------- */
+        // Set default size and layout of body panel
         headerPanel.setPreferredSize(new Dimension(100, 200));
         headerPanel.setBackground(Color.LIGHT_GRAY);
 
-        //set text and image alignment in header
+        // Set text and image alignment in header
         headerLabel.setIcon(logoImg);
         headerLabel.setIconTextGap(20);
         headerLabel.setText("Yagni Inc. Employee Actions Menu ");
         headerLabel.setVerticalTextPosition(JLabel.CENTER);
         headerLabel.setHorizontalTextPosition(JLabel.RIGHT);
 
-        //add header label to header panel 
+        // Add header label to header panel
         headerPanel.add(headerLabel);
 
-        /*------- Logout Button -------*/
+        // Format logout button layout
         logoutButton.setBounds(780, 15, 100, 40);
-        frame.add(logoutButton);
-        logoutButton.addActionListener(this);
         logoutButton.setHorizontalTextPosition(JLabel.CENTER);
         logoutButton.setVerticalTextPosition(JLabel.CENTER);
-       
+
+        // Passing scope to action listener for logout button
+        logoutButton.addActionListener(this);
+
+        // Add the button to the frame to render to the page
+        frame.add(logoutButton);
+
         /* ------- Body Content ------- */
-        //set default size and layout of body panel 
-        bodyPanel.setPreferredSize(new Dimension(100,100));
+        // Set default size and layout of body panel
+        bodyPanel.setPreferredSize(new Dimension(100, 100));
         bodyPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         bodyPanel.setBackground(Color.LIGHT_GRAY);
 
-        //set default size and layout of button panel relative to body panel
+        // Set default size and layout of button panel relative to body panel
         buttonPanel.setPreferredSize(new Dimension(400, 350));
         buttonPanel.setBackground(Color.DARK_GRAY);
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
 
-        //set text and style body text labels 
-        label.setText("Welcome Employee! ");
-        subLabel.setText("Choose an option to continue");  
-        label.setForeground(Color.WHITE);
-        subLabel.setForeground(Color.WHITE);
+        // Set style of body text labels
+        bodyLabel.setForeground(Color.WHITE);
+        bodySubLabel.setForeground(Color.WHITE);
 
-        //set defaults of inventory button 
+        // Set button sizes of employee action buttons
         inventoryButton.setPreferredSize(new Dimension(200, 60));
-        inventoryButton.setText("Manage Inventory");
-        inventoryButton.addActionListener(this);
-        
-        //set defaults of customer orders button 
         orderButton.setPreferredSize(new Dimension(200, 60));
-        orderButton.setText("Manage Orders");
+
+        // Passing scope to action listener for employee action buttons
+        inventoryButton.addActionListener(this);
         orderButton.addActionListener(this);
 
-        //add button panel to body panel; add text labels and buttons to button panel 
+        // Adding body components to the body/button panels
         bodyPanel.add(buttonPanel);
-        buttonPanel.add(label); 
-        buttonPanel.add(subLabel);
+        buttonPanel.add(bodyLabel);
+        buttonPanel.add(bodySubLabel);
         buttonPanel.add(inventoryButton);
         buttonPanel.add(orderButton);
 
         /* ------- Footer Content ------- */
-        //set defualts and text of footer panel
+        // Set defualts and text of footer panel
         footerPanel.setPreferredSize(new Dimension(100, 30));
         footerPanel.setBackground(Color.DARK_GRAY);
         footerLabel.setText("Created by Yagni Inc. © 2022");
         footerLabel.setForeground(Color.WHITE);
 
-        //add footer text to footer panel 
+        // Add footer text to footer panel
         footerPanel.add(footerLabel);
 
-        /* ------- Frame Content ------- */ 
-        //set default size. layout and style to the frame 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit out of application.
-        frame.setSize(900,700);
-        frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-        frame.setResizable(false); //this disable the resize features of the frame to the user
+        /* ------- Frame Content ------- */
+        // Exit out of application when closing the window
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //add the header, body and footer panels to the frame 
+        // Set default size, layout and style to the frame
+        frame.setSize(900, 700);
+        frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+
+        // Disable the resize features of the frame to the user
+        frame.setResizable(false);
+
+        // add the header, body and footer panels to the frame with BorderLayout manager
         frame.add(headerPanel, BorderLayout.NORTH);
         frame.add(bodyPanel, BorderLayout.CENTER);
         frame.add(footerPanel, BorderLayout.SOUTH);
-        
-        //display all content to the GUI 
+
+        // display all content to the GUI
         frame.setVisible(true);
 
     }
 
-   /**********FOR TESTING PURPOSES************/
-   //public static void main(String[] args) {
-
-
-        //EmployeeGUI user = new EmployeeGUI();
-
-    //}
-
- //Button click method to navigate the user to the Inventory management CRUD GUI or the Customer Orders Management GUI
-
+    // Event handler for button clicks
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if(e.getSource() == inventoryButton){
+        // On click of inventory button dispose this frame
+        if (e.getSource() == inventoryButton) {
             frame.dispose();
-            ManageInvGUI window = new ManageInvGUI(linkDB);
-        }
 
-        if(e.getSource() == orderButton){
+            // Passing the db connection with new object to render Employee GUI page
+            new ManageInvGUI(linkDB);
+        }
+        if (e.getSource() == orderButton) {
+            // On click of order button dispose this frame
             frame.dispose();
-            OrdersGUI window2 = new OrdersGUI(linkDB);
+
+            // Passing the db connection with new object to render Orders GUI page
+            new OrdersGUI(linkDB);
 
         }
-        if(e.getSource() == logoutButton){
+        if (e.getSource() == logoutButton) {
+            // On click of logout button close the db connection and dispose the JFrame
             linkDB.closeConnection();
             frame.dispose();
 
-            new HomeGUI(); 
+            // Create a new HomeGUI object to display the Home page
+            new HomeGUI();
         }
     }
 }
