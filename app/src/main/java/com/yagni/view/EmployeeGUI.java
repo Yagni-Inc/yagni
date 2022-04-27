@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
-
 import com.yagni.controller.*;
 
 public class EmployeeGUI implements ActionListener {
@@ -160,7 +159,6 @@ public class EmployeeGUI implements ActionListener {
 
 		// display all content to the GUI
 		frame.setVisible(true);
-
 	}
 
 	// Event handler for button clicks
@@ -179,7 +177,6 @@ public class EmployeeGUI implements ActionListener {
 
 			// Passing the db connection with new object to render Orders GUI page
 			new OrdersGUI(linkDB);
-
 		}
 		if (e.getSource() == logoutButton) {
 			// On click of logout button close the db connection and dispose the JFrame
