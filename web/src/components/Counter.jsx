@@ -18,10 +18,15 @@ class Counter extends Component {
 	render() {
 		return (
 			<div>
-				<button onClick={this.handleIncrement} className='btn btn-dark btn-lg'>
+				<button
+					onClick={this.handleIncrement}
+					className='btn btn-dark btn-lg me-3'
+				>
 					Add to Cart
 				</button>
+				<i className='bi bi-plus'></i>
 				<span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+				<i className='bi bi-dash' />
 			</div>
 		);
 	}
