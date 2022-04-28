@@ -3,7 +3,6 @@ vscode/
 *.properties
 *.class
 *.properties
-.DS_Store
 
 # Logs
 logs

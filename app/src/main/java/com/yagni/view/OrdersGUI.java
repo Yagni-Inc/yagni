@@ -14,18 +14,31 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 	private static JFrame ordersFrame = new JFrame("Manage Orders Window");  
 	private static JTable ordersTable = new JTable();
 	private static JScrollPane tableScroll = new JScrollPane();
+	private static JMenuBar menuReportsBar = new JMenuBar();
 	private static DbConnection linkDB;
 
-	private static JPanel headerPanel = new JPanel();               //Creates header content are
-	private static JPanel backPanel = new JPanel(); 
-	private static JPanel logoutPanel = new JPanel();            
-	private static JPanel bodyPanel = new JPanel();                //Creates body content area 
-	private static JPanel footerPanel = new JPanel();              //Creates footer content area 
-	private static JPanel tablePanel = new JPanel();               //Creates panel for table area
-	private static JPanel controlsPanel = new JPanel();            //Creates panel for controls area
+	private static JMenu marketReports = new JMenu("Marketing Reports");
+	private static JMenu financeReports = new JMenu("Finance Reports");
+	private static JMenu help = new JMenu("Help");
 
-	private static JLabel headerLabel = new JLabel();              //text/image label for header 
-	private static JLabel footerLabel = new JLabel();              //text label for footer
+	private static JMenuItem dailyMarket = new JMenuItem("Daily Market Report");  
+	private static JMenuItem weeklyMarket = new JMenuItem("Weekly Market Report"); 
+	private static JMenuItem monthlyMarket = new JMenuItem("Monthly Market Report");
+	private static JMenuItem weeklyFinance = new JMenuItem("Weekly Finance Report");
+	private static JMenuItem quarterlyFinance = new JMenuItem("Quarterly Finace Report");
+	private static JMenuItem about = new JMenuItem("Assistance");
+
+
+	private static JPanel headerPanel = new JPanel();		//Creates header content are
+	private static JPanel backPanel = new JPanel();		//Creates panel for back button				
+	private static JPanel logoutPanel = new JPanel();		//Creates panel for logout button           
+	private static JPanel bodyPanel = new JPanel();		//Creates body content area 
+	private static JPanel footerPanel = new JPanel();		//Creates footer content area 
+	private static JPanel tablePanel = new JPanel();		//Creates panel for table area
+	private static JPanel controlsPanel = new JPanel();		//Creates panel for controls area
+
+	private static JLabel headerLabel = new JLabel();		//text&image label for header 
+	private static JLabel footerLabel = new JLabel();		//text label for footer
 	private static JLabel controlsTitle = new JLabel("Actions");
 	private static JLabel orderLabel = new JLabel("Order Number");
 	private static JLabel dateLabel = new JLabel("Order Date");
@@ -34,16 +47,15 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 	private static JLabel searchLabel = new JLabel("Search Actions");
 	private static JLabel orderALabel = new JLabel("Order Actions");
 
-	private static ImageIcon logoImg = new ImageIcon("App/assets/img/YagniLogoOnly-50percent.png"); //load logo image  
-	private static ImageIcon searchImg = new ImageIcon("App/assets/img/searchIcon.png"); //image for search
+	private static ImageIcon logoImg = new ImageIcon("App/assets/img/YagniLogoOnly-50percent.png");		//load logo image  
+	private static ImageIcon searchImg = new ImageIcon("App/assets/img/searchIcon.png");		//image for search
 
 	private static JButton loadButton = new JButton("Load Order Data");
 	private static JButton reloadButton = new JButton("Refresh");
-	private static JButton searchButton = new JButton(); //button with searchIcon.png
+	private static JButton searchButton = new JButton();		//button with searchIcon.png
 	private static JButton backButton = new JButton("Back");
 	private static JButton logoutButton = new JButton("Logout");
-	private static JButton editButton = new JButton("Edit Order");
-	private static JButton cancelButton = new JButton("Cancel Order");
+	
 	private static JButton clearButton = new JButton("Clear");
 
 	private static JTextField orderNumberField = new JTextField(20);
@@ -64,15 +76,11 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 			headerLabel.setFont(caveatFont.deriveFont(Font.BOLD, 35f));
 			footerLabel.setFont(caveatFont.deriveFont(16f));
 			controlsTitle.setFont(caveatFont.deriveFont(Font.BOLD, 25f));
-		
-			cancelButton.setFont(caveatFont);
-			editButton.setFont(caveatFont);
 			loadButton.setFont(caveatFont); 
 			reloadButton.setFont(caveatFont);
 			backButton.setFont(caveatFont);
 			logoutButton.setFont(caveatFont);
 			clearButton.setFont(caveatFont);
-
 			orderLabel.setFont(caveatFont);
 			orderALabel.setFont(caveatFont);
 			dateLabel.setFont(caveatFont);
@@ -155,10 +163,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 		controlsPanel.add(orderALabel);
 		controlsPanel.add(clearButton);
 		clearButton.addActionListener(this);
-		controlsPanel.add(editButton);
-		editButton.addActionListener(this);
-		controlsPanel.add(cancelButton);
-		cancelButton.addActionListener(this);
+		
 	
 		/* ------- Tabel Panel & Load/Reload Button ------- */
 		tablePanel.setBounds(310, 0, 570, 520);
@@ -197,19 +202,44 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
 		ordersFrame.add(bodyPanel);
 		ordersFrame.add(footerPanel, BorderLayout.SOUTH);
 
+		 /* ------- MenuBar Content ------- */ 
+		ordersFrame.setJMenuBar(menuReportsBar);		//adding JMenuBar to ordersFrame
+
+		menuReportsBar.add(marketReports);		//adding Market Reports drop-down menu 
+		menuReportsBar.add(financeReports);		//adding Finance Reports drop-down menu
+		menuReportsBar.add(help);               // adding help section
+
+		/* ------- Market Reports Content ------- */
+		marketReports.add(dailyMarket);
+		dailyMarket.addActionListener(this);
+		marketReports.add(weeklyMarket);
+		weeklyMarket.addActionListener(this); 
+		marketReports.add(monthlyMarket);
+		monthlyMarket.addActionListener(this);
+		
+		/* ------- Finace Reports Content ------- */
+		financeReports.add(weeklyFinance);
+		weeklyFinance.addActionListener(this);
+		financeReports.add(quarterlyFinance);
+		quarterlyFinance.addActionListener(this);
+
+		/* ------- Help Content ------- */
+		help.add(about);
+		about.addActionListener(this);
+		 
 		//displays all content to the GUI 
 		ordersFrame.setVisible(true);
 	}
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        //on click of Load button, dsiplay all data from product inventory table 
+        //on click of Load button, display all data from product inventory table 
         if(e.getSource() == loadButton){
             tablePanel.remove(loadButton);
             tablePanel.repaint();
             tablePanel.add(reloadButton);
-            ReadAllOrders read = new ReadAllOrders(ordersTable); // creates a ReadAllOrders object from model/ReadAllOrders.java and passes in the products table
-            read.readAllOrders(linkDB); // calls the readAllOrders method and passes in the database connection
+            ReadAllOrders read = new ReadAllOrders(ordersTable);		// creates a ReadAllOrders object from model/ReadAllOrders.java and passes in the products table
+            read.readAllOrders(linkDB);		// calls the readAllOrders method and passes in the database connection
         }
         else if (e.getSource() == reloadButton){
             refreshOrders();
@@ -241,11 +271,32 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
         else if(e.getSource() == searchButton){
             clearOrdersTable();
             String orderNum = searchField.getText();
-            ReadOneOrder searchObj = new ReadOneOrder(orderNum, ordersTable); // creates a searchObj object from model/ReadOneOrder.java and passes in the products table
-            searchObj.readOneOrder(linkDB); // calls the readOneOrder method and passes in the database connection
+            ReadOneOrder searchObj = new ReadOneOrder(orderNum, ordersTable);		// creates a searchObj object from model/ReadOneOrder.java and passes in the products table
+            searchObj.readOneOrder(linkDB);		// calls the readOneOrder method and passes in the database connection
         }
-        
-    }  
+		else if(e.getSource() == dailyMarket){
+			MarketRepo day = new MarketRepo();
+			day.dayReport(linkDB);		//calls dayReport method from MarketRepo.java and passes in database connection
+		}
+		else if(e.getSource() == weeklyMarket){
+			MarketRepo week = new MarketRepo();
+			week.weekReport(linkDB);		//calls weekReport method from MarketRepo.java and passes in database connection		 
+		}
+		else if(e.getSource() == monthlyMarket){
+			MarketRepo month = new MarketRepo();
+			month.monthReport(linkDB);		//calls monthReport method from MarketRepo.java and passes in database connection
+		}
+		else if(e.getSource() == weeklyFinance){
+			FinanceRepo fin = new FinanceRepo();
+			fin.financeRepo(linkDB);		//calls financeRepo method from FinaceRepo.java and passes in the database connection
+		}
+		else if(e.getSource() == quarterlyFinance){
+			JOptionPane.showMessageDialog(null,"Jesse was here :'(", "Quarterly Finance Report", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if(e.getSource()== about){
+			JOptionPane.showMessageDialog(null, "For Customer Support Call Jesse at 720-277-6916 !","Help", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}  
     //Method to refresh the JTable 
     public void refreshOrders(){
         DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
@@ -258,15 +309,16 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
         DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
         model.setRowCount(0);
     }
-    public void clearTextFields(){
-           
-		productIDField.setText("");
+    //Method that clears all textfields
+	public void clearTextFields(){
+        productIDField.setText("");
 		orderDateField.setText("");
 		productQuantityField.setText("");
 		orderNumberField.setText("");
     }
    
     @Override
+	//this focusGained event clears the gray text from the searchfield when it is clicked
     public void focusGained(FocusEvent e){
         if(e.getSource() == searchField && searchField.getText().equals("Search Order #")){
             searchField.setText("");
@@ -276,6 +328,7 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
     }
 
     @Override
+	//this focusLost event sets the searchfield text to "Search Order #" and sets the text to gray
     public void focusLost(FocusEvent e) {
         if(searchField.getText().isEmpty()){
             searchField.setText("Search Order #");
@@ -285,18 +338,18 @@ public class OrdersGUI implements ActionListener,FocusListener,MouseListener{
     }
         
     @Override
+	//this mouseClicked event allows a user to populate all textfields by clicking a row from the JTable 
     public void mouseClicked(MouseEvent e) {
-       
         DefaultTableModel tmodel=(DefaultTableModel)ordersTable.getModel();
         int selectrowindex=ordersTable.getSelectedRow();
         orderNumberField.setText(tmodel.getValueAt(selectrowindex, 0).toString());
         orderDateField.setText(tmodel.getValueAt(selectrowindex, 1).toString());
         productIDField.setText(tmodel.getValueAt(selectrowindex, 4).toString());
         productQuantityField.setText(tmodel.getValueAt(selectrowindex, 5).toString());
-
     }
     
     @Override
+	//deleting any of these mouseEvents below will cause the MouseEvents to not work properly
     public void mousePressed(java.awt.event.MouseEvent e) {
         // TODO Auto-generated method stub
     }

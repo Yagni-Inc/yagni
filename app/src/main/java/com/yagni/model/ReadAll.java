@@ -7,59 +7,52 @@ import com.yagni.controller.*;
 
 public class ReadAll {
 
-    private static JTable productsTable;
+    private static JTable productsTable; // variable to display returned data in a Jtable
 
-    public ReadAll(JTable productsTableIn){
+    public ReadAll(JTable productsTableIn) {
+        // initialize products table to the products table parameter
         productsTable = productsTableIn;
-    }
+    } // end of constructor
 
-    // readAll method takes a connection object as an argument
-    // readAll creates a table based on the query that will update the JTable for the products table
+    // readAll method to create a Jtable to display all products from SQL query
     public void readAll(DbConnection linkDB) {
-        
-        // catches SQLExecption
         try {
-            
-            Statement statement = linkDB.getConnection().createStatement(); // creates a statment object
+            // Creates a staetment object to execute statements with db connection
+            Statement statement = linkDB.getConnection().createStatement();
 
-            // executes a SQL statment that reads all from the products table
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM yagni_inv_db.product;"); 
- 
-            // creates a DefaultTableModel object
+            // Executes a SQL statment that returns all data from the products table
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM yagni_inv_db.product;");
+
+            // Creates a DefaultTableModel object to map returned data to
             DefaultTableModel tableModel = (DefaultTableModel) productsTable.getModel();
 
             // initialize strings for the data in each field
-            String productId, quantity, wholesaleCost, salePrice, supplierId;
+            String productId;
+            String quantity;
+            String wholesaleCost;
+            String salePrice;
+            String supplierId;
 
-            // Creates a string array that is the size of our number of columns
-            String [] columnName = {"Product ID", "Quantity", "Wholesale Cost", "Sale Price", "Supplier ID"};
-
-            // CAN USE IF WE WANT TO TARGET THE SPECIFIC COLUMN NAMES FROM THE TABLE IN THE DATABASE
-            // Creates a ResultSetMetaData object
-            // ResultSetMetaData rsMetaData = resultSet.getMetaData();
-            // creates an int that is equal to the number columns
-            // int columns = rsMetaData.getColumnCount();
-            // Assosiates the column name with each column
-            // for(int i = 0; i < columns; i++){
-            //     columnName [i] = rsMetaData.getColumnName(i + 1);
-            // }
+            // Creates a string array that is holds the column names for each attribute
+            String[] columnName = { "Product ID", "Quantity", "Wholesale Cost", "Sale Price", "Supplier ID" };
 
             // Setting columns of the table model object to the column name array
             tableModel.setColumnIdentifiers(columnName);
 
-            // updates the JTable object procutsTable with the resultset data
-            while(resultSet.next()){
+            // Adds the result set data to rows in the JTable object procutsTable
+            while (resultSet.next()) {
                 productId = resultSet.getString(1);
                 quantity = resultSet.getString(2);
                 wholesaleCost = resultSet.getString(3);
                 salePrice = resultSet.getString(4);
                 supplierId = resultSet.getString(5);
-                String [] row = {productId, quantity, wholesaleCost, salePrice, supplierId};
+                String[] row = { productId, quantity, wholesaleCost, salePrice, supplierId };
                 tableModel.addRow(row);
             }
         } catch (SQLException e) {
+            // Prints the SQLException error if there is one
             System.out.println(e);
             System.out.println("Oops! An error has occured!");
-        } 
+        }
     }
 }
