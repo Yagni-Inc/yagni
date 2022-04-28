@@ -113,7 +113,6 @@ public class ProcessOne {
         } catch (SQLException e) {
             System.out.println(e);
         }
-
     }
 
     // Inserts into the Customer Information Table
