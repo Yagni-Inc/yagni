@@ -3,6 +3,7 @@ package com.yagni.model;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
 import com.yagni.controller.*;
 
 public class ReadAllOrders {
@@ -16,7 +17,6 @@ public class ReadAllOrders {
     public void readAllOrders(DbConnection linkDB) {
         
         try {
-            
             Statement state = linkDB.getConnection().createStatement(); // creates a statment object
 
             // executes a SQL statment that reads all from the purchase history table
@@ -35,7 +35,7 @@ public class ReadAllOrders {
             tableModel.setColumnIdentifiers(columnName);
 
             // updates the JTable object ordersTable with the result data
-            while(result.next()){
+            while (result.next()) {
                 orderNum = result.getString(1);
                 orderDate = result.getString(2);
                 hashEmail = result.getString(3);
