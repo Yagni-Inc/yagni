@@ -267,7 +267,6 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
 
         // Displays all content to the GUI
         inventoryFrame.setVisible(true);
-
     }// End of constructor
 
     // Event handler for button clicks
@@ -371,7 +370,6 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
 
                 // Refresh products Table
                 refreshProducts();
-
             }
         }
     }
