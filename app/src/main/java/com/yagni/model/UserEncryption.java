@@ -1,11 +1,10 @@
 package com.yagni.model;
 
-//Class name decleration
+//class decleration
 
 public class UserEncryption {
 
-    // method within class delceration
-    // Method takes string value and returns cypered text
+    // method takes string value and returns cypered text
 
     public static String userEncryption(String value) {
 
@@ -15,7 +14,7 @@ public class UserEncryption {
         // Variable declertion
         String hashedVal = "";
 
-        // For loop to parse through string values and alter their ASCII value by set
+        // for loop to parse through string values and alter their ASCII value by set
         // amount
         for (char c1 : charVals) {
 
