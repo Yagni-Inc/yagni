@@ -1,5 +1,4 @@
 package com.yagni.view;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
