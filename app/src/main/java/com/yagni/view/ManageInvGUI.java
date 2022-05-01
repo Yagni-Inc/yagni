@@ -8,85 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import com.yagni.controller.*;
 import com.yagni.model.*;
 
-<<<<<<< HEAD
-public class ManageInvGUI implements ActionListener,FocusListener,MouseListener{
-
-        private static JFrame inventoryFrame = new JFrame("Product Inventory Window");  
-        private static JTable productsTable = new JTable();
-        private static JScrollPane tableScroll = new JScrollPane();
-        private static DbConnection linkDB;
-        
-        private static JPanel headerPanel = new JPanel(); //Creates header content are
-        private static JPanel backPanel = new JPanel(); 
-        private static JPanel logoutPanel = new JPanel();            
-        private static JPanel bodyPanel = new JPanel(); //Creates body content area 
-        private static JPanel footerPanel = new JPanel(); //Creates footer content area 
-        private static JPanel tablePanel = new JPanel(); //Creates panel for table area
-        private static JPanel controlsPanel = new JPanel();            //Creates panel for controls area
-       
-        private static JLabel headerLabel = new JLabel();              //text/image label for header 
-        private static JLabel footerLabel = new JLabel();              //text label for footer
-        private static JLabel controlsTitle = new JLabel("Actions");
-        private static JLabel productIDLabel = new JLabel("Product ID");
-        private static JLabel quantityLabel = new JLabel("Quantity");
-        private static JLabel wholeSaleLabel = new JLabel("Whole Sale Price");
-        private static JLabel salePriceLabel = new JLabel("Sale Price");
-        private static JLabel supplierIDLabel = new JLabel("Supplier ID");
-        private static JLabel productActionsLabel = new JLabel("Product Actions");
-
-        private static ImageIcon logoImg = new ImageIcon("App/assets/img/YagniLogoOnly-50percent.png"); //load logo image  
-        private static ImageIcon searchImg = new ImageIcon("App/assets/img/searchIcon.png"); //image for search
-        private static ImageIcon warningImg = new ImageIcon("App/assets/img/warning.png");
-        
-        private static JButton addButton = new JButton("Add New Product");
-        private static JButton updateButton = new JButton("Update Product");
-        private static JButton deleteButton = new JButton("Delete Product"); 
-        private static JButton loadButton = new JButton("Load Inventory Data");
-        private static JButton reloadButton = new JButton("Refresh");
-        private static JButton searchButton = new JButton(); //button with searchIcon.png
-        private static JButton backButton = new JButton("Back");
-        private static JButton logoutButton = new JButton("Logout");
-        private static JButton clearButton = new JButton("Clear");
-       
-        private static JTextField productIDField = new JTextField(20);
-        private static JTextField quantityField = new JTextField(20);
-        private static JTextField wholeSaleField = new JTextField(20);
-        private static JTextField salePriceField = new JTextField(20);
-        private static JTextField supplierIDField = new JTextField(20);
-        private static JTextField searchField = new JTextField(20);
-        
-        ManageInvGUI(DbConnection linkDBIn){
-            // setting the connection with database
-        	linkDB = linkDBIn;
-
-            // Importing and setting custom font Caveat for all text components 
-            try {
-                File font_file = new File("App/assets/fonts/Caveat-VariableFont_wght.ttf");
-                Font caveatFont = Font.createFont(Font.TRUETYPE_FONT, font_file).deriveFont(20f);
-                GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font_file));
-                headerLabel.setFont(caveatFont.deriveFont(Font.BOLD, 35f));
-                controlsTitle.setFont(caveatFont.deriveFont(Font.BOLD, 25f));
-                addButton.setFont(caveatFont);
-                productIDLabel.setFont(caveatFont);
-                productActionsLabel.setFont(caveatFont);
-                quantityLabel.setFont(caveatFont);
-                wholeSaleLabel.setFont(caveatFont);
-                salePriceLabel.setFont(caveatFont);
-                supplierIDLabel.setFont(caveatFont);
-                updateButton.setFont(caveatFont);
-                deleteButton.setFont(caveatFont);
-                loadButton.setFont(caveatFont);
-                reloadButton.setFont(caveatFont);
-                searchField.setFont(caveatFont);
-                backButton.setFont(caveatFont);
-                logoutButton.setFont(caveatFont);
-                clearButton.setFont(caveatFont);
-                footerLabel.setFont(caveatFont.deriveFont(16f));	    
-            } catch (IOException | FontFormatException e) {
-                e.printStackTrace();
-            }
-=======
 public class ManageInvGUI implements ActionListener, FocusListener, MouseListener {
 
     private static JFrame inventoryFrame; // Jframe to display all elements
@@ -219,7 +140,6 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
->>>>>>> 76074fc44c2fbeda4af92bbaf5208e17af0d68f5
 
         /* ------- Header Content ------- */
         // Set default size and layout of body panel
