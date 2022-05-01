@@ -68,7 +68,7 @@ public class Update {
             System.out.println("\nSuccessfully updated product " + updateID + " in the inventory.");
             System.out.println("-----------------------------------------------------------------------------------");
         } catch (SQLException e) {
-            System.out.println("Oops! An error has occured.");
+            System.out.println("Oops! An error has occurred.");
             System.out.println(e);
         }
     }
