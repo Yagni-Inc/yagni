@@ -16,17 +16,16 @@ public class ReadAllOrders {
     public void readAllOrders(DbConnection linkDB) {
         
         try {
-            
-            Statement state = linkDB.getConnection().createStatement(); // creates a statment object
+            // creates a statement object
+	    	Statement state = linkDB.getConnection().createStatement(); 
 
-            // executes a SQL statment that reads all from the purchase history table
+            // executes a SQL statement that reads all from the purchase history table
             ResultSet result = state.executeQuery("SELECT * FROM yagni_inv_db.purchase_history;"); 
  
             // creates a DefaultTableModel object
             DefaultTableModel tableModel = (DefaultTableModel) ordersTable.getModel();
 
-
-            // initialize strings for the data in each field
+	   	    // initialize strings for the data in each field
             String orderNum, orderDate, hashEmail, location, productID, productQuantity;
 
             // Creates a string array that is the size of our number of columns
@@ -35,7 +34,7 @@ public class ReadAllOrders {
             tableModel.setColumnIdentifiers(columnName);
 
             // updates the JTable object ordersTable with the result data
-            while(result.next()){
+            while (result.next()) {
                 orderNum = result.getString(1);
                 orderDate = result.getString(2);
                 hashEmail = result.getString(3);
@@ -45,10 +44,9 @@ public class ReadAllOrders {
                 String [] row = {orderNum, orderDate, hashEmail, location, productID, productQuantity};
                 tableModel.addRow(row);
             }
-			
-        } catch (SQLException e) {
+	} catch (SQLException e) {
             System.out.println(e);
-            System.out.println("Oops! An error has occured!");
+            System.out.println("Oops! An error has occurred!");
         } 
     }
 }

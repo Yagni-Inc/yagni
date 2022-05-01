@@ -13,7 +13,8 @@ public class TestMain {
     public static void main(String[] args) throws IOException {
 
         Console cnsl= System.console();
-        Scanner userInput = new Scanner(System.in); // global userInput scanner for all userInput
+	    // global userInput scanner for all userInput
+        Scanner userInput = new Scanner(System.in); 
         String userName, strPassword;
         char [] password;
 
@@ -28,7 +29,6 @@ public class TestMain {
         
         boolean run = true;
         while (run) {
-
             int selection;
             System.out.println("-------------------------------------");
             System.out.println("Choose 1 to Create");
@@ -41,7 +41,6 @@ public class TestMain {
 
             switch (selection) {
                 case 1:
-
                     /** prompt user for product id, index 0 **/
                     System.out.println("-----------------------------------------------------------------------------------");
                     System.out.println("You have chosen to create a new product.\n");
@@ -87,7 +86,7 @@ public class TestMain {
                         readProdID = userInput.nextLine();
                         /** if product ID exists, call readOne method. if not, throw exception. **/
                         TestMain.readOne(readProdID, connection);
-                    } else{
+                    } else {
                         System.out.println("Oops! You have entered an invalid choice!");
                     }
                     System.out.println("-----------------------------------------------------------------------------------");
@@ -201,12 +200,11 @@ public class TestMain {
     /** read all or one product? **/
     /** if all, loop through the reslut set and print each row **/
     public static void readAll(Connection connection) {
-
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM yagni_inv_db.product;");
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 //System.out.println(resultSet.getString(1), "%-15s", resultSet.getString(2), "%-15s", resultSet.getString(3), "%-15s", resultSet.getString(4), "%-15s", resultSet.getString(5), "\n");
                 System.out.printf("%-15s%-15s%-15s%-15s%s\n",resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5));
             }
@@ -248,7 +246,7 @@ public class TestMain {
 		String sql_statement = "UPDATE `yagni_inv_db`.`product` SET ";
 		int count = 0;
 
-		if (updateQuant != null){
+		if (updateQuant != null) {
 			sql_statement = sql_statement + "`quanity` = '" + updateQuant + "'";
 			count ++;
 		}
@@ -307,7 +305,7 @@ public class TestMain {
 
     /**Connection to database method**/
     /**Returns a Connection object**/
-    public static Connection connect(String userName, String password){
+    public static Connection connect(String userName, String password) {
         
         //Try block catches a class not found execption
         try {
