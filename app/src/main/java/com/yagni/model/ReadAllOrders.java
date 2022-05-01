@@ -3,7 +3,6 @@ package com.yagni.model;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import com.yagni.controller.*;
 
 public class ReadAllOrders {
@@ -17,7 +16,8 @@ public class ReadAllOrders {
     public void readAllOrders(DbConnection linkDB) {
         
         try {
-            Statement state = linkDB.getConnection().createStatement(); // creates a statment object
+            // creates a statement object
+	    Statement state = linkDB.getConnection().createStatement(); 
 
             // executes a SQL statment that reads all from the purchase history table
             ResultSet result = state.executeQuery("SELECT * FROM yagni_inv_db.purchase_history;"); 
@@ -25,8 +25,7 @@ public class ReadAllOrders {
             // creates a DefaultTableModel object
             DefaultTableModel tableModel = (DefaultTableModel) ordersTable.getModel();
 
-
-            // initialize strings for the data in each field
+	    // initialize strings for the data in each field
             String orderNum, orderDate, hashEmail, location, productID, productQuantity;
 
             // Creates a string array that is the size of our number of columns
@@ -45,8 +44,7 @@ public class ReadAllOrders {
                 String [] row = {orderNum, orderDate, hashEmail, location, productID, productQuantity};
                 tableModel.addRow(row);
             }
-			
-        } catch (SQLException e) {
+	} catch (SQLException e) {
             System.out.println(e);
             System.out.println("Oops! An error has occured!");
         } 
