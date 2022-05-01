@@ -1,4 +1,5 @@
 package com.yagni.view;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -7,21 +8,30 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-
 public class HomeGUI implements ActionListener {
-
-    JFrame frame = new JFrame("Yagni Inc. Ordering and Inventory Management");      // Crates Frame & Title
-    JButton employeeButton = new JButton("Employee Login");     // Button to launch Employee Login
-    JButton customerButton = new JButton("Customer Ordering");      // Button to launch Customer Web Page
-    JPanel headerPanel = new JPanel();      // Creates panel for header content
-    JPanel bodyPanel = new JPanel();        // Creates panel for body content
-    JPanel buttonPanel = new JPanel();      // Creates inner panel for buttons in the body
-    JPanel footerPanel = new JPanel();      // Creates panel for footer content
-    JLabel headerLabel = new JLabel();      // text/image label for header
-    JLabel footerLabel = new JLabel();      // text label for Yagni Inc. Copyright info
-    ImageIcon logoImg = new ImageIcon("App/assets/img/YAGNI_logo.png");     // loads logo image
+    
+    JFrame frame; // Crates Frame & Title
+    JButton employeeButton; // Button to launch Employee Login
+    JButton customerButton; // Button to launch Customer Web Page
+    JPanel headerPanel; // Creates panel for header content
+    JPanel bodyPanel; // Creates panel for body content
+    JPanel buttonPanel; // Creates inner panel for buttons in the body
+    JPanel footerPanel; // Creates panel for footer content
+    JLabel headerLabel; // text/image label for header
+    JLabel footerLabel; // text label for Yagni Inc. Copyright info
+    ImageIcon logoImg; // loads logo image
 
     HomeGUI() {
+        frame = new JFrame("Yagni Inc. Ordering and Inventory Management");
+        employeeButton = new JButton("Employee Login");
+        customerButton = new JButton("Customer Ordering");
+        headerPanel = new JPanel();
+        bodyPanel = new JPanel();
+        buttonPanel = new JPanel();
+        footerPanel = new JPanel();
+        headerLabel = new JLabel();
+        footerLabel = new JLabel();
+        logoImg = new ImageIcon("App/assets/img/YAGNI_logo.png");
 
         // Importing and setting custom font Caveat for all text components
         try {
@@ -36,7 +46,6 @@ public class HomeGUI implements ActionListener {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-
         /****** Header Content ******/
         // set default size and layout of body panel
         headerPanel.setPreferredSize(new Dimension(100, 250));
@@ -74,7 +83,7 @@ public class HomeGUI implements ActionListener {
         buttonPanel.add(customerButton);
 
         /****** Footer Content ******/
-        // set defualts and text of footer panel
+        // set defaults and text of footer panel
         footerPanel.setPreferredSize(new Dimension(100, 30));
         footerPanel.setBackground(Color.DARK_GRAY);
         footerLabel.setText("Created by Yagni Inc. © 2022");
@@ -97,9 +106,7 @@ public class HomeGUI implements ActionListener {
 
         // display all content to the GUI
         frame.setVisible(true);
-
     }
-
     // Button click method to navigate the user to the Employee Login screen or the
     // Customer Ordering Web page
     @Override
@@ -114,6 +121,5 @@ public class HomeGUI implements ActionListener {
                 e1.printStackTrace();
             }
         }
-
     }
 }

@@ -16,12 +16,12 @@ public class ManageInvGUI implements ActionListener,FocusListener,MouseListener{
         private static JScrollPane tableScroll = new JScrollPane();
         private static DbConnection linkDB;
         
-        private static JPanel headerPanel = new JPanel();               //Creates header content are
+        private static JPanel headerPanel = new JPanel(); //Creates header content are
         private static JPanel backPanel = new JPanel(); 
         private static JPanel logoutPanel = new JPanel();            
-        private static JPanel bodyPanel = new JPanel();                //Creates body content area 
-        private static JPanel footerPanel = new JPanel();              //Creates footer content area 
-        private static JPanel tablePanel = new JPanel();               //Creates panel for table area
+        private static JPanel bodyPanel = new JPanel(); //Creates body content area 
+        private static JPanel footerPanel = new JPanel(); //Creates footer content area 
+        private static JPanel tablePanel = new JPanel(); //Creates panel for table area
         private static JPanel controlsPanel = new JPanel();            //Creates panel for controls area
        
         private static JLabel headerLabel = new JLabel();              //text/image label for header 
@@ -56,7 +56,6 @@ public class ManageInvGUI implements ActionListener,FocusListener,MouseListener{
         private static JTextField searchField = new JTextField(20);
         
         ManageInvGUI(DbConnection linkDBIn){
-            
             // setting the connection with database
         	linkDB = linkDBIn;
 
