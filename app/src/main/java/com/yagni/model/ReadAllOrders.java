@@ -17,7 +17,7 @@ public class ReadAllOrders {
         
         try {
             // creates a statement object
-	    Statement state = linkDB.getConnection().createStatement(); 
+	        Statement state = linkDB.getConnection().createStatement(); 
 
             // executes a SQL statment that reads all from the purchase history table
             ResultSet result = state.executeQuery("SELECT * FROM yagni_inv_db.purchase_history;"); 
@@ -25,7 +25,7 @@ public class ReadAllOrders {
             // creates a DefaultTableModel object
             DefaultTableModel tableModel = (DefaultTableModel) ordersTable.getModel();
 
-	    // initialize strings for the data in each field
+	        // initialize strings for the data in each field
             String orderNum, orderDate, hashEmail, location, productID, productQuantity;
 
             // Creates a string array that is the size of our number of columns
