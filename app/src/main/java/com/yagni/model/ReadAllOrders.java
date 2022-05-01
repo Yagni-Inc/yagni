@@ -19,7 +19,7 @@ public class ReadAllOrders {
             // creates a statement object
 	    	Statement state = linkDB.getConnection().createStatement(); 
 
-            // executes a SQL statment that reads all from the purchase history table
+            // executes a SQL statement that reads all from the purchase history table
             ResultSet result = state.executeQuery("SELECT * FROM yagni_inv_db.purchase_history;"); 
  
             // creates a DefaultTableModel object
@@ -46,7 +46,7 @@ public class ReadAllOrders {
             }
 	} catch (SQLException e) {
             System.out.println(e);
-            System.out.println("Oops! An error has occured!");
+            System.out.println("Oops! An error has occurred!");
         } 
     }
 }
