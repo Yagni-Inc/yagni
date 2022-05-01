@@ -16,7 +16,7 @@ public class Update {
         updateSupplierID = supplierIdIn;
     }
 
-	/** UPDATE METHOD **/
+	//UPDATE METHOD
     public void update(DbConnection linkDB) {
 
 		//example sql statement to update a product:
@@ -24,6 +24,7 @@ public class Update {
 
 		//start the sql statement
 		String sql_statement = "UPDATE `yagni_inv_db`.`product` SET ";
+		
 		//initialize a counter to help with comma placement
 		int count = 0;
 
@@ -67,7 +68,7 @@ public class Update {
             System.out.println("\nSuccessfully updated product " + updateID + " in the inventory.");
             System.out.println("-----------------------------------------------------------------------------------");
         } catch (SQLException e) {
-            System.out.println("Oops! An error has occured.");
+            System.out.println("Oops! An error has occurred.");
             System.out.println(e);
         }
     }
