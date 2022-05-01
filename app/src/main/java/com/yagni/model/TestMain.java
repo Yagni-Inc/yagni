@@ -13,7 +13,8 @@ public class TestMain {
     public static void main(String[] args) throws IOException {
 
         Console cnsl= System.console();
-        Scanner userInput = new Scanner(System.in); // global userInput scanner for all userInput
+	    // global userInput scanner for all userInput
+        Scanner userInput = new Scanner(System.in); 
         String userName, strPassword;
         char [] password;
 
