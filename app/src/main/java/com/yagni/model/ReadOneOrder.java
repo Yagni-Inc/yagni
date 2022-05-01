@@ -17,7 +17,7 @@ public class ReadOneOrder {
 	
     public void readOneOrder(DbConnection linkDb) {
         try {
-            // Creating a statement object to pass a SQL statment to the database
+            // Creating a statement object to pass a SQL statement to the database
             Statement state = linkDb.getConnection().createStatement();
 
             // Calling the executeQuery method to execute a statement to the database
