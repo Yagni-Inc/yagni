@@ -15,7 +15,7 @@ public class Update {
 	// Constructor
 	public Update(String productIdIn, String quantityIn, String wholeSaleIn, String salePriceIn, String supplierIdIn) {
 
-		// String variable inititalization
+		// String variable initialization
 		updateID = productIdIn;
 		updateQuant = quantityIn;
 		updateWholesale = wholeSaleIn;

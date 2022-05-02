@@ -4,30 +4,59 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
-
 import com.yagni.controller.*;
 
 public class LoginGUI implements ActionListener {
-    
-    private static JLabel userLabel = new JLabel("User");
+
+    // Variable Declarations
+    private static JFrame frame; 
+
+    private static ImageIcon logoImg;
+   
     private static JTextField userText;
-    private static JLabel passwordLabel = new JLabel("Password");
+    
     private static JPasswordField passwordText;
-    private static JButton button = new JButton("Login");
-    private static JLabel success = new JLabel();
-    private static JButton backButton = new JButton("Back");
+    
+    // JLabel Declarations
+    private static JLabel userLabel;
+    private static JLabel passwordLabel;
+    private static JLabel success;
+    private static JLabel headerLabel;
+    private static JLabel footerLabel;
+    
+    // JPanel Declarations
+    private static JPanel headerPanel;
+    private static JPanel bodyPanel;
+    private static JPanel loginPanel;
+    private static JPanel footerPanel;
+   
+    // JButton Declarations
+    private static JButton button;
+    private static JButton backButton;
 
-    JFrame frame = new JFrame("Employee Login");    //Creates frame and title 
-    JPanel headerPanel = new JPanel();              //Creates header content area
-    JPanel bodyPanel = new JPanel();                //Creates body content area 
-    JPanel loginPanel = new JPanel();               //Creates inner body panel for login text fields
-    JPanel footerPanel = new JPanel();              //Creates footer content area 
-    JLabel headerLabel = new JLabel();              //text/image label for header 
-    JLabel footerLabel = new JLabel();              //text label for footer
-    ImageIcon logoImg = new ImageIcon("App/assets/img/YagniLogoOnly.png"); //load logo image  
+    LoginGUI() {
 
-    LoginGUI(){
+        // Variable Initialization
+        frame = new JFrame("Employee Login"); //Creates frame and title
+        logoImg = new ImageIcon("App/assets/img/YagniLogoOnly.png"); // load logo image
 
+        // JLabel Initialization
+        headerLabel = new JLabel(); // text/image label for header 
+        footerLabel = new JLabel(); // text label for footer
+        userLabel = new JLabel("User");
+        passwordLabel = new JLabel("Password");
+        success = new JLabel();
+        
+        // JPanel Initialization
+        headerPanel = new JPanel(); // Creates header content area
+        bodyPanel = new JPanel(); // Creates body content area 
+        loginPanel = new JPanel(); // Creates inner body panel for login text fields
+        footerPanel = new JPanel(); // Creates footer content area 
+
+        // JButton Initialization 
+        button = new JButton("Login");
+        backButton = new JButton("Back");
+        
         // Importing and setting custom font Caveat for all text components 
         try {
             File font_file = new File("App/assets/fonts/Caveat-VariableFont_wght.ttf");
@@ -46,18 +75,18 @@ public class LoginGUI implements ActionListener {
         } 
         
         /* ------- Header Content ------- */ 
-        //set default size and layout of body panel 
+        // set default size and layout of body panel 
         headerPanel.setPreferredSize(new Dimension(100, 250));
         headerPanel.setBackground(Color.LIGHT_GRAY);
 
-        //set text and image alignment in header
+        // set text and image alignment in header
         headerLabel.setIcon(logoImg);
         headerLabel.setIconTextGap(20);
         headerLabel.setText("Yagni Inc. Employee Login ");
         headerLabel.setVerticalTextPosition(JLabel.CENTER);
         headerLabel.setHorizontalTextPosition(JLabel.RIGHT);
 
-        //add header label to header panel 
+        // add header label to header panel 
         headerPanel.add(headerLabel);
 
         /*-------Back Button-------*/
@@ -67,9 +96,8 @@ public class LoginGUI implements ActionListener {
 		backButton.setHorizontalTextPosition(JLabel.CENTER);
 		backButton.setVerticalTextPosition(JLabel.CENTER);
         
-       
         /* ------- Body Content ------- */
-         //set default size and layout of body panel and inner login panel 
+        // set default size and layout of body panel and inner login panel 
         bodyPanel.setPreferredSize(new Dimension(100,100));
         bodyPanel.setBackground(Color.LIGHT_GRAY);
         loginPanel.setPreferredSize(new Dimension(400, 350));
@@ -82,7 +110,7 @@ public class LoginGUI implements ActionListener {
         loginPanel.add(userLabel);
         loginPanel.add(userText);
 
-        //Password Text and Text Field 
+        // Password Text and Text Field 
         passwordText = new JPasswordField();
         passwordText.setPreferredSize(new Dimension(250, 40));
         loginPanel.add(passwordLabel);
@@ -96,32 +124,29 @@ public class LoginGUI implements ActionListener {
         loginPanel.add(success);
 
         /* ------- Footer Content ------- */
-        //set defualts and text of footer panel
+        // set defaults and text of footer panel
         footerPanel.setPreferredSize(new Dimension(100, 30));
         footerPanel.setBackground(Color.DARK_GRAY);
         footerLabel.setText("Created by Yagni Inc. © 2022 ");
         footerLabel.setForeground(Color.WHITE);
 
-         //add footer text to footer panel 
+        // add footer text to footer panel 
         footerPanel.add(footerLabel);
         
-
         /* ------- Frame Content ------- */
-        //set default size. layout and style to the frame 
+        // set default size. layout and style to the frame 
         frame.setSize(900,700);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);        //Dispose out of this GUI application only if needed, program will continue to run.
-        frame.setResizable(false); //this disable the resize features of the frame to the user
-        //add the header, body and footer panels to the frame 
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Dispose out of this GUI application only if needed, program will continue to run.
+        frame.setResizable(false); // this disable the resize features of the frame to the user
+        // add the header, body and footer panels to the frame 
         frame.add(headerPanel, BorderLayout.NORTH);
         frame.add(bodyPanel, BorderLayout.CENTER);
         frame.add(footerPanel, BorderLayout.SOUTH);
 
-        //display all content to the GUI 
+        // display all content to the GUI 
         frame.setVisible(true);
-
-   
-        
     }
+
 	//Button click method 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -132,16 +157,16 @@ public class LoginGUI implements ActionListener {
 			System.out.println(linkDB);
 			success.setText("");
 			
-			//if the login button is clicked and the user name and password are correct then open the EmployeeGUI; display login error otherwise. 
+		// if the login button is clicked and the user name and password are correct 
+        // then open the EmployeeGUI; display login error otherwise. 
 		if (e.getSource() == button && linkDB.getConnection() != null) {
-			
 			System.out.println("Login Successful!");
 			System.out.println("---------------------------------------");
 			frame.dispose();
 			new EmployeeGUI(linkDB); 
 		
 		} else {
-			success.setText("Invalid credentials!  Please Try Again. ");
+			success.setText("Invalid credentials! Please Try Again. ");
 			success.setForeground(Color.RED); 	
 		}
 
