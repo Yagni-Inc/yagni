@@ -1,24 +1,9 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-
-import saveData from './SaveData';
-import emailValidator from './EmailValidator';
 
 const Styles = styled.div`
 	// background: lavender;
 	padding: 20px;
-
-	h1 {
-		border-bottom: 1px solid white;
-		color: #3d3d3d;
-
-		font-size: 20px;
-		font-weight: 600;
-		line-height: 24px;
-		padding: 10px;
-		text-align: center;
-	}
 
 	form {
 		background: white;
