@@ -38,11 +38,11 @@ public class MarketRepo {
             // 3rd "most popular order"
             thirdProduct = result.getString(1);
             result = state.executeQuery("SELECT (SELECT sum(product_quanity) " 
-            + "FROM purchase_history) * product.Sale_cost AS 'totalSpent', customer_email " 
-            + "FROM product RIGHT JOIN purchase_history ON product.Sale_cost = purchase_history.product_quanity " 
-            + "LEFT JOIN  yagni_inv_db.customer_information ON purchase_history.hashed_email = customer_information.hashed_email " 
-            + "WHERE  order_date > date_add(curdate(), INTERVAL - 1 DAY) AND order_date <= curdate() group by customer_email " 
-            + "ORDER BY totalSpent DESC LIMIT 3; ");
+                    + "FROM purchase_history) * product.Sale_cost AS 'totalSpent', customer_email " 
+                    + "FROM product RIGHT JOIN purchase_history ON product.Sale_cost = purchase_history.product_quanity " 
+                    + "LEFT JOIN  yagni_inv_db.customer_information ON purchase_history.hashed_email = customer_information.hashed_email " 
+                    + "WHERE  order_date > date_add(curdate(), INTERVAL - 1 DAY) AND order_date <= curdate() group by customer_email " 
+                    + "ORDER BY totalSpent DESC LIMIT 3; ");
             result.next();
 
             // 1st "most popular customer"
