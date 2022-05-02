@@ -142,7 +142,7 @@ public class EmployeeGUI implements ActionListener {
 
 		/* ------- Frame Content ------- */
 		// Exit out of application when closing the window
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		// Set default size, layout and style to the frame
 		frame.setSize(900, 700);
