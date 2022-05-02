@@ -23,11 +23,9 @@ public class MarketRepo {
         try {
             Statement state = linkDb.getConnection().createStatement();
             /******** FOR DAILY REPORT ********/
-            ResultSet result = state.executeQuery(
-                    "SELECT product_id, sum(product_quanity) AS 'sum'" 
-                    + "FROM yagni_inv_db.purchase_history WHERE order_date > DATE_ADD(curdate(),INTERVAL -1 DAY)"
-                    + "AND order_date <= curdate() " 
-                    + "GROUP BY product_id ORDER BY sum(product_quanity) DESC LIMIT 3;");
+            ResultSet result = state.executeQuery("SELECT product_id, sum(product_quanity) AS 'sum' " 
+                    + "FROM yagni_inv_db.purchase_history WHERE order_date > DATE_ADD(curdate(),INTERVAL -1 DAY) " 
+                    + "AND order_date <= curdate() GROUP BY product_id ORDER BY sum(product_quanity) DESC LIMIT 3; ");
             result.next();
             // 1st "most popular order"
             firstProduct = result.getString(1); 
@@ -39,13 +37,12 @@ public class MarketRepo {
 
             // 3rd "most popular order"
             thirdProduct = result.getString(1);
-            result = state.executeQuery(
-                    "SELECT (SELECT sum(product_quanity)" 
-                    + "FROM purchase_history) * product.Sale_cost AS 'totalSpent', customer_email " 
-                    + "FROM product RIGHT JOIN purchase_history ON product.Sale_cost = purchase_history.product_quanity " 
-                    + "LEFT JOIN  yagni_inv_db.customer_information ON purchase_history.hashed_email = customer_information.hashed_email " 
-                    + "WHERE  order_date > date_add(curdate(), INTERVAL - 1 DAY) AND order_date <= curdate() group by customer_email"
-                    + "ORDER BY totalSpent DESC LIMIT 3;");
+            result = state.executeQuery("SELECT (SELECT sum(product_quanity) " 
+            + "FROM purchase_history) * product.Sale_cost AS 'totalSpent', customer_email " 
+            + "FROM product RIGHT JOIN purchase_history ON product.Sale_cost = purchase_history.product_quanity " 
+            + "LEFT JOIN  yagni_inv_db.customer_information ON purchase_history.hashed_email = customer_information.hashed_email " 
+            + "WHERE  order_date > date_add(curdate(), INTERVAL - 1 DAY) AND order_date <= curdate() group by customer_email " 
+            + "ORDER BY totalSpent DESC LIMIT 3; ");
             result.next();
 
             // 1st "most popular customer"
@@ -79,10 +76,9 @@ public class MarketRepo {
         try {
             Statement state = linkDb.getConnection().createStatement();
             /******** FOR WEEKLY REPORT ********/
-            ResultSet result = state.executeQuery(
-                    "SELECT product_id, sum(product_quanity) AS 'sum'" 
-                    + "FROM yagni_inv_db.purchase_history WHERE order_date > DATE_ADD(curdate(),INTERVAL -1 WEEK)" 
-                    + "AND order_date <= curdate() GROUP BY product_id ORDER BY sum(product_quanity) DESC LIMIT 3;");
+            ResultSet result = state.executeQuery("SELECT product_id, sum(product_quanity) AS 'sum' " 
+                    + "FROM yagni_inv_db.purchase_history WHERE order_date > DATE_ADD(curdate(),INTERVAL -1 WEEK) " 
+                    + "AND order_date <= curdate() GROUP BY product_id ORDER BY sum(product_quanity) DESC LIMIT 3; ");
             result.next();
     
             // 1st "Most popular order"
@@ -95,13 +91,12 @@ public class MarketRepo {
 
             // 3rd "most popular order"
             thirdProduct = result.getString(1); 
-            result = state.executeQuery(
-                    "SELECT (SELECT sum(product_quanity)" 
-                    + "FROM purchase_history) * product.Sale_cost AS 'totalSpent', customer_email" 
-                    + "FROM product RIGHT JOIN purchase_history ON product.Sale_cost = purchase_history.product_quanity"
-                    + "LEFT JOIN  yagni_inv_db.customer_information ON purchase_history.hashed_email = customer_information.hashed_email" 
-                    + "WHERE  order_date > date_add(curdate(), INTERVAL - 1 WEEK) AND order_date <= curdate() group by customer_email"
-                    + "ORDER BY totalSpent DESC LIMIT 3;");
+            result = state.executeQuery("SELECT (SELECT sum(product_quanity)" 
+                    + "FROM purchase_history) * product.Sale_cost AS 'totalSpent', customer_email " 
+                    + "FROM product RIGHT JOIN purchase_history ON product.Sale_cost = purchase_history.product_quanity "
+                    + "LEFT JOIN  yagni_inv_db.customer_information ON purchase_history.hashed_email = customer_information.hashed_email " 
+                    + "WHERE  order_date > date_add(curdate(), INTERVAL - 1 WEEK) AND order_date <= curdate() group by customer_email "
+                    + "ORDER BY totalSpent DESC LIMIT 3; ");
             result.next();
             // 1st "most popular customer"
             firstCustomer = result.getString(2); 
@@ -135,11 +130,10 @@ public class MarketRepo {
         try {
             Statement state = linkDb.getConnection().createStatement();
             /******** FOR MONTHLY REPORT ********/
-            ResultSet result = state.executeQuery(
-                    "SELECT product_id, sum(product_quanity) AS 'sum'" 
-                    + "FROM yagni_inv_db.purchase_history WHERE order_date >" 
-                    + "DATE_ADD(curdate(),INTERVAL -1 MONTH) AND order_date <= curdate() GROUP BY product_id"
-                    + "ORDER BY sum(product_quanity) DESC LIMIT 3;");
+            ResultSet result = state.executeQuery("SELECT product_id, sum(product_quanity) AS 'sum' " 
+                    + "FROM yagni_inv_db.purchase_history WHERE order_date > " 
+                    + "DATE_ADD(curdate(),INTERVAL -1 MONTH) AND order_date <= curdate() GROUP BY product_id "
+                    + "ORDER BY sum(product_quanity) DESC LIMIT 3; ");
             result.next();
 
             // 1st "Most popular order"
@@ -152,13 +146,12 @@ public class MarketRepo {
 
             // 3rd "most popular order"
             thirdProduct = result.getString(1); 
-            result = state.executeQuery(
-                    "SELECT (SELECT sum(product_quanity)"
-                    + "FROM purchase_history) * product.Sale_cost AS 'totalSpent', customer_email"
-                    + "FROM product RIGHT JOIN purchase_history ON product.Sale_cost = purchase_history.product_quanity"
-                    + "LEFT JOIN  yagni_inv_db.customer_information ON purchase_history.hashed_email = customer_information.hashed_email" 
-                    + " WHERE  order_date > date_add(curdate(), INTERVAL - 1 MONTH) AND order_date <= curdate() group by customer_email"
-                    + "ORDER BY totalSpent DESC LIMIT 3;");
+            result = state.executeQuery("SELECT (SELECT sum(product_quanity) "
+                    + "FROM purchase_history) * product.Sale_cost AS 'totalSpent', customer_email "
+                    + "FROM product RIGHT JOIN purchase_history ON product.Sale_cost = purchase_history.product_quanity "
+                    + "LEFT JOIN  yagni_inv_db.customer_information ON purchase_history.hashed_email = customer_information.hashed_email " 
+                    + "WHERE  order_date > date_add(curdate(), INTERVAL - 1 MONTH) AND order_date <= curdate() group by customer_email "
+                    + "ORDER BY totalSpent DESC LIMIT 3; ");
             result.next();
 
             // 1st "most popular customer"
