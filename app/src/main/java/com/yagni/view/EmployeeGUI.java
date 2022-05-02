@@ -131,7 +131,7 @@ public class EmployeeGUI implements ActionListener {
 		buttonPanel.add(orderButton);
 
 		/* ------- Footer Content ------- */
-		// Set defualts and text of footer panel
+		// Set defaults and text of footer panel
 		footerPanel.setPreferredSize(new Dimension(100, 30));
 		footerPanel.setBackground(Color.DARK_GRAY);
 		footerLabel.setText("Created by Yagni Inc. © 2022");
