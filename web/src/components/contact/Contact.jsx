@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
@@ -40,10 +40,10 @@ const Styles = styled.div`
 	}
 
 	label {
-		color: #3d3d3d;
+		color: #3f3f3f;
 		display: block;
 		font-family: sans-serif;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 500;
 		margin-bottom: 5px;
 	}
@@ -54,34 +54,55 @@ const Styles = styled.div`
 		font-family: sans-serif;
 		font-size: 14px;
 		margin: 20px 0px;
+		height: 40px;
+	}
+
+	.textBox {
+		width: 700px;
 	}
 `;
 
 const Contact = () => {
-	const { contact, handleSubmit } = useForm();
+	const [status, setStatus] = useState('Submit');
+
+	const handleSubmit = async e => {
+		e.preventDefault();
+		setStatus('Sending...');
+		const { name, email, message } = e.target.elements;
+		let details = {
+			name: name.value,
+			email: email.value,
+			message: message.value,
+		};
+		let response = await fetch('http://localhost:5000/contact', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8',
+			},
+			body: JSON.stringify(details),
+		});
+		setStatus('Submit');
+		let result = await response.json();
+		alert(result.status);
+	};
 
 	return (
-		<form
-			onSubmit={handleSubmit((data) => saveData(data))}
-			className='text-start'
-		>
-			<h1>Contact Us</h1>
-			<label>First name:</label>
-			<input name='First Name ' ref={contact} />
-
-			<label className='mt-3'>Last name:</label>
-			<input name='Last Name' ref={contact} />
-
-			<label className='mt-3'>Email:</label>
-			<input name='Email' ref={contact} />
-
-			<label className='mt-3'>Phone number:</label>
-			<input name='phone' ref={contact} />
-
-			<label className='mt-3'>Reason for contact:</label>
-			<input name='contactReason' ref={contact} />
-
-			<input type='submit' className='submitButton mt-5' />
+		<form onSubmit={handleSubmit} className='text-start'>
+			<div>
+				<label htmlFor='name'>Name:</label>
+				<input type='text' id='name' required />
+			</div>
+			<div>
+				<label htmlFor='email'>Email:</label>
+				<input type='email' id='email' required />
+			</div>
+			<div>
+				<label htmlFor='message'>Message:</label>
+				<textarea id='message' className='textBox' required />
+			</div>
+			<button type='submit' className='submitButton'>
+				{status}
+			</button>
 		</form>
 	);
 };
