@@ -1,19 +1,17 @@
 {
   "files": {
-    "main.css": "/yagni/static/css/main.28d2dd17.css",
-    "main.js": "/yagni/static/js/main.24a47f57.js",
-    "static/js/787.0bfccc2a.chunk.js": "/yagni/static/js/787.0bfccc2a.chunk.js",
+    "main.css": "/yagni/static/css/main.42887cf1.css",
+    "main.js": "/yagni/static/js/main.72cadd4f.js",
     "static/media/landing-bkg2.png": "/yagni/static/media/landing-bkg2.79fb5fc2e64ec321a148.png",
     "static/media/ecommerce.png": "/yagni/static/media/ecommerce.2e8a756cb56c29e2089b.png",
     "static/media/product.png": "/yagni/static/media/product.58be4a8a0f6250fb470b.png",
     "static/media/yagni-inc-light.png": "/yagni/static/media/yagni-inc-light.72b0e61b2bc135a8dbed.png",
     "index.html": "/yagni/index.html",
-    "main.28d2dd17.css.map": "/yagni/static/css/main.28d2dd17.css.map",
-    "main.24a47f57.js.map": "/yagni/static/js/main.24a47f57.js.map",
-    "787.0bfccc2a.chunk.js.map": "/yagni/static/js/787.0bfccc2a.chunk.js.map"
+    "main.42887cf1.css.map": "/yagni/static/css/main.42887cf1.css.map",
+    "main.72cadd4f.js.map": "/yagni/static/js/main.72cadd4f.js.map"
   },
   "entrypoints": [
-    "static/css/main.28d2dd17.css",
-    "static/js/main.24a47f57.js"
+    "static/css/main.42887cf1.css",
+    "static/js/main.72cadd4f.js"
   ]
 }
