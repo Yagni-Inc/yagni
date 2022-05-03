@@ -22,7 +22,7 @@ const NavBar = ({ size }) => {
 					</HashLink>
 				</li>
 				<li className='nav-item'>
-					<Link className='navbar-brand' to='/'>
+					<Link className='navbar-brand' to='/yagni/'>
 						<img src={logo} alt='Yagni Inc.' height='100' />
 					</Link>
 				</li>
