@@ -11,9 +11,13 @@ import com.yagni.model.*;
 public class OrdersGUI implements ActionListener, FocusListener, MouseListener {
 
 	private static JFrame ordersFrame; // JFrame that holds all elements
+	
 	private static JTable ordersTable; // JTable that displays customer orders
+	
 	private static JScrollPane tableScroll; //JScrollPane that allows mouse scrolling through ordersTable 
+	
 	private static JMenuBar menuReportsBar; //JMenuBar that holds all JMenu/JMenuItems
+	
 	private static DbConnection linkDB; // Variable for DB connection
 
 	// Variable declaration for all JMenu tabs

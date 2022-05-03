@@ -8,6 +8,7 @@ import com.yagni.controller.*;
 public class EmployeeGUI implements ActionListener {
 	
 	private static DbConnection linkDB; // Variable to persist connection to db
+	
 	private static JFrame frame; // JFrame to display all elements of EmployeeGUI
 
 	// Variable declarations for all JPanels needed within Employee GUI

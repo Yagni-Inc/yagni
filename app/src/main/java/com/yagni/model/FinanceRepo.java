@@ -11,6 +11,18 @@ public class FinanceRepo {
     private static String oldOrders;
     private static String newDollar;
     private static String oldDollar;
+
+    // declaring new integers to calculate difference of previous week orders
+    // and current week orders
+    private static int diffOrders;
+    private static int newIntOrders; 
+    private static int oldIntOrders;    
+
+    // declaring new double to calculate difference of previous week dollar total
+    // and current week dollar total
+    private static double diffDollar; 
+    private static double newDoubleDollar;
+    private static double oldDoubleDollar; 
     
     public FinanceRepo(){
         
@@ -40,13 +52,10 @@ public class FinanceRepo {
             result.next();
             oldOrders = result.getString(1);
 
-            //declaring new integers to calculate difference of previous week orders and current week orders
-            int diffOrders, newishOrders, oldishOrders;    
-
             //changing newOrders and oldOrders from a string into integers to perform math calculation
-            newishOrders = Integer.parseInt(newOrders);
-            oldishOrders = Integer.parseInt(oldOrders);
-            diffOrders = newishOrders - oldishOrders;
+            newIntOrders = Integer.parseInt(newOrders);
+            oldIntOrders = Integer.parseInt(oldOrders);
+            diffOrders = newIntOrders - oldIntOrders;
             
             //querying data for oldDollar "previous week dollar sum"
             result = state.executeQuery("SELECT SUM(Sale_cost) FROM yagni_inv_db.purchase_history "
@@ -55,9 +64,6 @@ public class FinanceRepo {
                     + "AND order_date <= DATE_ADD(curdate(),INTERVAL -1 WEEK);");
             result.next();
             oldDollar = result.getString(1);
-
-            //declaring new double to calculate difference of previous week dollar total and current week dollar total
-            double diffDollar, newDoubleDollar, oldDoubleDollar; 
 
             //changing newDollar and oldDollar from a string into a double to correctly perform math calculation
             newDoubleDollar = Double.parseDouble(newDollar);

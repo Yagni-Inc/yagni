@@ -10,7 +10,7 @@ public class Delete {
 
     private static String deleteID;
 
-    // CONSTRUCTORR!!!!!!!!!
+    // CONSTRUCTOR!!!!!!!!!
     public Delete(String deleteIDin) {
         deleteID = deleteIDin;
     }
@@ -30,7 +30,7 @@ public class Delete {
             System.out.println("\nSuccessfully deleted the product from the inventory.");
             System.out.println("-----------------------------------------------------------------------------------");
         } catch (SQLException e) {
-            System.out.println("Oops! An error has occured.");
+            System.out.println("Oops! An error has occurred.");
             System.out.println(e);
         }
     }

@@ -10,9 +10,12 @@ import com.yagni.model.*;
 
 public class ManageInvGUI implements ActionListener, FocusListener, MouseListener {
 
-    private static JFrame inventoryFrame; // Jframe to display all elements
+    private static JFrame inventoryFrame; // JFrame to display all elements
+    
     private static JTable productsTable; // JTable to display all products
+    
     private static JScrollPane tableScroll; // JScrollPane to scroll through the products JTable
+    
     private static DbConnection linkDB; // Variable to persist connection to db
 
     // Variable declarations for all JPanels needed within GUI
@@ -64,7 +67,7 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
         // Set the connection with db
         linkDB = linkDBIn;
 
-        // Initializing JFrame, Jtable and JScrollPane
+        // Initializing JFrame, JTable and JScrollPane
         inventoryFrame = new JFrame("Product Inventory Window");
         productsTable = new JTable();
         tableScroll = new JScrollPane();
@@ -189,7 +192,7 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
         controlsTitle.setHorizontalAlignment(JLabel.CENTER);
         controlsPanel.add(controlsTitle);
 
-        // Adding buttons/textfields to controlsPanel
+        // Adding buttons/Textfields to controlsPanel
         controlsPanel.add(addButton);
         controlsPanel.add(productIDLabel);
         controlsPanel.add(productIDField);
@@ -212,7 +215,7 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
         updateButton.addActionListener(this);
         deleteButton.addActionListener(this);
 
-        /* ------- Tabel Panel & Load/Reload Button ------- */
+        /* ------- Table Panel & Load/Reload Button ------- */
         tablePanel.setLayout(null);
         tablePanel.setBackground(Color.LIGHT_GRAY);
         tablePanel.setBounds(310, 0, 570, 520);
@@ -244,7 +247,7 @@ public class ManageInvGUI implements ActionListener, FocusListener, MouseListene
         tablePanel.add(searchButton);
 
         /* ------- Footer Content ------- */
-        // Set defualts and text of footer panel
+        // Set default and text of footer panel
         footerPanel.setPreferredSize(new Dimension(100, 30));
         footerPanel.setBackground(Color.DARK_GRAY);
         footerLabel.setForeground(Color.WHITE);

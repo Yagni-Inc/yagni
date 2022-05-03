@@ -7,20 +7,20 @@ import com.yagni.controller.*;
 
 public class ReadAll {
 
-    private static JTable productsTable; // variable to display returned data in a Jtable
+    private static JTable productsTable; // variable to display returned data in a JTable
 
     public ReadAll(JTable productsTableIn) {
         // initialize products table to the products table parameter
         productsTable = productsTableIn;
     } // end of constructor
 
-    // readAll method to create a Jtable to display all products from SQL query
+    // readAll method to create a JTable to display all products from SQL query
     public void readAll(DbConnection linkDB) {
         try {
-            // Creates a staetment object to execute statements with db connection
+            // Creates a statement object to execute statements with db connection
             Statement statement = linkDB.getConnection().createStatement();
 
-            // Executes a SQL statment that returns all data from the products table
+            // Executes a SQL statement that returns all data from the products table
             ResultSet resultSet = statement.executeQuery("SELECT * FROM yagni_inv_db.product;");
 
             // Creates a DefaultTableModel object to map returned data to
@@ -39,7 +39,7 @@ public class ReadAll {
             // Setting columns of the table model object to the column name array
             tableModel.setColumnIdentifiers(columnName);
 
-            // Adds the result set data to rows in the JTable object procutsTable
+            // Adds the result set data to rows in the JTable object productsTable
             while (resultSet.next()) {
                 productId = resultSet.getString(1);
                 quantity = resultSet.getString(2);
@@ -52,7 +52,7 @@ public class ReadAll {
         } catch (SQLException e) {
             // Prints the SQLException error if there is one
             System.out.println(e);
-            System.out.println("Oops! An error has occured!");
+            System.out.println("Oops! An error has occurred!");
         }
     }
 }

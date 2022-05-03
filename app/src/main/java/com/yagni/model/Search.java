@@ -6,7 +6,9 @@ import javax.swing.table.DefaultTableModel;
 import com.yagni.controller.*;
 
 public class Search {
+    
     private static String productID;
+   
     private static JTable productsTable;
     
     public Search(String productIDIn, JTable productsTableIn){
@@ -16,7 +18,7 @@ public class Search {
 
     public void readOne(DbConnection linkDb){
         try {
-            // Creating a statment object to pass a SQL statment to the database
+            // Creating a statement object to pass a SQL statement to the database
             Statement statement = linkDb.getConnection().createStatement();
 
             // Calling the executeQuery method to execute a statement to the database
@@ -35,7 +37,7 @@ public class Search {
             // Setting columns of the table model object to the column name array
             tableModel.setColumnIdentifiers(columnName);
 
-            // Printing out the result set of the SQL statment
+            // Printing out the result set of the SQL statement
             resultSet.next();
             
             productId = resultSet.getString(1);
