@@ -5,35 +5,81 @@
             "quantity": 3000,
             "wholeSale": 0.05,
             "salePrice": 0.75,
-            "supplierId": "Erasers R US"
+            "supplierId": "Erasers R US",
+            "img": "../../assets/img/products/eraser.png",
+            "amount": 1
           },
           {
             "productId": "White Out",
             "quantity": 3500,
             "wholeSale": 1.05,
             "salePrice": 3.75,
-            "supplierId": "Mistakes Make Us Rich"
+            "supplierId": "Mistakes Make Us Rich",
+            "img": "assets/img/products/white-out.png",
+            "amount": 1
           },
           {
             "productId": "Bleach",
             "quantity": 7000,
             "wholeSale": 1.95,
             "salePrice": 5.50,
-            "supplierId": "When in doubt, bleach it out!"
+            "supplierId": "When in doubt, bleach it out!",
+            "img": "../../assets/img/products/bleach.png",
+            "amount": 1
           },
           {
             "productId": "Scissors",
             "quantity": 6400,
             "wholeSale": 1.75,
             "salePrice": 4.65,
-            "supplierId": "Rocks, Paper and Scissors Ltd."
+            "supplierId": "Rocks, Paper and Scissors Ltd.",
+            "img": "../../assets/img/products/scissors.png",
+            "amount": 1
           },
           {
             "productId": "Paint",
             "quantity": 1500,
             "wholeSale": 4.75,
             "salePrice": 15.05,
-            "supplierId": "Cover the mistakes on your walls"
+            "supplierId": "Cover the mistakes on your walls", 
+            "img": "../../assets/img/products/paint.png",
+            "amount": 1
+          }, 
+          {
+            "productId": "Sulfuric Acid",
+            "quantity": 7500,
+            "wholeSale": 24.75,
+            "salePrice": 65.76,
+            "supplierId": "Chemical X Corp.", 
+            "img": "../src/assets/img/products/acid.png",
+            "amount": 1
+          }, 
+          {
+            "productId": "Shovel",
+            "quantity": 6300,
+            "wholeSale": 5.98,
+            "salePrice": 12.42,
+            "supplierId": "Bury the Mistakes", 
+            "img": "../../assets/img/products/shovel.png",
+            "amount": 1
+          }, 
+          {
+            "productId": "Broom",
+            "quantity": 30000,
+            "wholeSale": 3.56,
+            "salePrice": 4.00,
+            "supplierId": "We Sweep Inc.", 
+            "img": "../../assets/img/products/broom.png",
+            "amount": 1
+          }, 
+          {
+            "productId": "Catapult",
+            "quantity": 1200,
+            "wholeSale": 104.75,
+            "salePrice": 250.65,
+            "supplierId": "Out of Sight, Out of Mind", 
+            "img": "../../assets/img/products/catapult.png",
+            "amount": 1
           }
     ]
 }

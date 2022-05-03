@@ -1,15 +1,11 @@
+// REMOVING this component from Product card for now - may come back to it at a later date
+
 import React, { Component } from 'react';
 
 class Counter extends Component {
 	state = {
 		value: 0,
 	};
-
-	// Event binding option
-	// constructor() {
-	//   super();
-	//   this.handleIncrement = this.handleIncrement.bind(this);
-	// }
 
 	handleIncrement = () => {
 		this.setState({ value: this.state.value + 1 });
